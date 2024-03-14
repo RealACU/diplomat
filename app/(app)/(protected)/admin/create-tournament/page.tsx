@@ -7,10 +7,10 @@ const createTourneyPage = async (req: NextRequest) => {
 
   if (!user || (user?.publicMetadata.role as string) !== "admin") {
     const { nextUrl } = req;
-    NextResponse.redirect(new URL("/", nextUrl));
+    return NextResponse.redirect(new URL("/", nextUrl));
   }
 
-  return <CreateTourneyForm />;
+  return <CreateTourneyForm creatorId={user.id} />;
 };
 
 export default createTourneyPage;

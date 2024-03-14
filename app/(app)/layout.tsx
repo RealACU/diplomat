@@ -5,8 +5,8 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Navbar />
-      <div className="h-[calc(100%-4rem)] flex justify-center">
-        <div className="h-full w-full p-16 items-center md:max-w-screen-2xl">
+      <div className="min-h-[calc(100%-4rem)] p-16 flex justify-center">
+        <div className="w-full items-center md:max-w-screen-xl">
           {children}
         </div>
       </div>
