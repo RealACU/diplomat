@@ -10,7 +10,11 @@ const createTourneyPage = async (req: NextRequest) => {
     return NextResponse.redirect(new URL("/", nextUrl));
   }
 
-  return <CreateTourneyForm creatorId={user.id} />;
+  return (
+    <div className="px-32">
+      <CreateTourneyForm creatorId={user.id} />
+    </div>
+  );
 };
 
 export default createTourneyPage;

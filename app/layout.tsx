@@ -6,9 +6,9 @@ import { ClerkProvider } from "@clerk/nextjs";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Model Diplomat",
+  title: "Diplomat",
   description:
-    "A platform for Model United Nations (MUN) that streamlines the process of hosting, viewing, and applying to tournaments",
+    "A platform for Model United Nations (MUN) that streamlines the process of hosting, viewing, and applying to tournaments.",
 };
 
 export default function RootLayout({

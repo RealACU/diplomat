@@ -9,23 +9,80 @@ datasource db {
   // directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
+enum States {
+  AL
+  AK
+  AZ
+  AR
+  CA
+  CO
+  CT
+  DE
+  FL
+  GA
+  HI
+  ID
+  IL
+  IN
+  IA
+  KS
+  KY
+  LA
+  ME
+  MD
+  MA
+  MI
+  MN
+  MS
+  MO
+  MT
+  NE
+  NV
+  NH
+  NJ
+  NM
+  NY
+  NC
+  ND
+  OH
+  OK
+  OR
+  PA
+  RI
+  SC
+  SD
+  TN
+  TX
+  UT
+  VT
+  VA
+  WA
+  WV
+  WI
+  WY
+}
+
 model Tourney {
-  id          String      @id @default(cuid())
-  creatorId   String
-  name        String
-  school      String
-  location    String
-  startDate   Int
-  endDate     Int
+  id             String      @id @default(cuid())
+  creatorId      String
+  name           String
+  description    String
+  school         String
+  address        String
+  city           String
+  state          States
+  zip            Int
+  startDate      DateTime
+  endDate        DateTime
   allChairIds    String[]
   allDelegateIds String[]
-  committees  Committee[]
+  committees     Committee[]
 }
 
 model Committee {
   id              Int              @id @default(autoincrement())
   name            String
-  roomNumber      Int
+  roomNumber      String
   chairIds        String[]
   delegateIds     String[]
   delegateResults DelegateResult[]
