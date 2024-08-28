@@ -1,7 +1,6 @@
+Ask me for the .env file so that you can use backend services
+
 To-do
-- npx prisma generate
-- npx prisma db push
-- delete comments in schema.prisma
-- delete comments in .env
-- delete input-otp
-- npm uninstall input-otp
+
+- add tournament searching
+- add timer (if time allows)

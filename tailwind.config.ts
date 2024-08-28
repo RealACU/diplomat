@@ -18,7 +18,21 @@ const config = {
       },
     },
     extend: {
+      backgroundImage: {
+        frontpage: "url('/background_image.jpg')",
+      },
+      backgroundPosition: {
+        "top-3": "center top -3rem",
+      },
       colors: {
+        docblue: {
+          100: "#7FACCC",
+          200: "#41769E",
+        },
+        docorange: {
+          100: "#D39A60",
+          200: "#DDA66F",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -71,11 +85,16 @@ const config = {
           "0%,70%,100%": { opacity: "1" },
           "20%,50%": { opacity: "0" },
         },
+        "infinite-scroll": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-100%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "caret-blink": "caret-blink 1.25s ease-out infinite",
+        'infinite-scroll': 'infinite-scroll 25s linear infinite',
       },
     },
   },
