@@ -1,8 +1,21 @@
 import { UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import { Button } from "./ui/button";
-import { NAV_LINKS } from "@/constants";
 import Link from "next/link";
 import Image from "next/image";
+
+const NAV_LINKS = [
+  { href: "/contact-us", label: "Contact us" },
+  { href: "/about", label: "About" },
+  //{ href: "/", label: "Help" },
+]
+
+const RESULTS_INFO = [
+  { pl: 8, key: "tournament", label: "Tournament" },
+  { pl: 16, key: "date", label: "Date" },
+  { pl: 20, key: "country", label: "Delegation of" },
+  { pl: 22, key: "chair", label: "Chair" },
+  { pl: 24, key: "results", label: "Results" },
+]
 
 const Navbar = () => {
   return (
@@ -26,7 +39,7 @@ const Navbar = () => {
           {NAV_LINKS.map((link) => (
             <Link
               href={link.href}
-              key={link.key}
+              key={link.label}
               className="transition-all hover:font-bold focus:font-medium"
             >
               {link.label}
