@@ -39,15 +39,16 @@ import {
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
-import { clerkClient } from "@clerk/nextjs";
-import { User } from "@clerk/nextjs/server";
+import { clerkClient } from "@clerk/clerk-sdk-node";
+import { EmailAddress, PhoneNumber, User } from "@clerk/nextjs/server";
 import ProfileBar from "./ProfileBar";
 
 type Chair = {
   id: string;
-  name: string | null;
-  email: string | null;
-  phoneNumber: string | null;
+  firstName: string | null;
+  lastName: string | null;
+  emailAddresses: EmailAddress[] | null;
+  phoneNumbers: PhoneNumber[] | null;
   imageUrl: string;
 };
 
@@ -69,8 +70,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
   const [committees, setCommittees] = useState<Committee[]>([]);
 
   // Dialog state for adding chairs
-  const [chairName, setChairName] = useState<string>("");
-  const [chairId, setChairId] = useState<string>("");
+  const [chairPreviews, setChairPreviews] = useState<Chair>();
 
   const form = useForm<z.infer<typeof TourneySchema>>({
     resolver: zodResolver(TourneySchema),
@@ -325,49 +325,46 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                   <DialogHeader>
                     <DialogTitle>Add Chair</DialogTitle>
                   </DialogHeader>
-                  <div className="flex flex-col space-y-3">
-                    <Label htmlFor="chairName">Chair Name</Label>
+                  <div>
+                    <Label htmlFor="query">Chair Info</Label>
                     <Input
-                      id="chairName"
-                      placeholder="Jane Doe"
-                      onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
-                        setChairName(e.target.value)
-                      }
-                    />
-                    <Label htmlFor="chairId">Chair Id</Label>
-                    <Input
-                      id="chairId"
-                      placeholder="jane.doe@org.com"
-                      onBlur={(e: React.FocusEvent<HTMLInputElement>) =>
-                        setChairId(e.target.value)
-                      }
+                      id="query"
+                      placeholder="Search by name, email, or phone number"
+                      onBlur={async (e: React.FocusEvent<HTMLInputElement>) => {
+                        const userList = await clerkClient.users.getUserList({
+                          query: e.target.value,
+                        });
+
+                        // const chairList: Chair[] = userList.map((user) => {
+                        //   id: user.id,
+                        //   firstName: user.firstName,
+                        //   lastName: user.lastName,
+                        //   emailAddresses: user.emailAddresses,
+                        //   phoneNumbers: user.phoneNumbers,
+
+                        // })
+
+                        //setChairPreviews(chairList);
+                      }}
                     />
                   </div>
                   <DialogFooter className="sm:justify-start">
+                    {/* This is where the chair preview select goes */}
+                    {/* <DialogClose><Button type="submit"><ProfileBar> */}
                     <DialogClose asChild>
                       <Button
                         type="submit"
                         onClick={async () => {
-                          if (!chairName || !chairId) {
-                            return; //Todo: setError("please enter shi");
-                          }
-
-                          const chair = await clerkClient.users.getUser(
-                            chairId
-                          );
-
-                          const updatedCommittees = [...committees];
-                          updatedCommittees[i].chairs.push({
-                            id: chair.id,
-                            name: chair.username,
-                            email: chair.primaryEmailAddressId,
-                            phoneNumber: chair.primaryPhoneNumberId,
-                            imageUrl: chair.imageUrl,
-                          });
-                          setCommittees(updatedCommittees);
-
-                          setChairName("");
-                          setChairId("");
+                          // const updatedCommittees = [...committees];
+                          // updatedCommittees[i].chairs.push({
+                          //   id: chair.id,
+                          //   name: chair.username,
+                          //   email: chair.primaryEmailAddressId,
+                          //   phoneNumber: chair.primaryPhoneNumberId,
+                          //   imageUrl: chair.imageUrl,
+                          // });
+                          // setCommittees(updatedCommittees);
+                          // setQuery("");
                         }}
                       >
                         Create
@@ -383,9 +380,21 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                 >
                   <ProfileBar
                     profileImageUrl={chair.imageUrl}
-                    username={chair.name}
-                    emailAddress={chair.email}
-                    phoneNumber={chair.phoneNumber}
+                    username={
+                      chair.firstName && chair.lastName
+                        ? chair.firstName + chair.lastName
+                        : "MUN USER"
+                    }
+                    emailAddress={
+                      chair.emailAddresses
+                        ? chair.emailAddresses[0].toString()
+                        : "UNKNOWN"
+                    }
+                    phoneNumber={
+                      chair.phoneNumbers
+                        ? chair.phoneNumbers[0].toString()
+                        : "UNKNOWN"
+                    }
                   />
                 </div>
               ))}
