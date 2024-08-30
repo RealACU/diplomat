@@ -40,8 +40,14 @@ import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
 import { clerkClient } from "@clerk/clerk-sdk-node";
-import { EmailAddress, PhoneNumber, User } from "@clerk/nextjs/server";
+import {
+  createClerkClient,
+  EmailAddress,
+  PhoneNumber,
+  User,
+} from "@clerk/nextjs/server";
 import ProfileBar from "./ProfileBar";
+import { ClerkLoaded } from "@clerk/nextjs";
 
 type Chair = {
   id: string;
@@ -59,6 +65,10 @@ type Committee = {
 };
 
 const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
+  const clerkClient = createClerkClient({
+    secretKey: "sk_test_oCqsmeJJbANbQjBdRCx5niuhkfR697XlnOwXndOxOV",
+  });
+
   // Form state
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -326,18 +336,22 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                     <DialogTitle>Add Chair</DialogTitle>
                   </DialogHeader>
                   <div>
-                    <Label htmlFor="query">Chair Info</Label>
-                    <Input
-                      id="query"
-                      placeholder="Search by name, email, or phone number"
-                      onBlur={async (e: React.FocusEvent<HTMLInputElement>) => {
-                        const userList = await clerkClient.users.getUserList({
-                          query: e.target.value,
-                        });
+                    <ClerkLoaded>
+                      <Label htmlFor="query">Chair Info</Label>
+                      <Input
+                        id="query"
+                        placeholder="Search by name, email, or phone number"
+                        onBlur={async (
+                          e: React.FocusEvent<HTMLInputElement>
+                        ) => {
+                          const userList = await clerkClient.users.getUserList({
+                            query: e.target.value,
+                          });
 
-                        setChairPreviews(userList);
-                      }}
-                    />
+                          setChairPreviews(userList);
+                        }}
+                      />
+                    </ClerkLoaded>
                   </div>
                   <DialogFooter className="sm:justify-start">
                     {/* This is where the chair preview select goes */}

@@ -7,7 +7,7 @@ const NAV_LINKS = [
   { href: "/contact-us", label: "Contact us" },
   { href: "/about", label: "About" },
   //{ href: "/", label: "Help" },
-]
+];
 
 const RESULTS_INFO = [
   { pl: 8, key: "tournament", label: "Tournament" },
@@ -15,12 +15,12 @@ const RESULTS_INFO = [
   { pl: 20, key: "country", label: "Delegation of" },
   { pl: 22, key: "chair", label: "Chair" },
   { pl: 24, key: "results", label: "Results" },
-]
+];
 
 const Navbar = () => {
   return (
     <nav className="bg-slate-50 h-20 px-7 items-center grid grid-cols-2 text-slate-800 flex-nowrap filter drop-shadow-lg">
-      <div className="">
+      <div>
         <Link href="/" className="flex items-center">
           <Image
             src="/diplomat-logo.svg"
@@ -29,7 +29,6 @@ const Navbar = () => {
             alt="logo"
             className="h-auto -ml-2"
           ></Image>
-
           <p className="mx-3 text-2xl font-bold">Diplomat</p>
         </Link>
       </div>
