@@ -1,18 +1,5 @@
 import Image from "next/image";
 
-const banner_texts = [
-  "Easy and fast tournament creation",
-  "Discover events in your area",
-  "Edit and share tournament information",
-  "Keep delegates updated through SMS and email",
-  "View and administer delegate results",
-  "Easy and fast tournament creation",
-  "Discover events in your area",
-  "Edit and share tournament information",
-  "Keep delegates updated through SMS and email",
-  "View and administer delegate results",
-];
-
 export default function Home() {
   return (
     <div>
@@ -22,18 +9,106 @@ export default function Home() {
 
         <div className="relative whitespace-nowrap w-full z-0 mt-2 flex-nowrap inline-flex overflow-hidden">
           <ul className="flex items-center justify-center text-lg text-white animate-infinite-scroll">
-            {banner_texts.map((banner_text) => (
-              <li className="min-w-max flex items-center">
-                <Image
-                  src="/star_white.png"
-                  alt="star"
-                  width={20}
-                  height={0}
-                  className="h-full mx-3"
-                />
-                {banner_text}
-              </li>
-            ))}
+            <li className="min-w-max flex items-center">
+              <Image
+                src="/star_white.png"
+                alt="star"
+                width={20}
+                height={0}
+                className="h-full mx-3"
+              />
+              Easy and fast tournament creation
+            </li>
+            <li className="min-w-max flex items-center">
+              <Image
+                src="/star_white.png"
+                alt="star"
+                width={20}
+                height={0}
+                className="h-full mx-3"
+              />
+              Discover events in your area
+            </li>
+            <li className="min-w-max flex items-center">
+              <Image
+                src="/star_white.png"
+                alt="star"
+                width={20}
+                height={0}
+                className="h-full mx-3"
+              />
+              Edit and share tournament information
+            </li>
+            <li className="min-w-max flex items-center">
+              <Image
+                src="/star_white.png"
+                alt="star"
+                width={20}
+                height={0}
+                className="h-full mx-3"
+              />
+              Keep delegates updated through SMS and email
+            </li>
+            <li className="min-w-max flex items-center">
+              <Image
+                src="/star_white.png"
+                alt="star"
+                width={20}
+                height={0}
+                className="h-full mx-3"
+              />
+              View and administer delegate results
+            </li>
+            <li className="min-w-max flex items-center">
+              <Image
+                src="/star_white.png"
+                alt="star"
+                width={20}
+                height={0}
+                className="h-full mx-3"
+              />
+              Easy and fast tournament creation
+            </li>
+            <li className="min-w-max flex items-center">
+              <Image
+                src="/star_white.png"
+                alt="star"
+                width={20}
+                height={0}
+                className="h-full mx-3"
+              />
+              Discover events in your area
+            </li>
+            <li className="min-w-max flex items-center">
+              <Image
+                src="/star_white.png"
+                alt="star"
+                width={20}
+                height={0}
+                className="h-full mx-3"
+              />
+              Edit and share tournament information
+            </li>
+            <li className="min-w-max flex items-center">
+              <Image
+                src="/star_white.png"
+                alt="star"
+                width={20}
+                height={0}
+                className="h-full mx-3"
+              />
+              Keep delegates updated through SMS and email
+            </li>
+            <li className="min-w-max flex items-center">
+              <Image
+                src="/star_white.png"
+                alt="star"
+                width={20}
+                height={0}
+                className="h-full mx-3"
+              />
+              View and administer delegate results
+            </li>
           </ul>
         </div>
 

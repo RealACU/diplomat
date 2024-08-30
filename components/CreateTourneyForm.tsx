@@ -70,7 +70,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
   const [committees, setCommittees] = useState<Committee[]>([]);
 
   // Dialog state for adding chairs
-  const [chairPreviews, setChairPreviews] = useState<Chair>();
+  const [chairPreviews, setChairPreviews] = useState<User[]>();
 
   const form = useForm<z.infer<typeof TourneySchema>>({
     resolver: zodResolver(TourneySchema),
@@ -335,41 +335,36 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                           query: e.target.value,
                         });
 
-                        // const chairList: Chair[] = userList.map((user) => {
-                        //   id: user.id,
-                        //   firstName: user.firstName,
-                        //   lastName: user.lastName,
-                        //   emailAddresses: user.emailAddresses,
-                        //   phoneNumbers: user.phoneNumbers,
-
-                        // })
-
-                        //setChairPreviews(chairList);
+                        setChairPreviews(userList);
                       }}
                     />
                   </div>
                   <DialogFooter className="sm:justify-start">
                     {/* This is where the chair preview select goes */}
-                    {/* <DialogClose><Button type="submit"><ProfileBar> */}
-                    <DialogClose asChild>
-                      <Button
-                        type="submit"
-                        onClick={async () => {
-                          // const updatedCommittees = [...committees];
-                          // updatedCommittees[i].chairs.push({
-                          //   id: chair.id,
-                          //   name: chair.username,
-                          //   email: chair.primaryEmailAddressId,
-                          //   phoneNumber: chair.primaryPhoneNumberId,
-                          //   imageUrl: chair.imageUrl,
-                          // });
-                          // setCommittees(updatedCommittees);
-                          // setQuery("");
-                        }}
-                      >
-                        Create
-                      </Button>
-                    </DialogClose>
+                    {chairPreviews?.map((chairPreview) => (
+                      <DialogClose asChild>
+                        <Button type="submit" onClick={async () => {}}>
+                          <ProfileBar
+                            profileImageUrl={chairPreview.imageUrl}
+                            username={
+                              chairPreview.firstName && chairPreview.lastName
+                                ? chairPreview.firstName + chairPreview.lastName
+                                : "Unknown Name"
+                            }
+                            emailAddress={
+                              chairPreview.emailAddresses
+                                ? chairPreview.emailAddresses[0].toString()
+                                : "Unknown Email"
+                            }
+                            phoneNumber={
+                              chairPreview.phoneNumbers
+                                ? chairPreview.phoneNumbers[0].toString()
+                                : "Unknown Phone Number"
+                            }
+                          />
+                        </Button>
+                      </DialogClose>
+                    ))}
                   </DialogFooter>
                 </DialogContent>
               </Dialog>
