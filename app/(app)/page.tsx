@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 
 const banner_texts = [
@@ -11,24 +14,44 @@ const banner_texts = [
   "Edit and share tournament information",
   "Keep delegates updated through SMS and email",
   "View and administer delegate results",
+  "Easy and fast tournament creation",
+  "Discover events in your area",
+  "Edit and share tournament information",
+  "Keep delegates updated through SMS and email",
+  "View and administer delegate results",
+
 ];
 
 export default function Home() {
+  const textRef = useRef(null);
+
+  useEffect(() => {
+    const textElement = textRef.current;
+    if (textElement) {
+      
+      const content = textElement.innerHTML;
+      textElement.innerHTML += content;
+    }
+  }, []);
+
   return (
     <div>
       <div className="relative h-screen">
         <div className="w-full h-screen bg-docblue-200 z-10 absolute opacity-50" />
         <div className="bg-frontpage w-full h-screen bg-no-repeat bg-center bg-cover absolute" />
 
-        <div className="relative whitespace-nowrap w-full z-0 mt-2 flex-nowrap inline-flex overflow-hidden">
-          <ul className="flex items-center justify-center text-lg text-white animate-infinite-scroll">
-            {banner_texts.map((banner_text) => (
-              <li className="min-w-max flex items-center">
+        <div className="relative banner-container">
+          <ul
+            className="banner-text text-lg text-white"
+            ref={textRef}
+          >
+            {banner_texts.map((banner_text, index) => (
+              <li key={index} className="min-w-max flex items-center">
                 <Image
                   src="/star_white.png"
                   alt="star"
                   width={20}
-                  height={0}
+                  height={20}
                   className="h-full mx-3"
                 />
                 {banner_text}
@@ -67,15 +90,15 @@ export default function Home() {
                 src="/search_icon.png"
                 alt="search_icon"
                 width={30}
-                height={0}
+                height={30}
                 className="h-auto mx-4"
-              ></Image>
+              />
               <input
                 type="text"
                 id="search-bar"
                 placeholder="Search for a tournament near you"
                 className="text-xl font-semibold text-slate-800 placeholder-slate-300"
-              ></input>
+              />
             </div>
             <div className="w-full h-[465px]"></div>
           </div>
