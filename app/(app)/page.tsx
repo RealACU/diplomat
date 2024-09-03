@@ -3,7 +3,38 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 
-const banner_texts = [
+const banner_texts = 
+[
+  "Easy and fast tournament creation",
+  "Discover events in your area",
+  "Edit and share tournament information",
+  "Keep delegates updated through SMS and email",
+  "View and administer delegate results",
+  "Easy and fast tournament creation",
+  "Discover events in your area",
+  "Edit and share tournament information",
+  "Keep delegates updated through SMS and email",
+  "View and administer delegate results",
+  "Easy and fast tournament creation",
+  "Discover events in your area",
+  "Edit and share tournament information",
+  "Keep delegates updated through SMS and email",
+  "View and administer delegate results",
+  "Easy and fast tournament creation",
+  "Discover events in your area",
+  "Edit and share tournament information",
+  "Keep delegates updated through SMS and email",
+  "View and administer delegate results",
+  "Easy and fast tournament creation",
+  "Discover events in your area",
+  "Edit and share tournament information",
+  "Keep delegates updated through SMS and email",
+  "View and administer delegate results",
+  "Easy and fast tournament creation",
+  "Discover events in your area",
+  "Edit and share tournament information",
+  "Keep delegates updated through SMS and email",
+  "View and administer delegate results",
   "Easy and fast tournament creation",
   "Discover events in your area",
   "Edit and share tournament information",
@@ -28,8 +59,9 @@ export default function Home() {
   useEffect(() => {
     const textElement = textRef.current;
     if (textElement) {
-      
+      //@ts-ignore 
       const content = textElement.innerHTML;
+       //@ts-ignore 
       textElement.innerHTML += content;
     }
   }, []);
@@ -97,14 +129,14 @@ export default function Home() {
                 type="text"
                 id="search-bar"
                 placeholder="Search for a tournament near you"
-                className="text-xl font-semibold text-slate-800 placeholder-slate-300"
+                className="text-xl font-semibold text-slate-800 placeholder-slate-400 w-full h-full px-1 box-border"
               />
             </div>
             <div className="w-full h-[465px]"></div>
           </div>
           <div className="bg-slate-300 w-1/3 rounded-lg">
             <div className="bg-slate-300 w-full h-14 rounded-lg filter drop-shadow-md flex items-center">
-              <p className="text-xl font-semibold text-slate-800 mx-8">
+              <p className="text-xl font-semibold text-slate-800 mx-8 ">
                 Filter by
               </p>
             </div>

@@ -41,7 +41,7 @@ const Footer = () =>
     >
       <div className="w-full items-center grid grid-cols-2 px-6 md:max-w-screen-2xl">
         <div>
-          <p>Copyright © 2024 Asher & Danny & Shiv</p>
+          <p>Copyright © 2024 Asher, Danny & Shivansh</p>
         </div>
         <div className="flex justify-end space-x-4">
           <Button variant="link">Terms of Service</Button>
