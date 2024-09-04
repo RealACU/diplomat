@@ -39,36 +39,17 @@ import {
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
 import { Label } from "./ui/label";
-import { clerkClient } from "@clerk/clerk-sdk-node";
-import {
-  createClerkClient,
-  EmailAddress,
-  PhoneNumber,
-  User,
-} from "@clerk/nextjs/server";
 import ProfileBar from "./ProfileBar";
-import { ClerkLoaded } from "@clerk/nextjs";
-
-type Chair = {
-  id: string;
-  firstName: string | null;
-  lastName: string | null;
-  emailAddresses: EmailAddress[] | null;
-  phoneNumbers: PhoneNumber[] | null;
-  imageUrl: string;
-};
+import { User } from "@clerk/nextjs/server";
+import getChairPreviews from "@/actions/getChairPreviews";
 
 type Committee = {
   name: string;
   roomNumber: string;
-  chairs: Chair[];
+  chairs: User[];
 };
 
 const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
-  const clerkClient = createClerkClient({
-    secretKey: "sk_test_oCqsmeJJbANbQjBdRCx5niuhkfR697XlnOwXndOxOV",
-  });
-
   // Form state
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
@@ -114,6 +95,14 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
     //     setSuccess(data.success);
     //   });
     // });
+  };
+
+  const handleBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
+    const data = await getChairPreviews(e.target.value);
+    const parsedData = JSON.parse(data);
+    console.log(parsedData);
+
+    setChairPreviews(parsedData);
   };
 
   return (
@@ -302,7 +291,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
           date for both the start and end date.
         </FormDescription>
 
-        <div className="bg-white border-[1px] rounded-md p-4 grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="bg-white border-[1px] rounded-md p-4 grid gap-2 grid-cols-1">
           {/* Committees */}
 
           {committees.map((committee, i) => (
@@ -336,52 +325,63 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                     <DialogTitle>Add Chair</DialogTitle>
                   </DialogHeader>
                   <div>
-                    <ClerkLoaded>
-                      <Label htmlFor="query">Chair Info</Label>
-                      <Input
-                        id="query"
-                        placeholder="Search by name, email, or phone number"
-                        onBlur={async (
-                          e: React.FocusEvent<HTMLInputElement>
-                        ) => {
-                          const userList = await clerkClient.users.getUserList({
-                            query: e.target.value,
-                          });
-
-                          setChairPreviews(userList);
-                        }}
-                      />
-                    </ClerkLoaded>
+                    <Label htmlFor="query">Chair Info</Label>
+                    <Input
+                      id="query"
+                      placeholder="Search by name, email, or phone number"
+                      onBlur={handleBlur}
+                    />
                   </div>
                   <DialogFooter className="sm:justify-start">
                     {/* This is where the chair preview select goes */}
-                    {chairPreviews?.map((chairPreview) => (
-                      <DialogClose asChild>
-                        <Button type="submit" onClick={async () => {}}>
-                          <ProfileBar
-                            profileImageUrl={chairPreview.imageUrl}
-                            username={
-                              chairPreview.firstName && chairPreview.lastName
-                                ? chairPreview.firstName + chairPreview.lastName
-                                : "Unknown Name"
-                            }
-                            emailAddress={
-                              chairPreview.emailAddresses
-                                ? chairPreview.emailAddresses[0].toString()
-                                : "Unknown Email"
-                            }
-                            phoneNumber={
-                              chairPreview.phoneNumbers
-                                ? chairPreview.phoneNumbers[0].toString()
-                                : "Unknown Phone Number"
-                            }
-                          />
-                        </Button>
-                      </DialogClose>
-                    ))}
+                    <div className="h-full w-full flex flex-col gap-2 scroll-mx-0">
+                      {!chairPreviews ? (
+                        <p className="text-sm text-red-500 font-bold">
+                          No matches
+                        </p>
+                      ) : null}
+                      {chairPreviews?.map((chairPreview) => (
+                        <DialogClose asChild>
+                          <Button
+                            className="h-auto w-full"
+                            type="submit"
+                            onClick={() => {
+                              setCommittees((committees) =>
+                                // comm refers to the unupdated version of the committees list
+                                committees.map((comm) =>
+                                  comm === committee
+                                    ? {
+                                        name: comm.name,
+                                        roomNumber: comm.roomNumber,
+                                        chairs: [...comm.chairs, chairPreview],
+                                      }
+                                    : comm
+                                )
+                              );
+                            }}
+                          >
+                            <ProfileBar
+                              profileImageUrl={chairPreview.imageUrl}
+                              username={
+                                chairPreview.firstName +
+                                " " +
+                                chairPreview.lastName
+                              }
+                              emailAddress={
+                                chairPreview.emailAddresses[0].emailAddress
+                              }
+                              phoneNumber={
+                                chairPreview.phoneNumbers[0].phoneNumber
+                              }
+                            />
+                          </Button>
+                        </DialogClose>
+                      ))}
+                    </div>
                   </DialogFooter>
                 </DialogContent>
               </Dialog>
+              <div className="py-1"></div>
               {committee.chairs.map((chair, j) => (
                 <div
                   key={j}
@@ -389,21 +389,9 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                 >
                   <ProfileBar
                     profileImageUrl={chair.imageUrl}
-                    username={
-                      chair.firstName && chair.lastName
-                        ? chair.firstName + chair.lastName
-                        : "MUN USER"
-                    }
-                    emailAddress={
-                      chair.emailAddresses
-                        ? chair.emailAddresses[0].toString()
-                        : "UNKNOWN"
-                    }
-                    phoneNumber={
-                      chair.phoneNumbers
-                        ? chair.phoneNumbers[0].toString()
-                        : "UNKNOWN"
-                    }
+                    username={chair.username}
+                    emailAddress={chair.primaryEmailAddress?.emailAddress}
+                    phoneNumber={chair.primaryPhoneNumber?.phoneNumber}
                   />
                 </div>
               ))}
@@ -412,7 +400,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
 
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="outline">
+              <Button>
                 <Plus className="h-4 w-4" />
                 Add Committee
               </Button>
