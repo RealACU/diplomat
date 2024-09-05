@@ -43,7 +43,7 @@ const Navbar = async () => {
 
         <div className="items-stretch flex gap-5">
           <SignedIn>
-            {(!user || (user?.publicMetadata.role as string) !== "admin") && (
+            {(user?.publicMetadata.role as string) === "admin" && (
               <Button asChild>
                 <Link
                   href="/sign-in"
