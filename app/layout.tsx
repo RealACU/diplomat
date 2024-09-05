@@ -24,7 +24,7 @@ export default function RootLayout({
     >
       <html lang="en">
         <body className={inter.className}>
-          <main className="pb-32">{children}</main>
+          <main className="h-full pb-32">{children}</main>
         </body>
       </html>
     </ClerkProvider>
