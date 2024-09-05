@@ -347,7 +347,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                             type="submit"
                             onClick={() => {
                               setCommittees((committees) =>
-                                // comm refers to the unupdated version of the committees list
+                                // comm refers to the unupdated version of a committee in the committees list
                                 committees.map((comm) =>
                                   comm === committee
                                     ? {

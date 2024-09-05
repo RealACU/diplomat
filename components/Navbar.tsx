@@ -48,7 +48,7 @@ const Navbar = () => {
 
         <div className="items-stretch flex gap-5">
           <SignedIn>
-            <UserButton afterSignOutUrl="/" />
+            <UserButton />
           </SignedIn>
           <SignedOut>
             <Button asChild>

@@ -18,9 +18,9 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider
+      afterSignOutUrl="/"
+      afterMultiSessionSingleSignOutUrl="/"
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
-      signInFallbackRedirectUrl=""
-      signUpFallbackRedirectUrl=""
     >
       <html lang="en">
         <body className={inter.className}>
