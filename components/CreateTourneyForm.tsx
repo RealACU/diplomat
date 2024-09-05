@@ -389,9 +389,9 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                 >
                   <ProfileBar
                     profileImageUrl={chair.imageUrl}
-                    username={chair.username}
-                    emailAddress={chair.primaryEmailAddress?.emailAddress}
-                    phoneNumber={chair.primaryPhoneNumber?.phoneNumber}
+                    username={chair.firstName + " " + chair.lastName}
+                    emailAddress={chair.emailAddresses[0].emailAddress}
+                    phoneNumber={chair.phoneNumbers[0].phoneNumber}
                   />
                 </div>
               ))}

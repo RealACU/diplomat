@@ -1,21 +1,6 @@
-"use client";
-
-import { useEffect, useRef } from "react";
 import Image from "next/image";
 
 export default function Home() {
-  const textRef = useRef(null);
-
-  useEffect(() => {
-    const textElement = textRef.current;
-    if (textElement) {
-      // @ts-ignore
-      const content = textElement.innerHTML;
-      // @ts-ignore
-      textElement.innerHTML += content;
-    }
-  }, []);
-
   return (
     <div>
       <div className="relative h-screen">

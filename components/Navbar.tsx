@@ -2,22 +2,17 @@ import { UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import { currentUser } from "@clerk/nextjs/server";
+import { Plus } from "lucide-react";
 
 const NAV_LINKS = [
   { href: "/contact-us", label: "Contact us" },
   { href: "/about", label: "About" },
-  //{ href: "/", label: "Help" },
 ];
 
-const RESULTS_INFO = [
-  { pl: 8, key: "tournament", label: "Tournament" },
-  { pl: 16, key: "date", label: "Date" },
-  { pl: 20, key: "country", label: "Delegation of" },
-  { pl: 22, key: "chair", label: "Chair" },
-  { pl: 24, key: "results", label: "Results" },
-];
+const Navbar = async () => {
+  const user = await currentUser();
 
-const Navbar = () => {
   return (
     <nav className="bg-slate-50 h-20 px-7 items-center grid grid-cols-2 text-slate-800 flex-nowrap filter drop-shadow-lg">
       <div>
@@ -48,6 +43,17 @@ const Navbar = () => {
 
         <div className="items-stretch flex gap-5">
           <SignedIn>
+            {(!user || (user?.publicMetadata.role as string) !== "admin") && (
+              <Button asChild>
+                <Link
+                  href="/sign-in"
+                  className="text-lg bg-slate-500 py-2 px-6 rounded-md hover:bg-slate-400 hover:scale-105 duration-100 flex-shrink-0 font-semibold"
+                >
+                  <Plus />
+                  Create Tournament
+                </Link>
+              </Button>
+            )}
             <UserButton />
           </SignedIn>
           <SignedOut>
