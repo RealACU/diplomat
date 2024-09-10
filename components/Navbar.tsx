@@ -40,20 +40,17 @@ const Navbar = () => {
           </SignedIn>
           <SignedOut>
             <Button asChild>
-              <Link
+              <a
                 href="/sign-in"
-                className="text-lg bg-slate-500 py-2 px-6 rounded-md hover:bg-slate-400 hover:scale-105 duration-100 flex-shrink-0 font-semibold"
+                className="text-[16px] bg-slate-400 py-2 px-6 rounded-md hover:bg-slate-500 hover:scale-105 duration-100 flex-shrink-0 font-semibold"
               >
                 Sign in
-              </Link>
+              </a>
             </Button>
-            <Button asChild>
-              <Link
-                href="/sign-up"
-                className="text-lg bg-docorange-100 py-2 px-10 rounded-md hover:bg-docorange-100 hover:scale-105 duration-100 flex-shrink-0"
+            <Button asChild
+                className="text-[16px] bg-[#D39A60] py-2 px-10 rounded-md hover:bg-[#DDA66F] hover:scale-105 duration-100 flex-shrink-0"
               >
-                Get Started
-              </Link>
+                <Link href="/sign-up">Get started</Link>
             </Button>
           </SignedOut>
         </div>
