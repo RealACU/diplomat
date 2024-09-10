@@ -44,29 +44,25 @@ const Navbar = async () => {
         <div className="items-stretch flex gap-5">
           <SignedIn>
             {(user?.publicMetadata.role as string) === "admin" && (
-              <Button asChild>
-                <Link
-                  href="/sign-in"
-                  className="text-lg bg-slate-500 py-2 px-6 rounded-md hover:bg-slate-400 hover:scale-105 duration-100 flex-shrink-0 font-semibold"
+              <Button asChild
+                className="text-[16px] bg-slate-400 py-2 pl-4 pr-6 mr-2 rounded-md hover:bg-slate-500 hover:scale-105 transition duration-100 flex-shrink-0 font-semibold"
                 >
-                  <Plus />
-                  Create Tournament
-                </Link>
+                <Link href="/sign-in"> <Plus className="px-1"/>Create Tournament </Link>
               </Button>
             )}
-            <UserButton />
+            <UserButton/>
           </SignedIn>
           <SignedOut>
             <Button asChild>
               <a
                 href="/sign-in"
-                className="text-[16px] bg-slate-400 py-2 px-6 rounded-md hover:bg-slate-500 hover:scale-105 duration-100 flex-shrink-0 font-semibold"
+                className="text-[16px] bg-slate-400 py-2 px-6 rounded-md hover:bg-slate-500 hover:scale-105 transition duration-100 flex-shrink-0 font-semibold"
               >
                 Sign in
               </a>
             </Button>
             <Button asChild
-                className="text-[16px] bg-[#D39A60] py-2 px-10 rounded-md hover:bg-[#DDA66F] hover:scale-105 duration-100 flex-shrink-0"
+                className="text-[16px] bg-[#D39A60] py-2 px-10 rounded-md hover:bg-[#DDA66F] hover:scale-105 transition duration-100 flex-shrink-0"
               >
                 <Link href="/sign-up">Get started</Link>
             </Button>
