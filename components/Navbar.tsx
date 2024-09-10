@@ -1,13 +1,21 @@
 import { UserButton, SignedIn, SignedOut } from "@clerk/nextjs";
 import { Button } from "./ui/button";
-import { NAV_LINKS } from "@/constants";
 import Link from "next/link";
 import Image from "next/image";
+import { currentUser } from "@clerk/nextjs/server";
+import { Plus } from "lucide-react";
 
-const Navbar = () => {
+const NAV_LINKS = [
+  { href: "/contact-us", label: "Contact us" },
+  { href: "/about", label: "About" },
+];
+
+const Navbar = async () => {
+  const user = await currentUser();
+
   return (
     <nav className="bg-slate-50 h-20 px-7 items-center grid grid-cols-2 text-slate-800 flex-nowrap filter drop-shadow-lg">
-      <div className="">
+      <div>
         <Link href="/" className="flex items-center">
           <Image
             src="/diplomat-logo.svg"
@@ -16,7 +24,6 @@ const Navbar = () => {
             alt="logo"
             className="h-auto -ml-2"
           ></Image>
-
           <p className="mx-3 text-2xl font-bold">Diplomat</p>
         </Link>
       </div>
@@ -26,7 +33,7 @@ const Navbar = () => {
           {NAV_LINKS.map((link) => (
             <Link
               href={link.href}
-              key={link.key}
+              key={link.label}
               className="transition-all hover:font-bold focus:font-medium"
             >
               {link.label}
@@ -36,7 +43,18 @@ const Navbar = () => {
 
         <div className="items-stretch flex gap-5">
           <SignedIn>
-            <UserButton afterSignOutUrl="/" />
+            {(user?.publicMetadata.role as string) === "admin" && (
+              <Button asChild>
+                <Link
+                  href="/sign-in"
+                  className="text-lg bg-slate-500 py-2 px-6 rounded-md hover:bg-slate-400 hover:scale-105 duration-100 flex-shrink-0 font-semibold"
+                >
+                  <Plus />
+                  Create Tournament
+                </Link>
+              </Button>
+            )}
+            <UserButton />
           </SignedIn>
           <SignedOut>
             <Button asChild>

@@ -17,9 +17,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      afterSignOutUrl="/"
+      afterMultiSessionSingleSignOutUrl="/"
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    >
       <html lang="en">
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <main className="h-full pb-32">{children}</main>
+        </body>
       </html>
     </ClerkProvider>
   );
