@@ -28,7 +28,7 @@ const Footer = () => {
 
   return (
     <footer
-      className={`bg-slate-50 border-t-2 border-slate-200 h-32 flex justify-center fixed left-0 w-full transition-all duration-500 ${
+      className={`bg-slate-50 border-t-2 border-slate-200 h-32 flex justify-center z-50 fixed left-0 w-full transition-all duration-500 ${
         visible ? "bottom-0" : "-bottom-32"
       }`}
     >
