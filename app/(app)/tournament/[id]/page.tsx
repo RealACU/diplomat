@@ -1,3 +1,4 @@
+//@ts-ignore;
 import { currentUser } from "@clerk/nextjs";
 
 const tourneyPage = async ({ params }: { params: { id: string } }) => {
