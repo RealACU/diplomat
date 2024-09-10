@@ -1,13 +1,12 @@
-import { NextRequest, NextResponse } from "next/server";
 import CreateTourneyForm from "@/components/CreateTourneyForm";
 import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-const createTourneyPage = async (req: NextRequest) => {
+const createTourneyPage = async () => {
   const user = await currentUser();
 
   if (!user || (user?.publicMetadata.role as string) !== "admin") {
-    const { nextUrl } = req;
-    return NextResponse.redirect(new URL("/", nextUrl));
+    return redirect("/");
   }
 
   return (
