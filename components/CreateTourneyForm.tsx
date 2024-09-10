@@ -98,10 +98,14 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
   };
 
   const handleBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
+    if (!e.target.value) {
+      return;
+    }
+
     const data = await getChairPreviews(e.target.value);
     const parsedData = JSON.parse(data);
-    console.log(parsedData);
 
+    console.log(parsedData);
     setChairPreviews(parsedData);
   };
 
@@ -368,10 +372,10 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                                 chairPreview.lastName
                               }
                               emailAddress={
-                                chairPreview.emailAddresses[0].emailAddress
+                                chairPreview.emailAddresses[0]?.emailAddress
                               }
                               phoneNumber={
-                                chairPreview.phoneNumbers[0].phoneNumber
+                                chairPreview.phoneNumbers[0]?.phoneNumber
                               }
                             />
                           </Button>
@@ -390,8 +394,8 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                   <ProfileBar
                     profileImageUrl={chair.imageUrl}
                     username={chair.firstName + " " + chair.lastName}
-                    emailAddress={chair.emailAddresses[0].emailAddress}
-                    phoneNumber={chair.phoneNumbers[0].phoneNumber}
+                    emailAddress={chair.emailAddresses[0]?.emailAddress}
+                    phoneNumber={chair.phoneNumbers[0]?.phoneNumber}
                   />
                 </div>
               ))}
