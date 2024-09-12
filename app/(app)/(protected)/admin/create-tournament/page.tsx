@@ -10,7 +10,7 @@ const createTourneyPage = async () => {
   }
 
   return (
-    <div className="px-32">
+    <div className="px-8 md:px-32">
       <CreateTourneyForm creatorId={user.id} />
     </div>
   );
