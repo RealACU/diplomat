@@ -5,11 +5,6 @@ import Image from "next/image";
 import { currentUser } from "@clerk/nextjs/server";
 import { Plus } from "lucide-react";
 
-const NAV_LINKS = [
-  { href: "/contact-us", label: "Contact us" },
-  { href: "/about", label: "About" },
-];
-
 const Navbar = async () => {
   const user = await currentUser();
 
@@ -30,31 +25,34 @@ const Navbar = async () => {
 
       <div className="items-center flex justify-end gap-7 text-md">
         <ul className="space-x-7 hidden lg:flex flex-shrink-0">
-          {NAV_LINKS.map((link) => (
-            <Link
-              href={link.href}
-              key={link.label}
-              className="transition-all hover:font-bold focus:font-medium"
-            >
-              {link.label}
-            </Link>
-          ))}
+          <Link
+            href="/contact-us"
+            className="transition-all hover:font-bold focus:font-medium"
+          >
+            Contact Us
+          </Link>
+          <Link
+            href="/about"
+            className="transition-all hover:font-bold focus:font-medium"
+          >
+            About
+          </Link>
         </ul>
 
         <div className="items-stretch flex gap-5">
           <SignedIn>
             {(user?.publicMetadata.role as string) === "admin" && (
-              <Button asChild>
-                <Link
-                  href="/sign-in"
-                  className="text-lg bg-slate-500 py-2 px-6 rounded-md hover:bg-slate-400 hover:scale-105 duration-100 flex-shrink-0 font-semibold"
-                >
+              <Button
+                asChild
+                className="text-sm bg-docorange-100 py-2 px-6 rounded-md hover:bg-docorange-200 hover:scale-105 duration-100 flex-shrink-0 font-semibold hidden sm:flex"
+              >
+                <Link href="/admin/create-tournament">
                   <Plus />
                   Create Tournament
                 </Link>
               </Button>
             )}
-            <UserButton/>
+            <UserButton />
           </SignedIn>
           <SignedOut>
             <Button asChild>
@@ -65,10 +63,11 @@ const Navbar = async () => {
                 Sign in
               </a>
             </Button>
-            <Button asChild
-                className="text-[16px] bg-[#D39A60] py-2 px-10 rounded-md hover:bg-[#DDA66F] hover:scale-105 transition duration-100 flex-shrink-0"
-              >
-                <Link href="/sign-up">Get started</Link>
+            <Button
+              asChild
+              className="text-[16px] bg-[#D39A60] py-2 px-10 rounded-md hover:bg-[#DDA66F] hover:scale-105 transition duration-100 flex-shrink-0"
+            >
+              <Link href="/sign-up">Get started</Link>
             </Button>
           </SignedOut>
         </div>

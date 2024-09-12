@@ -23,9 +23,7 @@ export default function RootLayout({
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
     >
       <html lang="en">
-        <body className={inter.className}>
-          <main className="h-full">{children}</main>
-        </body>
+        <body className={inter.className}>{children}</body>
       </html>
     </ClerkProvider>
   );
