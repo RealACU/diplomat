@@ -1,9 +1,5 @@
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <div className="pt-8 pb-36">
-      {children}
-    </div>
-  );
+  return <div className="py-10">{children}</div>;
 };
 
 export default AppLayout;

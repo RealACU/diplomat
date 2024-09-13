@@ -105,7 +105,6 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
     const data = await getChairPreviews(e.target.value);
     const parsedData = JSON.parse(data);
 
-    console.log(parsedData);
     setChairPreviews(parsedData);
   };
 
@@ -307,13 +306,15 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                 variant="ghost"
                 className="absolute top-2 right-2"
                 onClick={() =>
-                  setCommittees((committees) => committees.splice(i, 1))
+                  setCommittees((committees) =>
+                    committees.filter((comm) => comm !== committee)
+                  )
                 }
               >
                 <Trash2 className="h-4 w-4" />
               </Button>
               <p className="font-semibold text-lg">{committee.name}</p>
-              <p>Room {committee.roomNumber}</p>
+              <p className="pb-4">Room {committee.roomNumber}</p>
 
               {/* Add chair */}
 
@@ -347,7 +348,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                       {chairPreviews?.map((chairPreview) => (
                         <DialogClose asChild>
                           <Button
-                            className="h-auto w-full"
+                            className="h-auto w-full bg-slate-100 hover:bg-slate-200"
                             type="submit"
                             onClick={() => {
                               setCommittees((committees) =>
@@ -385,20 +386,36 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                   </DialogFooter>
                 </DialogContent>
               </Dialog>
-              <div className="py-1"></div>
-              {committee.chairs.map((chair, j) => (
-                <div
-                  key={j}
-                  className="flex flex-col p-1 rounded-md border-[1px] bg-slate-200 hover:bg-slate-200/70"
-                >
-                  <ProfileBar
-                    profileImageUrl={chair.imageUrl}
-                    username={chair.firstName + " " + chair.lastName}
-                    emailAddress={chair.emailAddresses[0]?.emailAddress}
-                    phoneNumber={chair.phoneNumbers[0]?.phoneNumber}
-                  />
-                </div>
-              ))}
+              <div className="py-2 flex flex-col gap-1">
+                {committee.chairs.map((chair, j) => (
+                  <Button
+                    key={j}
+                    onClick={() => {
+                      setCommittees((committees) =>
+                        // comm refers to the unupdated version of a committee in the committees list
+                        committees.map((comm) =>
+                          comm === committee
+                            ? {
+                                name: comm.name,
+                                roomNumber: comm.roomNumber,
+                                // Creates a committee object without this specific chair
+                                chairs: comm.chairs.filter((c) => c !== chair),
+                              }
+                            : comm
+                        )
+                      );
+                    }}
+                    className="h-auto w-full flex p-1 rounded-md border-[1px] bg-slate-100 hover:bg-slate-200"
+                  >
+                    <ProfileBar
+                      profileImageUrl={chair.imageUrl}
+                      username={chair.firstName + " " + chair.lastName}
+                      emailAddress={chair.emailAddresses[0]?.emailAddress}
+                      phoneNumber={chair.phoneNumbers[0]?.phoneNumber}
+                    />
+                  </Button>
+                ))}
+              </div>
             </div>
           ))}
 
