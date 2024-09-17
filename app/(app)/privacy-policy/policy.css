@@ -1,0 +1,91 @@
+/* CSS Code - styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #595959;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #000000;
+}
+
+h1 {
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 22px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+p, li {
+    font-size: 15px;
+    color: #595959;
+}
+
+ul {
+    list-style-type: square;
+    margin-left: 20px;
+}
+
+ul ul {
+    list-style-type: circle;
+}
+
+ol {
+    margin-left: 20px;
+}
+
+a {
+    color: #003AFA;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+strong {
+    font-weight: bold;
+}
+
+em {
+    font-style: italic;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+#toc a {
+    color: #003AFA;
+    text-decoration: none;
+}

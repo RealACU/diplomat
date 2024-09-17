@@ -37,8 +37,21 @@ const Footer = () => {
           <p>Copyright © 2024 Asher & Danny & Shivansh</p>
         </div>
         <div className="flex justify-end space-x-4">
-          <Button variant="link">Terms of Service</Button>
-          <Button variant="link">Privacy Policy</Button>
+          <Button variant="link">
+            <a
+            href="/terms-of-service"
+           >
+            Terms of Use
+            </a>
+          </Button>
+          
+          <Button variant="link">
+          <a
+            href="/privacy-policy"
+           >
+            Privacy Policy
+            </a>
+          </Button>
         </div>
       </div>
     </footer>

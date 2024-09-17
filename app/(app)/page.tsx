@@ -151,7 +151,7 @@ export default function Home() {
                 type="text"
                 id="search-bar"
                 placeholder="Search for a tournament near you"
-                className="text-xl font-semibold text-slate-800 placeholder-slate-300"
+                className="text-xl font-semibold h-[55px] w-full text-slate-800 placeholder-slate-300"
               />
             </div>
             <div className="w-full h-[465px]"></div>

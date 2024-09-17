@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { currentUser } from "@clerk/nextjs/server";
-import { Plus } from "lucide-react";
+import { Plus } from "lucide-react"; 
 
 const Navbar = async () => {
   const user = await currentUser();
@@ -26,13 +26,13 @@ const Navbar = async () => {
       <div className="items-center flex justify-end gap-7 text-md">
         <ul className="space-x-7 hidden lg:flex flex-shrink-0">
           <Link
-            href="/contact-us"
+            href="/contact-us/"
             className="transition-all hover:font-bold focus:font-medium"
           >
             Contact Us
           </Link>
           <Link
-            href="/about"
+            href="/about/"
             className="transition-all hover:font-bold focus:font-medium"
           >
             About
@@ -67,7 +67,9 @@ const Navbar = async () => {
               asChild
               className="text-[16px] bg-[#D39A60] py-2 px-10 rounded-md hover:bg-[#DDA66F] hover:scale-105 transition duration-100 flex-shrink-0"
             >
-              <Link href="/sign-up">Get started</Link>
+              <Link href="/sign-up">
+              Get started
+              </Link>
             </Button>
           </SignedOut>
         </div>
