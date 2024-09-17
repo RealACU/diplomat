@@ -1,91 +1,107 @@
-/* CSS Code - styles.css */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #ffffff;
-    color: #595959;
-    line-height: 1.5;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
+/* Global styles for the privacy policy page */
+.privacy-container {
     width: 80%;
     margin: 0 auto;
     padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #595959;
+    line-height: 1.5;
 }
 
-h1, h2 {
-    color: #000000;
-}
-
-h1 {
+.privacy-title {
     font-size: 26px;
     margin-bottom: 10px;
-}
-
-h2 {
-    font-size: 22px;
-    margin-top: 30px;
-    margin-bottom: 10px;
-}
-
-h3 {
-    font-size: 18px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-p, li {
-    font-size: 15px;
-    color: #595959;
-}
-
-ul {
-    list-style-type: square;
-    margin-left: 20px;
-}
-
-ul ul {
-    list-style-type: circle;
-}
-
-ol {
-    margin-left: 20px;
-}
-
-a {
-    color: #003AFA;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-strong {
+    color: #000000;
     font-weight: bold;
 }
 
-em {
-    font-style: italic;
+.privacy-updated {
+    font-size: 14px;
+    margin-bottom: 15px;
 }
 
-table {
+.privacy-intro {
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.privacy-questions {
+    font-size: 15px;
+    margin-bottom: 20px;
+    
+}
+
+.privacy-subheading {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.privacy-summary {
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.privacy-toc-heading {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.privacy-toc {
+    list-style-type: decimal;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.privacy-list {
+    list-style-type: square;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    
+}
+
+.privacy-link {
+    color: #003AFA;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.privacy-link:hover {
+    text-decoration: underline;
+}
+
+.privacy-section-heading {
+    font-size: 22px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    color: #000000;
+    font-weight: bold;
+}
+
+.privacy-content {
+    font-size: 15px;
+    margin-bottom: 15px;
+    
+}
+
+/* Specific styling for privacy policy tables */
+.privacy-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-table, th, td {
+.privacy-table, .privacy-table th, .privacy-table td {
     border: 1px solid black;
 }
 
-th, td {
+.privacy-table th, .privacy-table td {
     padding: 10px;
     text-align: left;
 }
 
-#toc a {
-    color: #003AFA;
-    text-decoration: none;
-}
