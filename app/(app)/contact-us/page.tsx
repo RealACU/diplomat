@@ -58,7 +58,7 @@ const ContactUsPage = () => {
 
   return (
     <div className="h-full w-full py-10 px-8 md:px-32">
-      <section className="bg-slate-50 p-4 rounded-md shadow-lg">
+      <section className="bg-slate-50 p-6 rounded-md shadow-lg">
         <Form {...form}>
           <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
             <h1 className="text-[2rem] font-bold text-center">Contact Form</h1>
