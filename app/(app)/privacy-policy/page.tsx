@@ -349,17 +349,33 @@ const PrivacyPolicyPage = () => {
         9. DO UNITED STATES RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?
       </h2>
       <p className="privacy-content">
-        <strong>In Short:</strong> If you are a resident of California, Colorado,
-        Connecticut, Delaware, Florida, Indiana, Iowa, Kentucky, Montana, New
-        Hampshire, New Jersey, Oregon, Tennessee, Texas, Utah, or Virginia, you
-        may have rights to access, correct, or delete personal information.
-        Please refer to specific laws in your state for more details.
+        <strong>In Short:</strong> In Short: If you are a resident of California, 
+        Colorado, Connecticut, Delaware, Florida, Indiana, Iowa, Kentucky, Montana, 
+        New Hampshire, New Jersey, Oregon, Tennessee, Texas, Utah, or Virginia, 
+        you may have the right to request access to and receive details about the 
+        personal information we maintain about you and how we have processed it, 
+        correct inaccuracies, get a copy of, or delete your personal information. 
+        You may also have the right to withdraw your consent to our processing of 
+        your personal information. These rights may be limited in some circumstances 
+        by applicable law. More information is provided below.
       </p>
       <p className="privacy-content">
         We have not disclosed, sold, or shared any personal information to third
         parties for a business or commercial purpose in the preceding twelve
         (12) months. We will not sell or share personal information in the
         future belonging to website visitors, users, and other consumers.
+      </p>
+
+      {/* Table */} 
+      <h2 className="privacy-section-heading" id="policyupdates">
+          Categories of Personal Information We Collect
+      </h2>
+
+      <p>
+
+        <table> 
+          
+        </table>
       </p>
 
       {/* Section 10 */}
