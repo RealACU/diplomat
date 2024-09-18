@@ -1,4 +1,4 @@
-const page = () => {
+const TosPage = () => {
     return (
         <div>
             Enter
@@ -6,4 +6,4 @@ const page = () => {
     );
 }
 
-export default page;
+export default TosPage;

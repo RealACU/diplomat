@@ -1,10 +1,9 @@
-import './About.css'
-const about = () => {
-    return (
-        <div className="Diddy">
-            Daddy Danny Do Diddy Disciples
-        </div>
-    );
-}
+const AboutPage = () => {
+  return (
+    <div className="items-center flex justify-center h-1/2 w-full">
+      Placeholder
+    </div>
+  );
+};
 
-export default about;
+export default AboutPage;

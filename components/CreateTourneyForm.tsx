@@ -238,8 +238,8 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
               <FormLabel>Description</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="When you enter the school..."
                   {...field}
+                  placeholder="When you enter the school..."
                 />
               </FormControl>
               <FormDescription>

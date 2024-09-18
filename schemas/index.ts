@@ -23,3 +23,10 @@ export const TourneySchema = z.object({
   startDate: z.string({ required_error: "Please enter start date" }),
   endDate: z.string({ required_error: "Please enter end date" }),
 });
+
+export const ContactSchema = z.object({
+  name: z.string({ required_error: "Please enter name" }),
+  email: z.string({ required_error: "Please enter email" }),
+  message: z.string({ required_error: "Please enter message" }),
+  access_key: z.string(),
+});
