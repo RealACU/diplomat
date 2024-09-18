@@ -1,0 +1,68 @@
+.contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f5f3f3;
+}
+
+form {
+    max-width: 600px;
+    width: 100%;
+    background: #ffffff;
+    padding: 25px 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #000000;
+    margin: 25px;
+}
+
+form h2 {
+    font-size: 35px;
+    text-align: center;
+    font-weight: bold; 
+}
+
+form .input-box {
+    margin-top: 20px;
+}
+
+.field {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #3498db; /* Border always visible */
+    border-radius: 4px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.field:focus {
+    border-color: #2980b9; /* Darker border on focus */
+}
+
+.message {
+    height: 100px;
+}
+
+.input-button .fields.button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    background-color: #d39a60;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.input-button .fields.button:hover {
+    background-color: #f67b00;
+}
+
+.input-box .field.mess {
+    height: 200px;
+    resize: none;
+}
