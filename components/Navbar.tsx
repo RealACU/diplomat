@@ -10,7 +10,7 @@ const Navbar = async () => {
 
   return (
     <nav className="bg-slate-50 h-20 px-7 items-center grid grid-cols-2 text-slate-800 flex-nowrap filter drop-shadow-lg">
-      <div className="pb-1 w-1/2 invisible sm:visible">
+      <div className="w-1/4 invisible sm:visible">
         <Link href="/" className="flex items-center">
           <Image
             src="/diplomat-logo.svg"
@@ -59,7 +59,7 @@ const Navbar = async () => {
           <SignedOut>
             <Button
               asChild
-              className="text-[16px] py-2 px-6 rounded-md hover:scale-105 transition duration-100 flex-shrink-0 font-semibold"
+              className="text-[16px] bg-slate-400 py-2 px-6 rounded-md hover:bg-slate-500 hover:scale-105 transition duration-100 flex-shrink-0 font-semibold"
             >
               <Link href="/sign-in">Sign in</Link>
             </Button>
