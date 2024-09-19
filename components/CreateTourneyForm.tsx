@@ -243,7 +243,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                 />
               </FormControl>
               <FormDescription>
-                Mention anything you'd like delegates to know.
+                Mention anything you would like delegates to know.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -345,8 +345,8 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                           No matches
                         </p>
                       ) : null}
-                      {chairPreviews?.map((chairPreview) => (
-                        <DialogClose asChild>
+                      {chairPreviews?.map((chairPreview, j) => (
+                        <DialogClose key={j} asChild>
                           <Button
                             className="h-auto w-full bg-slate-100 hover:bg-slate-200"
                             type="submit"
@@ -387,9 +387,9 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                 </DialogContent>
               </Dialog>
               <div className="py-2 flex flex-col gap-1">
-                {committee.chairs.map((chair, j) => (
+                {committee.chairs.map((chair, k) => (
                   <Button
-                    key={j}
+                    key={k}
                     onClick={() => {
                       setCommittees((committees) =>
                         // comm refers to the unupdated version of a committee in the committees list

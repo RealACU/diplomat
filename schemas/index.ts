@@ -24,9 +24,18 @@ export const TourneySchema = z.object({
   endDate: z.string({ required_error: "Please enter end date" }),
 });
 
+/**
+ * Schema for users contacting developers
+ */
 export const ContactSchema = z.object({
-  name: z.string({ required_error: "Please enter name" }),
-  email: z.string({ required_error: "Please enter email" }),
-  message: z.string({ required_error: "Please enter message" }),
+  name: z
+    .string({ required_error: "Please enter name" })
+    .min(1, { message: "Please enter name" }),
+  email: z
+    .string({ required_error: "Please enter email" })
+    .min(1, { message: "Please enter email" }),
+  message: z
+    .string({ required_error: "Please enter message" })
+    .min(1, { message: "Please enter message" }),
   access_key: z.string(),
 });

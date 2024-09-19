@@ -1,68 +1,124 @@
-"use client"
-import Swal from 'sweetalert2'
-import  './Contact.css'
+"use client";
 
-const page = () => {
-    //@ts-ignore
-    const onSubmit = async (event) => {
-        event.preventDefault();
-        const formData = new FormData(event.target);
-    
-        formData.append("access_key", "73ef8272-59c7-44b9-a56e-8b24df3de135");
-    
-        const object = Object.fromEntries(formData);
-        const json = JSON.stringify(object);
-    
-        const res = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json"
-          },
-          body: json
-        }).then((res) => res.json());
-    
-        if (res.success) {
-          Swal.fire({
-            title: "Sucess!",
-            text: "Message send successfully!",
-            icon: "success", 
-          });
-        }
-      };
+import * as z from "zod";
 
-    return (
-        <section 
-            className="contact">
-                <form onSubmit={onSubmit}>
-                    <h2>Contact Form</h2>
-                    <div className="input-box">
-                        <label>
-                            Full Name 
-                        </label> 
-                        <input type="text" className="field" placeholder='Enter Your Name' name='name' required/>
-                    </div>
+import { useTransition } from "react";
+import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { ContactSchema } from "@/schemas";
+import { Textarea } from "@/components/ui/textarea";
 
-                    <div className="input-box">
-                        <label> 
-                            Email Address
-                        </label>
-                            <input type="text" className="field" placeholder="Enter Your Email Address" name='email' required />
-                    </div>
-                    <div className="input-box">
-                        <label> 
-                            Your Message
-                        </label>
-                            <textarea name="message" className="field mess" placeholder="Enter Your Message"  required />
-                    </div>
-                    <div className="input-button">
-                        <button className=" fields button" type="submit"> 
-                            Send Message
-                        </button>
-                    </div>
-                </form>
-        </section>
-    );
-}
+const ContactUsPage = () => {
+  const [isPending, startTransition] = useTransition();
+
+  const form = useForm<z.infer<typeof ContactSchema>>({
+    resolver: zodResolver(ContactSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      message: "",
+      access_key: "73ef8272-59c7-44b9-a56e-8b24df3de135",
+    },
+  });
+
+  const onSubmit = (values: z.infer<typeof ContactSchema>) => {
+    startTransition(async () => {
+      const json = JSON.stringify(values);
+
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: json,
+      }).then((res) => res.json());
+
+      if (res.success) {
+        Swal.fire({
+          title: "Sucess!",
+          text: "Message send successfully!",
+          icon: "success",
+        });
+      }
+    });
+  };
+
+  return (
+    <div className="h-full w-full py-10 px-8 md:px-32">
+      <Form {...form}>
+        <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    placeholder="Jane Doe"
+                    disabled={isPending}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    placeholder="janedoe@example.com"
+                    disabled={isPending}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Message</FormLabel>
+                <FormControl>
+                  <Textarea
+                    {...field}
+                    placeholder="Hello, I have a question..."
+                    disabled={isPending}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button disabled={isPending} type="submit" className="w-full sm:w-16">
+            Send
+          </Button>
+        </form>
+      </Form>
+    </div>
+  );
+};
 
 export default page;
