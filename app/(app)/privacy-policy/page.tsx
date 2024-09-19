@@ -1,3 +1,4 @@
+import { Table } from "lucide-react";
 import "./privacypolicy.css";
 
 const PrivacyPolicyPage = () => {
@@ -366,18 +367,125 @@ const PrivacyPolicyPage = () => {
         future belonging to website visitors, users, and other consumers.
       </p>
 
-      {/* Table */} 
-      <h2 className="privacy-section-heading" id="policyupdates">
+    {/* Table */} 
+      <h2 className="privacy-subheading" id="policyupdates">
           Categories of Personal Information We Collect
       </h2>
 
-      <p>
-
-        <table> 
-          
+      <p className="privacy-content">
+        We have collected the following categories of personal information in the past twelve (12) months:
+      </p>
+      
+      <div>
+        <table className="privacy-table">
+          <tr>
+            <th>Category</th>
+            <th>Examples</th>
+            <th>Collected</th>
+          </tr>
+          <tr>
+            <td>Identifiers</td>
+            <td>Contact details, such as real name, alias, postal address, telephone or mobile contact number, unique personal identifier, online identifier, Internet Protocol address, email address, and account name</td>
+            <td>NO</td>
+          </tr>
+          <tr>
+            <td>Personal information as defined in the California Customer Records statute</td>
+            <td>Name, contact information, education, employment, employment history, and financial information</td>
+            <td>NO</td>
+          </tr>
+          <tr>
+            <td>Protected classification characteristics under state or federal law</td>
+            <td>Gender, age, date of birth, race and ethnicity, national origin, marital status, and other demographic data</td>
+            <td>NO</td>
+          </tr>
+          <tr>
+            <td>Commercial information</td>
+            <td>Transaction information, purchase history, financial details, and payment information</td>
+            <td>NO</td>
+          </tr>
+          <tr>
+            <td>Biometric information</td>
+            <td>Fingerprints and voiceprints</td>
+            <td>NO</td>
+          </tr>
+          <tr>
+            <td>Internet or other similar network activity</td>
+            <td>Browsing history, search history, online behavior, interest data, and interactions with our and other websites, applications, systems, and advertisements</td>
+            <td>NO</td>
+          </tr>
+          <tr>
+            <td>Geolocation data</td>
+            <td>Device location</td>
+            <td>NO</td>
+          </tr>
+          <tr>
+            <td>Audio, electronic, sensory, or similar information</td>
+            <td>Images and audio, video or call recordings created in connection with our business activities</td>
+            <td>NO</td>
+          </tr>
+          <tr>
+            <td>Professional or employment-related information</td>
+            <td>Business contact details in order to provide you our Services at a business level or job title, work history, and professional qualifications if you apply for a job with us</td>
+            <td>NO</td>
+          </tr>
+          <tr>
+            <td>Education Information</td>
+            <td>Student records and directory information</td>
+            <td>NO</td>
+          </tr>
+          <tr>
+            <td>Inferences drawn from collected personal information</td>
+            <td>Inferences drawn from any of the collected personal information listed above to create a profile or summary about, for example, an individual’s preferences and characteristics</td>
+            <td>NO</td>
+          </tr>
+          <tr>
+            <td>Sensitive personal Information</td>
+            <td>—</td>
+            <td>NO</td>
+          </tr>
         </table>
+      </div>
+
+      { /* Just to get space between table and text beneath it*/ }
+      <p className="privacy-subheading"></p>
+
+      <p className="privacy-content">
+        We may also collect other personal information outside of these categories through instances where you interact with us in person, online, or by phone or mail in the context of:
+      </p>   
+      <p className="privacy-list">
+        <li>Recieving help through our <a href="/contact-us" className="privacy-link"> Contact Us Form</a></li>
+      </p>
+      <p className="privacy-list">
+        <li>Participation in customer surveys or contests</li>
+      </p>
+      <p className="privacy-list">
+        <li>Facilitation in the delivery of our Services and to respond to your inquiries</li>
       </p>
 
+      <p className="privacy-subheading">
+        Sources of Personal Information
+      </p>
+
+
+
+
+
+
+
+      { /* Just to get space between table and text beneath it*/ }
+      <p className="privacy-title">
+      ‎ {/* invisible character added so that there is space between what i am adding and the next one */}
+        </p>
+        <p className="privacy-title">
+      ‎ 
+        </p>
+        <p className="privacy-title">
+      ‎ 
+        </p>
+        <p className="privacy-title">
+      ‎ 
+        </p>
+      
       {/* Section 10 */}
       <h2 className="privacy-section-heading" id="policyupdates">
         10. DO WE MAKE UPDATES TO THIS NOTICE?
@@ -410,9 +518,9 @@ const PrivacyPolicyPage = () => {
       <p className="privacy-content">
         Diplomat
         <br />
-        __________
+        1100 S Ocean Blvd, Palm Beach, FL 33480
         <br />
-        __________
+        6969 Salty Springs Ave. S, Tilted Towers, 
         <br />
         United States
       </p>
