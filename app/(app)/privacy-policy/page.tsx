@@ -10,10 +10,10 @@ const PrivacyPolicyPage = () => {
       </p>
       <p className="privacy-intro">
         This Privacy Notice for Diplomat ("<strong>we</strong>", "
-        <strong>us</strong>", or "<strong>our</strong>"), describes how and why we
-        might access, collect, store, use, and/or share ("<strong>process</strong>")
-        your personal information when you use our services ("<strong>Services</strong>"),
-        including when you:
+        <strong>us</strong>", or "<strong>our</strong>"), describes how and why
+        we might access, collect, store, use, and/or share ("
+        <strong>process</strong>") your personal information when you use our
+        services ("<strong>Services</strong>"), including when you:
       </p>
       <ul className="privacy-list">
         <li>Visit our website</li>
@@ -50,10 +50,11 @@ const PrivacyPolicyPage = () => {
         </strong>
       </p>
       <p className="privacy-content">
-        <strong>What personal information do we process?</strong> When you visit,
-        use, or navigate our Services, we may process personal information
-        depending on how you interact with Diplomat and the Services, the choices
-        you make, and the products and features you use. Learn more about{" "}
+        <strong>What personal information do we process?</strong> When you
+        visit, use, or navigate our Services, we may process personal
+        information depending on how you interact with Diplomat and the
+        Services, the choices you make, and the products and features you use.
+        Learn more about{" "}
         <a href="#infocollect" className="privacy-link">
           what information do we collect
         </a>
@@ -69,10 +70,10 @@ const PrivacyPolicyPage = () => {
       </p>
       <p className="privacy-content">
         <strong>How do we process your information?</strong> We process your
-        information to provide, improve, and administer our Services, communicate
-        with you, for security and fraud prevention, and to comply with law. We
-        may also process your information for other purposes with your consent.
-        Learn more about{" "}
+        information to provide, improve, and administer our Services,
+        communicate with you, for security and fraud prevention, and to comply
+        with law. We may also process your information for other purposes with
+        your consent. Learn more about{" "}
         <a href="#infouse" className="privacy-link">
           how we process your information
         </a>
@@ -92,19 +93,19 @@ const PrivacyPolicyPage = () => {
       </p>
       <p className="privacy-content">
         <strong>How do we keep your information safe?</strong> We have adequate
-        organizational and technical processes and procedures in place to protect
-        your personal information. However, no electronic transmission over the
-        internet or information storage technology can be guaranteed to be 100%
-        secure. Learn more about{" "}
+        organizational and technical processes and procedures in place to
+        protect your personal information. However, no electronic transmission
+        over the internet or information storage technology can be guaranteed to
+        be 100% secure. Learn more about{" "}
         <a href="#infosafe" className="privacy-link">
           how we keep your information safe
         </a>
         .
       </p>
       <p className="privacy-content">
-        <strong>What are your rights?</strong> Depending on where you are located
-        geographically, the applicable privacy law may mean you have certain
-        rights regarding your personal information. Learn more about{" "}
+        <strong>What are your rights?</strong> Depending on where you are
+        located geographically, the applicable privacy law may mean you have
+        certain rights regarding your personal information. Learn more about{" "}
         <a href="#privacyrights" className="privacy-link">
           your privacy rights
         </a>
@@ -127,21 +128,91 @@ const PrivacyPolicyPage = () => {
         .
       </p>
 
-      <p className="privacy-section-heading"> 
-          TABLE OF CONTENTS
-      </p>
-          <li> <a href="#infocollect" className="privacy-link"> WHAT INFORMATION DO WE COLLECT? </a></li>
-          <li> <a href="#infouse" className="privacy-link"> HOW DO WE PROCESS YOUR INFORMATION? </a></li>
-          <li> <a href="#whoshare" className="privacy-link"> WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION </a></li>
-          <li> <a href="#sociallogins" className="privacy-link"> HOW DO WE HANDLE YOUR SOCIAL LOGINS? </a></li>
-          <li> <a href="#inforetain" className="privacy-link"> HOW LONG DO WE KEEP YOUR INFORMATION </a></li>
-          <li> <a href="#infosafe" className="privacy-link"> HOW DO WE KEEP YOUR INFORMATION SAFE? </a></li>
-          <li> <a href="#privacyrights" className="privacy-link"> WHAT ARE YOUR PRIVACY RIGHTS? </a></li>
-          <li> <a href="#DNT" className="privacy-link"> CONTROLS FOR DO-NOT-TRACK FEATURES? </a></li>
-          <li> <a href="#uslaws" className="privacy-link"> DO UNITED STATES RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS? </a></li>
-          <li> <a href="#policyupdates" className="privacy-link"> DO WE MAKE UPDATES TO THIS NOTICE? </a></li>
-          <li> <a href="#contact" className="privacy-link"> HOW CAN YOU CONTACT US ABOUT THIS NOTICE? </a></li>
-          <li> <a href="#request" className="privacy-link"> HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU? </a></li>
+      <p className="privacy-section-heading">TABLE OF CONTENTS</p>
+      <li>
+        {" "}
+        <a href="#infocollect" className="privacy-link">
+          {" "}
+          WHAT INFORMATION DO WE COLLECT?{" "}
+        </a>
+      </li>
+      <li>
+        {" "}
+        <a href="#infouse" className="privacy-link">
+          {" "}
+          HOW DO WE PROCESS YOUR INFORMATION?{" "}
+        </a>
+      </li>
+      <li>
+        {" "}
+        <a href="#whoshare" className="privacy-link">
+          {" "}
+          WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION{" "}
+        </a>
+      </li>
+      <li>
+        {" "}
+        <a href="#sociallogins" className="privacy-link">
+          {" "}
+          HOW DO WE HANDLE YOUR SOCIAL LOGINS?{" "}
+        </a>
+      </li>
+      <li>
+        {" "}
+        <a href="#inforetain" className="privacy-link">
+          {" "}
+          HOW LONG DO WE KEEP YOUR INFORMATION{" "}
+        </a>
+      </li>
+      <li>
+        {" "}
+        <a href="#infosafe" className="privacy-link">
+          {" "}
+          HOW DO WE KEEP YOUR INFORMATION SAFE?{" "}
+        </a>
+      </li>
+      <li>
+        {" "}
+        <a href="#privacyrights" className="privacy-link">
+          {" "}
+          WHAT ARE YOUR PRIVACY RIGHTS?{" "}
+        </a>
+      </li>
+      <li>
+        {" "}
+        <a href="#DNT" className="privacy-link">
+          {" "}
+          CONTROLS FOR DO-NOT-TRACK FEATURES?{" "}
+        </a>
+      </li>
+      <li>
+        {" "}
+        <a href="#uslaws" className="privacy-link">
+          {" "}
+          DO UNITED STATES RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?{" "}
+        </a>
+      </li>
+      <li>
+        {" "}
+        <a href="#policyupdates" className="privacy-link">
+          {" "}
+          DO WE MAKE UPDATES TO THIS NOTICE?{" "}
+        </a>
+      </li>
+      <li>
+        {" "}
+        <a href="#contact" className="privacy-link">
+          {" "}
+          HOW CAN YOU CONTACT US ABOUT THIS NOTICE?{" "}
+        </a>
+      </li>
+      <li>
+        {" "}
+        <a href="#request" className="privacy-link">
+          {" "}
+          HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?{" "}
+        </a>
+      </li>
 
       {/* Section 1 */}
       <h2 className="privacy-section-heading" id="infocollect">
@@ -366,15 +437,16 @@ const PrivacyPolicyPage = () => {
         9. DO UNITED STATES RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?
       </h2>
       <p className="privacy-content">
-        <strong>In Short:</strong> In Short: If you are a resident of California, 
-        Colorado, Connecticut, Delaware, Florida, Indiana, Iowa, Kentucky, Montana, 
-        New Hampshire, New Jersey, Oregon, Tennessee, Texas, Utah, or Virginia, 
-        you may have the right to request access to and receive details about the 
-        personal information we maintain about you and how we have processed it, 
-        correct inaccuracies, get a copy of, or delete your personal information. 
-        You may also have the right to withdraw your consent to our processing of 
-        your personal information. These rights may be limited in some circumstances 
-        by applicable law. More information is provided below.
+        <strong>In Short:</strong> In Short: If you are a resident of
+        California, Colorado, Connecticut, Delaware, Florida, Indiana, Iowa,
+        Kentucky, Montana, New Hampshire, New Jersey, Oregon, Tennessee, Texas,
+        Utah, or Virginia, you may have the right to request access to and
+        receive details about the personal information we maintain about you and
+        how we have processed it, correct inaccuracies, get a copy of, or delete
+        your personal information. You may also have the right to withdraw your
+        consent to our processing of your personal information. These rights may
+        be limited in some circumstances by applicable law. More information is
+        provided below.
       </p>
       <p className="privacy-content">
         We have not disclosed, sold, or shared any personal information to third
@@ -383,16 +455,16 @@ const PrivacyPolicyPage = () => {
         future belonging to website visitors, users, and other consumers.
       </p>
 
-    {/* Table */} 
+      {/* Table */}
       <h2 className="privacy-subheading" id="policyupdates">
-          Categories of Personal Information We Collect
+        Categories of Personal Information We Collect
       </h2>
 
       <p className="privacy-content">
-        We have collected the following categories of personal information in the past twelve (12) months:
+        We have collected the following categories of personal information in
+        the past twelve (12) months:
       </p>
-      
-      
+
       <div>
         <table className="privacy-table">
           <thead>
@@ -405,22 +477,42 @@ const PrivacyPolicyPage = () => {
           <tbody>
             <tr>
               <td>Identifiers</td>
-              <td>Contact details, such as real name, alias, postal address, telephone or mobile contact number, unique personal identifier, online identifier, Internet Protocol address, email address, and account name</td>
+              <td>
+                Contact details, such as real name, alias, postal address,
+                telephone or mobile contact number, unique personal identifier,
+                online identifier, Internet Protocol address, email address, and
+                account name
+              </td>
+              <td>YES</td>
+            </tr>
+            <tr>
+              <td>
+                Personal information as defined in the California Customer
+                Records statute
+              </td>
+              <td>
+                Name, contact information, education, employment, employment
+                history, and financial information
+              </td>
               <td>NO</td>
             </tr>
             <tr>
-              <td>Personal information as defined in the California Customer Records statute</td>
-              <td>Name, contact information, education, employment, employment history, and financial information</td>
-              <td>NO</td>
-            </tr>
-            <tr>
-              <td>Protected classification characteristics under state or federal law</td>
-              <td>Gender, age, date of birth, race and ethnicity, national origin, marital status, and other demographic data</td>
+              <td>
+                Protected classification characteristics under state or federal
+                law
+              </td>
+              <td>
+                Gender, age, date of birth, race and ethnicity, national origin,
+                marital status, and other demographic data
+              </td>
               <td>NO</td>
             </tr>
             <tr>
               <td>Commercial information</td>
-              <td>Transaction information, purchase history, financial details, and payment information</td>
+              <td>
+                Transaction information, purchase history, financial details,
+                and payment information
+              </td>
               <td>NO</td>
             </tr>
             <tr>
@@ -430,7 +522,11 @@ const PrivacyPolicyPage = () => {
             </tr>
             <tr>
               <td>Internet or other similar network activity</td>
-              <td>Browsing history, search history, online behavior, interest data, and interactions with our and other websites, applications, systems, and advertisements</td>
+              <td>
+                Browsing history, search history, online behavior, interest
+                data, and interactions with our and other websites,
+                applications, systems, and advertisements
+              </td>
               <td>NO</td>
             </tr>
             <tr>
@@ -440,12 +536,19 @@ const PrivacyPolicyPage = () => {
             </tr>
             <tr>
               <td>Audio, electronic, sensory, or similar information</td>
-              <td>Images and audio, video or call recordings created in connection with our business activities</td>
+              <td>
+                Images and audio, video or call recordings created in connection
+                with our business activities
+              </td>
               <td>NO</td>
             </tr>
             <tr>
               <td>Professional or employment-related information</td>
-              <td>Business contact details in order to provide you our Services at a business level or job title, work history, and professional qualifications if you apply for a job with us</td>
+              <td>
+                Business contact details in order to provide you our Services at
+                a business level or job title, work history, and professional
+                qualifications if you apply for a job with us
+              </td>
               <td>NO</td>
             </tr>
             <tr>
@@ -455,7 +558,11 @@ const PrivacyPolicyPage = () => {
             </tr>
             <tr>
               <td>Inferences drawn from collected personal information</td>
-              <td>Inferences drawn from any of the collected personal information listed above to create a profile or summary about, for example, an individual’s preferences and characteristics</td>
+              <td>
+                Inferences drawn from any of the collected personal information
+                listed above to create a profile or summary about, for example,
+                an individual’s preferences and characteristics
+              </td>
               <td>NO</td>
             </tr>
             <tr>
@@ -467,133 +574,229 @@ const PrivacyPolicyPage = () => {
         </table>
       </div>
 
-      { /* Just to get space between table and text beneath it*/ }
-      <p className="privacy-subheading"></p>
+      {/* Just to get space between table and text beneath it */}
+      <div className="py-6"></div>
 
       <p className="privacy-content">
-        We may also collect other personal information outside of these categories through instances where you interact with us in person, online, or by phone or mail in the context of:
-      </p>   
+        We may also collect other personal information outside of these
+        categories through instances where you interact with us in person,
+        online, or by phone or mail in the context of:
+      </p>
       <p className="privacy-list">
-        <li>Recieving help through our <a href="/contact-us" className="privacy-link"> Contact Us Form</a></li>
+        <li>
+          Recieving help through our{" "}
+          <a href="/contact-us" className="privacy-link">
+            {" "}
+            Contact Us Form
+          </a>
+        </li>
       </p>
       <p className="privacy-list">
         <li>Participation in customer surveys or contests</li>
       </p>
       <p className="privacy-list">
-        <li>Facilitation in the delivery of our Services and to respond to your inquiries</li>
+        <li>
+          Facilitation in the delivery of our Services and to respond to your
+          inquiries
+        </li>
       </p>
 
-      <p className="privacy-subheading">
-          Sources of Personal Information
+      <p className="privacy-subheading">Sources of Personal Information</p>
+
+      <p className="privacy-content">
+        Learn more about the sources of personal information we collect in "{" "}
+        <a href="#infocollect" className="privacy-link">
+          {" "}
+          WHAT INFORMATION DO WE COLLECT
+        </a>{" "}
+        "
+      </p>
+
+      <h2 className="privacy-subheading">
+        How Do We Use and Share Personal Information
+      </h2>
+
+      <p className="privacy-content">
+        Learn about how we use your personal information in the section, "{" "}
+        <a href="#infouse" className="privacy-link">
+          {" "}
+          HOW DO WE PROCESS YOUR INFORMATION{" "}
+        </a>
+        "
       </p>
 
       <p className="privacy-content">
-          Learn more about the sources of personal information we collect in " <a href="#infocollect" className="privacy-link"> WHAT INFORMATION DO WE COLLECT</a> "
+        <strong> Will your information be shared with anyone else? </strong>
       </p>
-      
-      <h2 className="privacy-subheading"> 
-          How Do We Use and Share Personal Information
-      </h2>
 
-          <p className="privacy-content">
-              Learn about how we use your personal information in the section, " <a href="#infouse" className="privacy-link"> HOW DO WE PROCESS YOUR INFORMATION </a>"
-          </p>
-            
-          <p className="privacy-content">
-              <strong> Will your information be shared with anyone else? </strong>
-          </p>
+      <p className="privacy-content">
+        We may disclose your personal information with our service providers
+        pursuant to a written contract between us and each service provider.
+        Learn more about how we disclose personal information to in the section,
+        "
+        <a href="#whoshare" className="privacy-link">
+          {" "}
+          WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?{" "}
+        </a>{" "}
+        "
+      </p>
 
-          <p className="privacy-content">
-              We may disclose your personal information with our service providers pursuant to a written contract between us and each 
-              service provider. Learn more about how we disclose personal information to in the section, "
-                <a href="#whoshare" className="privacy-link"> WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION? </a> "
-          </p>
-          
-          <p className="privacy-content">
-              We may use your personal information for our own business purposes, such as for undertaking internal research for technological development and demonstration. This is not considered to be "selling" of your personal information.
-          </p>
-          <p className="privacy-content">
-              We have not disclosed, sold, or shared any personal information to third parties for a business or commercial purpose in the preceding twelve (12) months. We will not sell or share personal information in the future belonging to website visitors, users, and other consumers.
-          </p>
+      <p className="privacy-content">
+        We may use your personal information for our own business purposes, such
+        as for undertaking internal research for technological development and
+        demonstration. This is not considered to be "selling" of your personal
+        information.
+      </p>
+      <p className="privacy-content">
+        We have not disclosed, sold, or shared any personal information to third
+        parties for a business or commercial purpose in the preceding twelve
+        (12) months. We will not sell or share personal information in the
+        future belonging to website visitors, users, and other consumers.
+      </p>
 
-      <h2 className="privacy-subheading">
-          Your Rights
-      </h2>
-          <p className="privacy-content">
-              You have rights under certain US state data protection laws. However, these rights are not absolute, 
-              and in certain cases, we may decline your request as permitted by law. These rights include:
-          </p>
-              <p className="privacy-list">
-                  <li> <strong> Right to know</strong> whether or not we are processing your personal data</li>
-                  <li> <strong> Right to access</strong> your personal data </li>
-                  <li> <strong> Right to correct</strong> inaccuaracies in your personal data </li>
-                  <li> <strong> Right to request</strong> the deletion of your personal data </li>
-                  <li> <strong> Right to obtain a copy</strong> of the personal data you previously shared with us </li>
-                  <li> <strong> Right to non-discrimination</strong> for exercising your rights </li>
-                  <li> <strong> Right to opt out</strong> of the processing of your personal data if it is used for targeted advertising (or sharing as defined under California’s privacy law), the sale of personal data, or profiling in furtherance of decisions that produce legal or similarly significant effects ("profiling") </li>
-              </p>
-          <p className="privacy-content">
-            Depending upon the state where you live, you may also have the following rights:
-          </p>
-              <p className="privacy-list">
-                  <li> <strong>Right to </strong> obtain a list of the categories of third parties to which we have disclosed personal data (as permitted by applicable law, including California's and Delaware's privacy law)  </li>
-                  <li> <strong>Right to </strong> obtain a list of specific third parties to which we have disclosed personal data (as permitted by applicable law, including Oregon’s privacy law) </li>
-                  <li> <strong>Right to</strong>  limit use and disclosure of sensitive personal data (as permitted by applicable law, including California’s privacy law)  </li>
-                  <li><strong> Right to </strong> opt out of the collection of sensitive data and personal data collected through the operation of a voice or facial recognition feature (as permitted by applicable law, including Florida’s privacy law) </li>
-              </p>
+      <h2 className="privacy-subheading">Your Rights</h2>
+      <p className="privacy-content">
+        You have rights under certain US state data protection laws. However,
+        these rights are not absolute, and in certain cases, we may decline your
+        request as permitted by law. These rights include:
+      </p>
+      <p className="privacy-list">
+        <li>
+          {" "}
+          <strong> Right to know</strong> whether or not we are processing your
+          personal data
+        </li>
+        <li>
+          {" "}
+          <strong> Right to access</strong> your personal data{" "}
+        </li>
+        <li>
+          {" "}
+          <strong> Right to correct</strong> inaccuaracies in your personal data{" "}
+        </li>
+        <li>
+          {" "}
+          <strong> Right to request</strong> the deletion of your personal data{" "}
+        </li>
+        <li>
+          {" "}
+          <strong> Right to obtain a copy</strong> of the personal data you
+          previously shared with us{" "}
+        </li>
+        <li>
+          {" "}
+          <strong> Right to non-discrimination</strong> for exercising your
+          rights{" "}
+        </li>
+        <li>
+          {" "}
+          <strong> Right to opt out</strong> of the processing of your personal
+          data if it is used for targeted advertising (or sharing as defined
+          under California’s privacy law), the sale of personal data, or
+          profiling in furtherance of decisions that produce legal or similarly
+          significant effects ("profiling"){" "}
+        </li>
+      </p>
+      <p className="privacy-content">
+        Depending upon the state where you live, you may also have the following
+        rights:
+      </p>
+      <p className="privacy-list">
+        <li>
+          {" "}
+          <strong>Right to </strong> obtain a list of the categories of third
+          parties to which we have disclosed personal data (as permitted by
+          applicable law, including California's and Delaware's privacy law){" "}
+        </li>
+        <li>
+          {" "}
+          <strong>Right to </strong> obtain a list of specific third parties to
+          which we have disclosed personal data (as permitted by applicable law,
+          including Oregon’s privacy law){" "}
+        </li>
+        <li>
+          {" "}
+          <strong>Right to</strong> limit use and disclosure of sensitive
+          personal data (as permitted by applicable law, including California’s
+          privacy law){" "}
+        </li>
+        <li>
+          <strong> Right to </strong> opt out of the collection of sensitive
+          data and personal data collected through the operation of a voice or
+          facial recognition feature (as permitted by applicable law, including
+          Florida’s privacy law){" "}
+        </li>
+      </p>
 
-      <h2 className="privacy-subheading">
-          How To Exercise Your Rights
-      </h2>
-          <p className="privacy-content">
-            To exercise these rights, you can contact us by visiting <a href="/" className="privacy-link"> Diplomat </a>, or by referring to the contact details at the bottom of this document.
-          </p>
-          <p className="privacy-content">
-            We will honor your opt-out preferences if you enact the <a href="https://globalprivacycontrol.org/" className="privacy-link"> Global Privacy Control (GPC) </a> opt-out signal on your browser. 
-          </p>
-          <p className="privacy content">
-            Under certain US state data protection laws, you can designate an authorized agent to make a request on your behalf. We may deny a request from an authorized agent that does not submit proof that they have been validly authorized to act on your behalf in accordance with applicable laws.          </p>
-          
-      <h2 className="privacy-subheading">
-          Request Verification
-      </h2>    
-          <p className="privacy-content">
-             Upon receiving your request, we will need to verify your identity to determine you are the same person about whom we
-             have the information in our system. We will only use personal information provided in your request to verify your
-             identity or authority to make the request. However, if we cannot verify your identity from the information already
-             maintained by us, we may request that you provide additional information for the purposes of verifying your identity
-             and for security or fraud-prevention purposes.
-          </p>
-          <p>
-             If you submit the request through an authorized agent, we may need to collect additional information to verify your identity 
-             before processing your request and the agent will need to provide a written and signed permission from you to submit such request
-             on your behalf.
-          </p>
+      <h2 className="privacy-subheading">How To Exercise Your Rights</h2>
+      <p className="privacy-content">
+        To exercise these rights, you can contact us by visiting{" "}
+        <a href="/" className="privacy-link">
+          Diplomat
+        </a>
+        , or by referring to the contact details at the bottom of this document.
+      </p>
+      <p className="privacy-content">
+        We will honor your opt-out preferences if you enact the{" "}
+        <a href="https://globalprivacycontrol.org/" className="privacy-link">
+          {" "}
+          Global Privacy Control (GPC){" "}
+        </a>{" "}
+        opt-out signal on your browser.
+      </p>
+      <p className="privacy content">
+        Under certain US state data protection laws, you can designate an
+        authorized agent to make a request on your behalf. We may deny a request
+        from an authorized agent that does not submit proof that they have been
+        validly authorized to act on your behalf in accordance with applicable
+        laws.{" "}
+      </p>
 
-      <h2 className="privacy-subheading">
-          Appeals
-      </h2>
-          <p className="privacy-content">
-             Under certain US state data protection laws, if we decline to take action regarding your request, you may appeal our 
-             decision by emailing us at Contact Us Form. We will inform you in writing of any action taken or not taken in response
-             to the appeal, including a written explanation of the reasons for the decisions. If your appeal is denied, you may 
-             submit a complaint to your state attorney general.
-          </p>
+      <h2 className="privacy-subheading">Request Verification</h2>
+      <p className="privacy-content">
+        Upon receiving your request, we will need to verify your identity to
+        determine you are the same person about whom we have the information in
+        our system. We will only use personal information provided in your
+        request to verify your identity or authority to make the request.
+        However, if we cannot verify your identity from the information already
+        maintained by us, we may request that you provide additional information
+        for the purposes of verifying your identity and for security or
+        fraud-prevention purposes.
+      </p>
+      <p>
+        If you submit the request through an authorized agent, we may need to
+        collect additional information to verify your identity before processing
+        your request and the agent will need to provide a written and signed
+        permission from you to submit such request on your behalf.
+      </p>
 
-      <h2 className="privacy-subheading">
-          California " SHINE THE LIGHT " Law
-      </h2>
-          <p>
-          California Civil Code Section 1798.83, also known as the "Shine The Light" law, permits our users who are California 
-          residents to request and obtain from us, once a year and free of charge, information about categories of personal 
-          information (if any) we disclosed to third parties for direct marketing purposes and the names and addresses of all 
-          third parties with which we shared personal information in the immediately preceding calendar year. If you are a 
-          California resident and would like to make such a request, please submit your request in writing to us by using the 
-          contact details provided in the section <a href="#contact" className="privacy-link"> "HOW CAN YOU CONTACT US ABOUT THIS NOTICE?"</a>
-          </p>
+      <h2 className="privacy-subheading">Appeals</h2>
+      <p className="privacy-content">
+        Under certain US state data protection laws, if we decline to take
+        action regarding your request, you may appeal our decision by emailing
+        us at Contact Us Form. We will inform you in writing of any action taken
+        or not taken in response to the appeal, including a written explanation
+        of the reasons for the decisions. If your appeal is denied, you may
+        submit a complaint to your state attorney general.
+      </p>
 
+      <h2 className="privacy-subheading">California " SHINE THE LIGHT " Law</h2>
+      <p>
+        California Civil Code Section 1798.83, also known as the "Shine The
+        Light" law, permits our users who are California residents to request
+        and obtain from us, once a year and free of charge, information about
+        categories of personal information (if any) we disclosed to third
+        parties for direct marketing purposes and the names and addresses of all
+        third parties with which we shared personal information in the
+        immediately preceding calendar year. If you are a California resident
+        and would like to make such a request, please submit your request in
+        writing to us by using the contact details provided in the section{" "}
+        <a href="#contact" className="privacy-link">
+          {" "}
+          "HOW CAN YOU CONTACT US ABOUT THIS NOTICE?"
+        </a>
+      </p>
 
-     
       {/* Section 10 */}
       <h2 className="privacy-section-heading" id="policyupdates">
         10. DO WE MAKE UPDATES TO THIS NOTICE?
@@ -624,13 +827,11 @@ const PrivacyPolicyPage = () => {
         or contact us by post at:
       </p>
       <p className="privacy-content">
-        Diplomat
+        Advanced Technologies Academy
         <br />
-          <a href="https://www.google.com/maps/place/Mar-a-Lago+Beach+House/@26.6773205,-80.0372964,17z/data=!4m9!1m2!2m1!1s1100+S+Ocean+Blvd,+Palm+Beach,+FL+33480!3m5!1s0x88d8d71e8e055555:0xe24c32b9b2e28363!8m2!3d26.6776994!4d-80.0357884!16s%2Fg%2F11t2pzcrrz?entry=ttu&g_ep=EgoyMDI0MDkxNi4wIKXMDSoASAFQAw%3D%3D" className="privacy-link"> 1125 S Ocean Blvd, Palm Beach, FL 33480 </a>
+        1411 Robin St, Las Vegas, NV 89106
         <br />
-          6969 Salty Springs Ave. S, Tilted Towers, 
-        <br />
-          United States
+        United States
       </p>
 
       {/* Section 12 */}

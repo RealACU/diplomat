@@ -52,7 +52,6 @@ type Committee = {
 const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
   // Form state
   const [error, setError] = useState<string | undefined>("");
-  const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
   // Dialog state for adding committees
@@ -80,8 +79,10 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
   });
 
   const onSubmit = (values: z.infer<typeof TourneySchema>) => {
-    // setError("");
-    // setSuccess("");
+    //setError("");
+
+    //if(new Date(values.startDate))
+
     //
     // If end date < start date, set error and return
     // If end date === start date && end time < start time, set error & return
@@ -110,7 +111,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(() => {})} className="space-y-6">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid sm:grid-cols-2 gap-4">
           <FormField
             control={form.control}
@@ -473,8 +474,9 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
             </DialogContent>
           </Dialog>
         </div>
-        {/* <FormError message={error} />
-        <FormSuccess message={success} /> */}
+        {error && (
+          <p className="text-red-500">{error}</p>
+        )}
         <Button disabled={isPending} type="submit" className="w-full sm:w-16">
           Create
         </Button>

@@ -89,7 +89,7 @@ body,
   100% { transform: translateX(-200%); }
 }
 
-.banner-container{
+.banner-container {
   overflow: hidden;
   white-space: nowrap;
   position: relative;
@@ -97,9 +97,8 @@ body,
   height: 100px;
 }
 
-.banner-text
- {
+.banner-text {
   display: flex;
   white-space: nowrap;
   animation: scroll-left 30s linear infinite; 
-  }
+}
