@@ -31,8 +31,8 @@ const config = {
           200: "#41769E",
         },
         'docorange': {
-          100: "#D39A60",
-          200: "#DDA66F",
+          100: "#E9E4D0",
+          200: "#E9E4D0",
         },
 
         border: "hsl(var(--border))",
