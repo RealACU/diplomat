@@ -1,5 +1,4 @@
-import { Table } from "lucide-react";
-import "./privacypolicy.css";
+import "./privacyPolicy.css";
 
 const PrivacyPolicyPage = () => {
   return (

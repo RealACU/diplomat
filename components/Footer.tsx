@@ -39,7 +39,7 @@ const Footer = () => {
         <div className="flex justify-end space-x-4">
           <Button variant="link">
             <a
-            href="/terms-of-service"
+            href="/terms-of-use"
            >
             Terms of Use
             </a>

@@ -42,14 +42,19 @@ import { Label } from "./ui/label";
 import ProfileBar from "./ProfileBar";
 import { User } from "@clerk/nextjs/server";
 import getChairPreviews from "@/actions/getChairPreviews";
+import createTourney from "@/actions/createTourney";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 
-type Committee = {
+export type Committee = {
   name: string;
   roomNumber: string;
   chairs: User[];
 };
 
 const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
+  const router = useRouter();
+
   // Form state
   const [error, setError] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
@@ -79,23 +84,32 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
   });
 
   const onSubmit = (values: z.infer<typeof TourneySchema>) => {
-    //setError("");
+    startTransition(async () => {
+      const startDate = new Date(values.startDate);
+      const endDate = new Date(values.endDate);
 
-    //if(new Date(values.startDate))
+      if (startDate > endDate) {
+        return setError("Start date cannot be after end date");
+      }
 
-    //
-    // If end date < start date, set error and return
-    // If end date === start date && end time < start time, set error & return
-    //
-    // Generate allChairIds here
-    //
-    // startTransition(() => {
-    //   // TODO: make server action to create tourney
-    //   createTourney(values).then((data) => {
-    //     setError(data.error);
-    //     setSuccess(data.success);
-    //   });
-    // });
+      createTourney(values, committees).then((res) => {
+        if (res) {
+          Swal.fire({
+            title: "Success!",
+            text: "Tournament created successfully!",
+            icon: "success",
+          });
+
+          return router.push("/");
+        }
+
+        Swal.fire({
+          title: "Failure",
+          text: "Failed to create",
+          icon: "error",
+        });
+      });
+    });
   };
 
   const handleBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
@@ -474,9 +488,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
             </DialogContent>
           </Dialog>
         </div>
-        {error && (
-          <p className="text-red-500">{error}</p>
-        )}
+        {error && <p className="text-red-500">{error}</p>}
         <Button disabled={isPending} type="submit" className="w-full sm:w-16">
           Create
         </Button>
