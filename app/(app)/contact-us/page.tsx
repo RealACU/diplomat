@@ -9,7 +9,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -48,7 +47,7 @@ const ContactUsPage = () => {
 
       if (res.success) {
         Swal.fire({
-          title: "Sucess!",
+          title: "Success!",
           text: "Message sent successfully!",
           icon: "success",
         });

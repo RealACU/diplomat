@@ -63,20 +63,18 @@ enum States {
 }
 
 model Tourney {
-  id             String      @id @default(cuid())
-  creatorId      String
-  name           String
-  description    String
-  school         String
-  address        String
-  city           String
-  state          States
-  zip            Int
-  startDate      DateTime
-  endDate        DateTime
-  allChairIds    String[]
-  allDelegateIds String[]
-  committees     Committee[]
+  id          String      @id @default(cuid())
+  creatorId   String
+  name        String
+  description String
+  school      String
+  address     String
+  city        String
+  state       States
+  zip         String
+  startDate   DateTime
+  endDate     DateTime
+  committees  Committee[]
 }
 
 model Committee {
