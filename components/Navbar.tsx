@@ -44,7 +44,7 @@ const Navbar = async () => {
             {(user?.publicMetadata.role as string) === "admin" && (
               <Button
                 asChild
-                className="text-sm bg-docorange-100 py-2 px-6 rounded-md hover:bg-docorange-200 hover:scale-105 duration-100 flex-shrink-0 font-semibold hidden sm:flex"
+                className="text-sm bg-[#d6975f] py-2 px-6 rounded-md hover:bg-[#d6975f] hover:scale-105 duration-100 flex-shrink-0 font-semibold hidden sm:flex"
               >
                 <Link href="/admin/create-tournament">
                   <Plus />
