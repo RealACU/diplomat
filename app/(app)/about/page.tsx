@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const AboutPage = () => {
     return (
-        <div className="w-full h-[626px] text-slate-800">
+        <div className="text-slate-800">
             <p className="w-max text-3xl lg:ml-16 mx-8 lg:mx-0 mt-16 font-semibold py-3 px-3 rounded-lg border-docorange-200 border-2">About Us</p>
             <div className="grid lg:grid-cols-2 w-full">
                 <div className="lg:ml-16 mx-8 lg:mx-0 mt-10 space-y-1">

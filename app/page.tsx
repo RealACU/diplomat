@@ -159,8 +159,9 @@ export default function Home() {
           <div className="bg-slate-300 w-1/3 rounded-lg">
             <div className="bg-slate-300 w-full h-14 rounded-lg filter drop-shadow-md flex items-center">
               <p className="text-xl font-semibold text-slate-800 mx-8">
-                Filter by
+                My Tournaments
               </p>
+              <p>stuff</p>
             </div>
           </div>
         </div>

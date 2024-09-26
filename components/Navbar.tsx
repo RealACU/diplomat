@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { currentUser } from "@clerk/nextjs/server";
-import { Plus } from "lucide-react";
+import { Plus, Eye } from "lucide-react";
 
 const Navbar = async () => {
   const user = await currentUser();
@@ -24,7 +24,7 @@ const Navbar = async () => {
       </div>
 
       <div className="items-center flex justify-end gap-7 text-md">
-        <ul className="space-x-7 hidden md:flex flex-shrink-0">
+        <ul className="space-x-7 hidden lg:flex flex-shrink-0">
           <Link
             href="/contact-us/"
             className="transition-all hover:font-bold focus:font-medium"
@@ -52,6 +52,16 @@ const Navbar = async () => {
                 </Link>
               </Button>
             )}
+            <Button
+              asChild
+              className="text-sm bg-docorange-100 py-2 px-6 rounded-md hover:bg-docorange-200 hover:scale-105 duration-100 flex-shrink-0 font-semibold hidden md:flex"
+            >
+              <Link href="my-tournaments">
+                <Eye className="pr-1" />
+                My Tournaments
+              </Link>
+            </Button>
+
             <div className="h-auto w-auto flex items-center justify-center">
               <UserButton />
             </div>
