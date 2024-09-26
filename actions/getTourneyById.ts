@@ -2,7 +2,7 @@
 
 import { db } from "@/lib/db";
 
-export default async function getTourneyInfo(tourneyId: string) {
+export default async function getTourneyById(tourneyId: string) {
   const tourney = await db.tourney.findUnique({
     where: {
       id: tourneyId,
