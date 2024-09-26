@@ -1,14 +1,8 @@
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
-
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <>
-      <Navbar />
+    <div className="py-10 px-8 md:px-32">
       {children}
-      <Footer />
-      <div className="p-16"></div>
-    </>
+    </div>
   );
 };
 

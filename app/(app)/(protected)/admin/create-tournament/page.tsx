@@ -9,11 +9,7 @@ const createTourneyPage = async () => {
     return redirect("/");
   }
 
-  return (
-    <div className="py-10 px-8 md:px-32">
-      <CreateTourneyForm creatorId={user.id} />
-    </div>
-  );
+  return <CreateTourneyForm creatorId={user.id} />;
 };
 
 export default createTourneyPage;
