@@ -116,23 +116,23 @@ export default function Home() {
 
         <div className="flex justify-center w-full items-center text-white text-4xl lg:text-6xl absolute z-30 font-semibold pt-16 text-center h-28">
           <h1 className="md:w-full w-96">
-            Your gateway to everything Model UN.
+            Your gateway to everything Model UN
           </h1>
         </div>
 
         <nav className="relative grid sm:flex justify-center items-center gap-6 z-20 text-white text-xl font-semibold whitespace-nowrap">
           <a
-            href="/about"
-            className="bg-docorange-100 rounded-md mt-40 py-4 bg-opacity-75 hover:bg-opacity-100 hover:scale-105 duration-100 md:px-32 px-10 text-center"
+            href="/"
+            className="bg-gradient-to-bl from-[#dcc56a]/75 to-[#ba804d]/75 rounded-md mt-40 py-4 hover:bg-opacity-100 hover:scale-105 duration-100 md:px-20 px-10 text-center"
           >
-            Learn more
+            View Tournaments
           </a>
 
           <a
-            href="/tournament-page"
-            className="bg-docblue-100 rounded-md sm:mt-40 py-4 bg-opacity-75 hover:bg-opacity-100 hover:scale-105 duration-100 md:px-32 px-10 text-center"
+            href="/about"
+            className="bg-docblue-100 rounded-md sm:mt-40 py-4 bg-opacity-75 hover:bg-opacity-100 hover:scale-105 duration-100 md:px-28 px-10 text-center"
           >
-            MAVMUN
+            Learn More
           </a>
         </nav>
       </div>
