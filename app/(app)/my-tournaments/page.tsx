@@ -25,6 +25,19 @@ const MyTournamentsPage = async () => {
       <h2 className="text-xl font-semibold">
         Tournaments where I'm a delegate
       </h2>
+      {(user?.publicMetadata.dTourneys as string[]).map(async (dTourneyId) => {
+        const tourneyInfo = await getTourneyById(dTourneyId);
+
+        if (!tourneyInfo) return null;
+
+        return (
+          <Button>
+            <Link href={`/my-tournaments/${dTourneyId}`}>
+              {tourneyInfo.name}
+            </Link>
+          </Button>
+        );
+      })}
     </div>
   );
 };

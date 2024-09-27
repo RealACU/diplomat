@@ -4,7 +4,7 @@ import * as z from "zod";
 
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { Trash2, Plus } from "lucide-react";
+import { Trash2, Plus, MoveRight } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { stateAbbreviations } from "@/lib/stateAbbreviations";
 import { stateNames } from "@/lib/stateNames";
@@ -344,18 +344,21 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                   <DialogHeader>
                     <DialogTitle>Add Chair</DialogTitle>
                   </DialogHeader>
-                  <div>
-                    <Label htmlFor="query">Chair Info</Label>
+                  <Label htmlFor="query">Chair Info</Label>
+                  <div className="flex gap-1">
                     <Input
                       id="query"
                       placeholder="Search by name, email, or phone number"
                       onBlur={handleBlur}
                     />
+                    <Button>
+                      <MoveRight />
+                    </Button>
                   </div>
                   <DialogFooter className="sm:justify-start">
                     {/* This is where the chair preview select goes */}
                     <div className="h-full w-full flex flex-col gap-2 scroll-mx-0">
-                      {!chairPreviews ? (
+                      {chairPreviews && chairPreviews.length === 0 ? (
                         <p className="text-sm text-red-500 font-bold">
                           No matches
                         </p>
