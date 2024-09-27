@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div>
       <div className="relative h-screen">
-        <div className="w-full h-screen bg-docblue-200 z-10 absolute opacity-50" />
+        <div className="w-full h-screen bg-docblue-200 z-10 absolute opacity-35" />
         <div className="bg-frontpage w-full h-screen bg-no-repeat bg-center bg-cover absolute" />
 
         <div className="relative whitespace-nowrap w-full z-0 mt-2 flex-nowrap inline-flex overflow-hidden">
@@ -123,14 +123,14 @@ export default function Home() {
         <nav className="relative grid sm:flex justify-center items-center gap-6 z-20 text-white text-xl font-semibold whitespace-nowrap">
           <a
             href="/"
-            className="bg-gradient-to-bl from-[#dcc56a]/75 to-[#ba804d]/75 rounded-md mt-40 py-4 hover:bg-opacity-100 hover:scale-105 duration-100 md:px-20 px-10 text-center"
+            className="bg-gradient-to-bl from-[#dcc56a]/75 to-[#ba804d]/75 rounded-md mt-40 py-4 hover:bg-[#ba804d]/90 hover:bg-opacity-100 hover:scale-105 duration-100 md:px-20 px-10 text-center"
           >
             View Tournaments
           </a>
 
           <a
             href="/about"
-            className="bg-docblue-100 rounded-md sm:mt-40 py-4 bg-opacity-75 hover:bg-opacity-100 hover:scale-105 duration-100 md:px-28 px-10 text-center"
+            className="bg-gradient-to-br from-docblue-200/50 to-docblue-100/75 rounded-md sm:mt-40 py-4 hover:to-docblue-100/100 bg-opacity-75 hover:bg-opacity-100 hover:scale-105 duration-100 md:px-28 px-10 text-center"
           >
             Learn More
           </a>
