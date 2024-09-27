@@ -9,35 +9,37 @@ const MyTournamentsPage = async () => {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-xl font-semibold">Tournaments where I'm a chair</h2>
-      {(user?.publicMetadata.cTourneys as string[]).map(async (cTourneyId) => {
-        const tourneyInfo = await getTourneyById(cTourneyId);
+      {(user?.publicMetadata.cTourneys as string[]) &&
+        (user?.publicMetadata.cTourneys as string[]).map(async (cTourneyId) => {
+          const tourneyInfo = await getTourneyById(cTourneyId);
 
-        if (!tourneyInfo) return null;
+          if (!tourneyInfo) return null;
 
-        return (
-          <Button>
-            <Link href={`/my-tournaments/${cTourneyId}`}>
-              {tourneyInfo.name}
-            </Link>
-          </Button>
-        );
-      })}
+          return (
+            <Button>
+              <Link href={`/my-tournaments/${cTourneyId}`}>
+                {tourneyInfo.name}
+              </Link>
+            </Button>
+          );
+        })}
       <h2 className="text-xl font-semibold">
         Tournaments where I'm a delegate
       </h2>
-      {(user?.publicMetadata.dTourneys as string[]).map(async (dTourneyId) => {
-        const tourneyInfo = await getTourneyById(dTourneyId);
+      {(user?.publicMetadata.dTourneys as string[]) &&
+        (user?.publicMetadata.dTourneys as string[]).map(async (dTourneyId) => {
+          const tourneyInfo = await getTourneyById(dTourneyId);
 
-        if (!tourneyInfo) return null;
+          if (!tourneyInfo) return null;
 
-        return (
-          <Button>
-            <Link href={`/my-tournaments/${dTourneyId}`}>
-              {tourneyInfo.name}
-            </Link>
-          </Button>
-        );
-      })}
+          return (
+            <Button>
+              <Link href={`/my-tournaments/${dTourneyId}`}>
+                {tourneyInfo.name}
+              </Link>
+            </Button>
+          );
+        })}
     </div>
   );
 };
