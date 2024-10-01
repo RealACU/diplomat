@@ -51,7 +51,7 @@ export default async function createTourney(
     });
   });
 
-  const createUser = await db.tourney.create({ data });
+  const createTourney = await db.tourney.create({ data });
 
-  return createUser;
+  return createTourney;
 }
