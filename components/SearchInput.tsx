@@ -1,15 +1,34 @@
 "use client";
 import { useState } from "react";
+import getTourneysByName from "@/actions/getTourneysByName";
 
-const SearchInput = () => {
-    const [searchQuery, setSearchQuery] = useState("");
+const SearchInput: React.FC<{ onFetch: (data: any[]) => void } & React.InputHTMLAttributes<HTMLInputElement>> = ({
+    onFetch,
+    className,
+  }) => {
+    const [input, setInput] = useState("");
+  
 
-    return <input 
-        type="text"
-        id="search-bar"
-        placeholder="Search for a tournament near you"
-        className="text-xl font-semibold h-[55px] w-full text-slate-800 placeholder-slate-300"
-    />
+    const handleBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
+        if (!e.target.value){
+            return;
+        }
+        const fetchedTourneys = (await getTourneysByName(e.target.value));
+        onFetch(fetchedTourneys);
+        
+    }
+    
+    return(
+        <div className="relative">
+            <input 
+                onBlur={handleBlur}
+                type="text"
+                id="search-bar"
+                placeholder="Search for a tournament near you"
+                className={className}
+            />
+        </div>
+    )
 }
 
 export default SearchInput;

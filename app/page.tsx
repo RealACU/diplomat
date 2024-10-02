@@ -1,6 +1,14 @@
+"use client";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import SearchInput from "@/components/SearchInput";
+import { useState } from "react";
+import { Search } from "lucide-react";
 
 export default function Home() {
+  const [tourneys, setTourneys] = useState<any[]>([]);
+
   return (
     <div>
       <div className="relative h-screen">
@@ -136,29 +144,43 @@ export default function Home() {
           </a>
         </nav>
       </div>
-      <div className="bg-docblue-100 h-auto relative px-6 py-10">
+      <div className="bg-docblue-100 h-auto relative px-6 py-10 text-slate-800">
         <div className="flex gap-6">
           <div className="bg-slate-50 w-2/3 rounded-lg">
-            <div className="bg-slate-50 w-full h-14 rounded-lg filter drop-shadow-md flex items-center">
-              <Image
-                src="/search_icon.png"
-                alt="search_icon"
-                width={30}
-                height={30}
-                className="h-auto mx-4"
-              />
-              <input
-                type="text"
-                id="search-bar"
-                placeholder="Search for a tournament near you"
-                className="text-xl font-semibold h-[55px] w-full text-slate-800 placeholder-slate-300"
-              />
+            <div className="flex flex-col">
+              <div className="bg-slate-50 w-full h-14 rounded-lg filter drop-shadow-md flex items-center">
+                <button>
+                  <Search className="mx-4"/>
+                </button>
+                <SearchInput
+                  className="text-xl font-semibold h-[55px] w-full placeholder-slate-300"
+                  onFetch={setTourneys}
+                />
+              </div>
             </div>
-            <div className="w-full h-[465px]"></div>
+            <div className="w-full h-[465px] overflow-auto bg-white rounded-md shadow-md mt-2">
+              <ul>
+                {tourneys.length > 0 ? (
+                  tourneys.map(tourney => (
+                    <li key={tourney.id}>
+                      <Link href={`/my-tournaments/${tourney.id}`}>
+                        <div className="bg-slate-200 mx-4 px-4 py-3 my-3 rounded-md hover:bg-slate-300 duration-100 font-bold text-md flex overflow-clip">
+                          <div className="w-3/5 break-words pr-8">{tourney.name}</div>
+                          <div className="w-1/5 break-words">{tourney.city}, {tourney.state}</div>
+                          <div className="ml-auto text-right">{tourney.startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                        </div>
+                      </Link>
+                    </li>
+                  ))
+                ) : (
+                  <li className="py-2 flex justify-center items-center">No tournaments found.</li>
+                )}
+              </ul>
+            </div>
           </div>
           <div className="bg-slate-300 w-1/3 rounded-lg">
             <div className="bg-slate-300 w-full h-14 rounded-lg filter drop-shadow-md flex items-center">
-              <p className="text-xl font-semibold text-slate-800 mx-8">
+              <p className="text-xl font-semibold mx-8">
                 My Tournaments
               </p>
               <p>stuff</p>
