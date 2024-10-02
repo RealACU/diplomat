@@ -19,13 +19,13 @@ const SearchInput: React.FC<{ onFetch: (data: any[]) => void } & React.InputHTML
     }
     
     return(
-        <div className="relative">
+        <div className="relative w-full">
             <input 
-                onBlur={handleBlur}
-                type="text"
-                id="search-bar"
-                placeholder="Search for a tournament near you"
-                className={className}
+            onBlur={handleBlur}
+            type="text"
+            id="search-bar"
+            placeholder="Search for a tournament..."
+            className={`w-full ${className}`}
             />
         </div>
     )

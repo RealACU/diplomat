@@ -44,25 +44,24 @@ const Navbar = async () => {
             {(user?.publicMetadata.role as string) === "admin" && (
               <Button
                 asChild
-                className="text-sm bg-[#d6975f] py-2 px-6 rounded-md hover:bg-[#d6975f] hover:scale-105 duration-100 flex-shrink-0 font-semibold hidden sm:flex"
+                className="text-[16px] bg-gradient-to-tr from-slate-400 to-[#7388a2] py-2 px-6 rounded-md hover:bg-gradient-to-r transition-all hover:scale-105 duration-100 flex-shrink-0 font-semibold hidden sm:flex"
               >
                 <Link href="/admin/create-tournament">
-                  <Plus />
+                  <Plus className="mr-1 px-0.5 -ml-2"/>
                   Create Tournament
                 </Link>
               </Button>
             )}
             <Button
               asChild
-              className="text-sm bg-[#d6975f] py-2 px-6 rounded-md hover:bg-[#d6975f] hover:scale-105 duration-100 flex-shrink-0 font-semibold hidden md:flex"
+              className="text-[16px] bg-gradient-to-tl from-[#c1ad5e] to-[#d6975f] py-2 px-6 rounded-md hover:bg-gradient-to-t transition-all hover:scale-105 duration-100 flex-shrink-0 font-semibold hidden md:flex"
             >
               <Link href="my-tournaments">
-                <Eye className="pr-1" />
                 My Tournaments
               </Link>
             </Button>
 
-            <div className="h-auto w-auto flex items-center justify-center">
+            <div className="h-auto w-auto flex items-center justify-center ml-2">
               <UserButton />
             </div>
           </SignedIn>

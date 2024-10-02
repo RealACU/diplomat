@@ -147,13 +147,13 @@ export default function Home() {
       <div className="bg-docblue-100 h-auto relative px-6 py-10 text-slate-800">
         <div className="flex gap-6">
           <div className="bg-slate-50 w-2/3 rounded-lg">
-            <div className="flex flex-col">
-              <div className="bg-slate-50 w-full h-14 rounded-lg filter drop-shadow-md flex items-center">
+            <div className="flex flex-col w-full">
+              <div className="bg-slate-50 w-full h-14 rounded-lg filter drop-shadow-md flex items-center pr-4">
                 <button>
                   <Search className="mx-4"/>
                 </button>
                 <SearchInput
-                  className="text-xl font-semibold h-[55px] w-full placeholder-slate-300"
+                  className="text-xl font-medium h-full py-1 w-full placeholder-slate-400"
                   onFetch={setTourneys}
                 />
               </div>
