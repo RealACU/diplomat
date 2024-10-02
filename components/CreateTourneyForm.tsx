@@ -124,6 +124,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
   };
 
   return (
+    <div className="py-10 px-8 md:px-32">
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid sm:grid-cols-2 gap-4">
@@ -250,11 +251,11 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>Invitation and Description</FormLabel>
               <FormControl>
                 <Textarea
                   {...field}
-                  placeholder="When you enter the school..."
+                  placeholder="Thank you for your interest in our tournament! When you enter the school..."
                 />
               </FormControl>
               <FormDescription>
@@ -497,6 +498,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
         </Button>
       </form>
     </Form>
+    </div>
   );
 };
 

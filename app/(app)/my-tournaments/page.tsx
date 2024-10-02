@@ -7,7 +7,7 @@ const MyTournamentsPage = async () => {
   const user = await currentUser();
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 py-10 px-8 md:px-32">
       <h2 className="text-xl font-semibold">Tournaments where I'm a chair</h2>
       {(user?.publicMetadata.cTourneys as string[]) &&
         (user?.publicMetadata.cTourneys as string[]).map(async (cTourneyId) => {
