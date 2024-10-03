@@ -126,7 +126,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
   };
 
   return (
-    <div className="py-10 px-8 md:px-32">
+    
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid sm:grid-cols-2 gap-4">
@@ -500,7 +500,6 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
         </Button>
       </form>
     </Form>
-    </div>
   );
 };
 
