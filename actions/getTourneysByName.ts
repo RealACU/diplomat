@@ -8,11 +8,14 @@ export default async function getTourneysByName(query: string) {
       name: {
         contains: query,
         mode: "insensitive",
-      }
+      },
+    },
+    include: {
+      committees: true,
     },
     orderBy: {
-      startDate: "asc"
-    } 
+      startDate: "asc",
+    },
   });
   return tourneys;
 }

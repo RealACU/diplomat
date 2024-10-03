@@ -113,6 +113,8 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
   };
 
   const handleBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
+    setChairPreviews(undefined);
+
     if (!e.target.value) {
       return;
     }
@@ -124,7 +126,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
   };
 
   return (
-    <div className="py-10 px-8 md:px-32">
+    
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid sm:grid-cols-2 gap-4">
@@ -359,7 +361,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                   <DialogFooter className="sm:justify-start">
                     {/* This is where the chair preview select goes */}
                     <div className="h-full w-full flex flex-col gap-2 scroll-mx-0">
-                      {chairPreviews && chairPreviews.length === 0 ? (
+                      {!chairPreviews || chairPreviews.length === 0 ? (
                         <p className="text-sm text-red-500 font-bold">
                           No matches
                         </p>
@@ -498,7 +500,6 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
         </Button>
       </form>
     </Form>
-    </div>
   );
 };
 

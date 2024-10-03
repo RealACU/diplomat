@@ -1,10 +1,8 @@
-import { PrismaClient } from "@prisma/client";
+import { db } from "@/lib/db";
 import TabsComponent from "@/components/ui/tabs";
 
-const prisma = new PrismaClient();
-
 const tourneyPage = async ({ params }: { params: { id: string } }) => {
-  const tourney = await prisma.tourney.findUnique({
+  const tourney = await db.tourney.findUnique({
     where: { id: params.id },
     include: {
       committees: true,

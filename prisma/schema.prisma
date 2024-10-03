@@ -84,6 +84,7 @@ model Committee {
   id              Int              @id @default(autoincrement())
   name            String
   roomNumber      String
+  bgGuideLink     String
   chairIds        String[]
   delegateIds     String[]
   delegateResults DelegateResult[]
