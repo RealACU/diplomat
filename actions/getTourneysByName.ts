@@ -7,6 +7,9 @@ export default async function getTourneysByName(query: string) {
     where: {
       name: query,
     },
+    include: {
+      committees: true,
+    },
   });
   return tourneys;
 }

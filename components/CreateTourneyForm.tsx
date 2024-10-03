@@ -113,6 +113,8 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
   };
 
   const handleBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
+    setChairPreviews(undefined);
+
     if (!e.target.value) {
       return;
     }
@@ -358,7 +360,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                   <DialogFooter className="sm:justify-start">
                     {/* This is where the chair preview select goes */}
                     <div className="h-full w-full flex flex-col gap-2 scroll-mx-0">
-                      {chairPreviews && chairPreviews.length === 0 ? (
+                      {!chairPreviews || chairPreviews.length === 0 ? (
                         <p className="text-sm text-red-500 font-bold">
                           No matches
                         </p>
