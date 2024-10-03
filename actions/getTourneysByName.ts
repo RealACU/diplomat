@@ -5,10 +5,16 @@ import { db } from "@/lib/db";
 export default async function getTourneysByName(query: string) {
   const tourneys = await db.tourney.findMany({
     where: {
-      name: query,
+      name: {
+        contains: query,
+        mode: "insensitive",
+      },
     },
     include: {
       committees: true,
+    },
+    orderBy: {
+      startDate: "asc",
     },
   });
   return tourneys;

@@ -12,11 +12,10 @@ const MyTournamentsPage = async () => {
         <>
           <h1>Tournaments I've created</h1>
           <Button>
-            <Link href={}></Link>
+            <Link href={``}></Link>
           </Button>
         </>
       )}
-
       <h2 className="text-xl font-semibold">Tournaments where I'm a chair</h2>
       {(user?.publicMetadata.cTourneys as string[]) &&
         (user?.publicMetadata.cTourneys as string[]).map(async (cTourneyId) => {
