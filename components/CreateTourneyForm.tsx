@@ -52,7 +52,15 @@ export type Committee = {
   chairs: User[];
 };
 
-const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
+const CreateTourneyForm = ({
+  creatorId,
+  preset,
+  committeeArray,
+}: {
+  creatorId: string;
+  preset?: z.infer<typeof TourneySchema>;
+  committeeArray?: Committee[];
+}) => {
   const router = useRouter();
 
   // Form state
@@ -62,7 +70,9 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
   // Dialog state for adding committees
   const [name, setName] = useState<string>("");
   const [roomNumber, setRoomNumber] = useState<string>(""); // Some schools use letters
-  const [committees, setCommittees] = useState<Committee[]>([]);
+  const [committees, setCommittees] = useState<Committee[]>(
+    committeeArray || []
+  );
 
   // Dialog state for adding chairs
   const [chairPreviews, setChairPreviews] = useState<User[]>();
@@ -70,16 +80,15 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
   const form = useForm<z.infer<typeof TourneySchema>>({
     resolver: zodResolver(TourneySchema),
     defaultValues: {
-      creatorId,
-      name: "",
-      description: "",
-      school: "",
-      address: "",
-      city: "",
-      state: "",
-      zip: "",
-      startDate: "",
-      endDate: "",
+      name: preset?.name || "",
+      description: preset?.description || "",
+      school: preset?.school || "",
+      address: preset?.address || "",
+      city: preset?.city || "",
+      state: preset?.state || "",
+      zip: preset?.zip || "",
+      startDate: preset?.startDate || "",
+      endDate: preset?.endDate || "",
     },
   });
 
@@ -92,11 +101,11 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
         return setError("Start date cannot be after end date");
       }
 
-      createTourney(values, committees).then((res) => {
+      createTourney(values, committees, creatorId).then((res) => {
         if (res) {
           Swal.fire({
             title: "Success!",
-            text: "Tournament created successfully!",
+            text: "Did it without a hitch",
             icon: "success",
           });
 
@@ -126,7 +135,6 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
   };
 
   return (
-    
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <div className="grid sm:grid-cols-2 gap-4">
@@ -137,7 +145,12 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
               <FormItem>
                 <FormLabel>Tournament Name</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="MAVMUN" disabled={isPending} />
+                  <Input
+                    {...field}
+                    value={field.value}
+                    placeholder="MAVMUN"
+                    disabled={isPending}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -153,6 +166,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                 <FormControl>
                   <Input
                     {...field}
+                    value={field.value}
                     placeholder="Advanced Technologies Academy HS"
                     disabled={isPending}
                   />
@@ -171,6 +185,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                 <FormControl>
                   <Input
                     {...field}
+                    value={field.value}
                     placeholder="1411 Robin St"
                     disabled={isPending}
                   />
@@ -190,6 +205,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                   <FormControl>
                     <Input
                       {...field}
+                      value={field.value}
                       placeholder="Las Vegas"
                       disabled={isPending}
                     />
@@ -236,6 +252,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                   <FormControl>
                     <Input
                       {...field}
+                      value={field.value}
                       placeholder="89106"
                       type="number"
                       disabled={isPending}
@@ -257,6 +274,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
               <FormControl>
                 <Textarea
                   {...field}
+                  value={field.value}
                   placeholder="Thank you for your interest in our tournament! When you enter the school..."
                 />
               </FormControl>
@@ -278,6 +296,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                 <FormControl>
                   <Input
                     {...field}
+                    value={field.value}
                     placeholder="When you enter the school..."
                     type="datetime-local"
                     disabled={isPending}
@@ -297,6 +316,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                 <FormControl>
                   <Input
                     {...field}
+                    value={field.value}
                     placeholder="When you enter the school..."
                     type="datetime-local"
                     disabled={isPending}

@@ -1,5 +1,9 @@
 import { db } from "@/lib/db";
 import TabsComponent from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import signUpDelegate from "@/actions/signUpDelegate";
+import { currentUser } from "@clerk/nextjs/server";
+import CommitteeSignUp from "@/components/CommitteeSignUp";
 
 const tourneyPage = async ({ params }: { params: { id: string } }) => {
   const tourney = await db.tourney.findUnique({
@@ -13,6 +17,8 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
     return <div>Tournament not found</div>;
   }
 
+  const user = await currentUser();
+
   const { name, description, startDate, endDate, committees } = tourney;
 
   const items = [
@@ -25,19 +31,40 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
               <p className="text-xl font-semibold mx-8">Invitation Message</p>
             </div>
             <div className="w-full h-[465px]">
-              <p className="text-md px-6 py-4 whitespace-pre-wrap">{tourney.description}</p>
+              <p className="text-md px-6 py-4 whitespace-pre-wrap">
+                {tourney.description}
+              </p>
             </div>
           </div>
           <div className="bg-slate-50 w-1/3 rounded-lg">
             <div className="bg-slate-50 w-full h-14 rounded-lg filter drop-shadow-md flex items-center justify-center mb-5">
-              <p className="text-xl font-semibold mx-8">Tournament Information</p>
+              <p className="text-xl font-semibold mx-8">
+                Tournament Information
+              </p>
             </div>
             <div className="bg-slate-200 mx-4 px-4 py-3 my-3 rounded-md font-medium text-md flex overflow-clip break-words">
-              <p>{new Date(tourney.startDate).toDateString() === new Date(tourney.endDate).toDateString() ? "Date" : "Dates"}</p>
+              <p>
+                {new Date(tourney.startDate).toDateString() ===
+                new Date(tourney.endDate).toDateString()
+                  ? "Date"
+                  : "Dates"}
+              </p>
               <p className="ml-auto text-right">
-                {new Date(tourney.startDate).toDateString() === new Date(tourney.endDate).toDateString()
-                  ? new Date(tourney.startDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
-                  : `${new Date(tourney.startDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })} - ${new Date(tourney.endDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`}
+                {new Date(tourney.startDate).toDateString() ===
+                new Date(tourney.endDate).toDateString()
+                  ? new Date(tourney.startDate).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
+                  : `${new Date(tourney.startDate).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })} - ${new Date(tourney.endDate).toLocaleDateString(
+                      "en-US",
+                      { year: "numeric", month: "long", day: "numeric" }
+                    )}`}
               </p>
             </div>
             <div className="bg-slate-200 mx-4 px-4 py-3 my-3 rounded-md font-medium text-md flex overflow-clip break-words">
@@ -47,15 +74,13 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
             <div className="bg-slate-200 mx-4 px-4 py-3 my-3 rounded-md font-medium text-md flex overflow-clip break-words">
               <p>Committees</p>
               <p className="ml-auto text-right">
-              {committees.length > 0 ? (
-                committees.map((committee) => (
-                  <div key={committee.id}>
-                    {committee.name}
-                  </div>
-                ))
-              ) : (
-                <p>No committees (yet!)</p>
-              )}
+                {committees.length > 0 ? (
+                  committees.map((committee) => (
+                    <div key={committee.id}>{committee.name}</div>
+                  ))
+                ) : (
+                  <p>No committees (yet!)</p>
+                )}
               </p>
             </div>
           </div>
@@ -63,15 +88,29 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
       ),
     },
     {
-      title: "Comittees",
+      title: "Committees",
       content: (
         <div className="flex gap-6">
           <div className="bg-slate-300 w-2/3 rounded-lg">
             <div className="bg-slate-300 w-full h-14 rounded-lg filter drop-shadow-md flex items-center justify-center">
-              <p className="text-xl font-semibold">Comittees</p>
+              <p className="text-xl font-semibold">Committees</p>
             </div>
-            <div className="w-full h-[465px]">
-              <p className="text-md px-6 py-4">bruh</p>
+            <div className="w-full h-[465px] p-8">
+              {user && committees.length > 0 ? (
+                committees.map((committee) => (
+                  <CommitteeSignUp
+                    tourneyId={params.id}
+                    committeeId={committee.id}
+                    committeeName={committee.name}
+                    delegateId={user.id}
+                    signedUp={(
+                      user.publicMetadata.dTourneys as string[]
+                    ).includes(params.id)}
+                  />
+                ))
+              ) : (
+                <p>No committees (yet!)</p>
+              )}
             </div>
           </div>
 
@@ -104,21 +143,29 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
         </div>
       ),
     },
-  ]
+  ];
 
   return (
     <div className="relative">
       <div className="w-full h-[260px] flex">
         <div className="w-full h-[260px] bg-docblue-200 z-10 absolute bg-opacity-50 backdrop-filter backdrop-blur-lg" />
-        <div className="bg-frontpage w-full h-[260px] bg-top-3 bg-no-repeat bg-cover absolute z-0" /> 
+        <div className="bg-frontpage w-full h-[260px] bg-top-3 bg-no-repeat bg-cover absolute z-0" />
 
         <div className="w-full grid grid-cols-2 z-20 pb-[80px] lg:mx-16 mx-8 text-white items-center">
-          <h1 className="lg:text-7xl md:text-6xl text-5xl font-medium break-words">{tourney.name}</h1>
+          <h1 className="lg:text-7xl md:text-6xl text-5xl font-medium break-words">
+            {tourney.name}
+          </h1>
           <div className="flex-col flex gap-y-2">
             <h2 className="hidden lg:flex justify-end text-2xl">
-              {startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              {startDate.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
             </h2>
-            <h2 className="hidden lg:flex justify-end text-2xl break-words">{tourney.city}, {tourney.state}</h2>
+            <h2 className="hidden lg:flex justify-end text-2xl break-words">
+              {tourney.city}, {tourney.state}
+            </h2>
           </div>
         </div>
       </div>

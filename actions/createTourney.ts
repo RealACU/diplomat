@@ -11,14 +11,15 @@ import { States } from "@prisma/client";
 
 export default async function createTourney(
   values: z.infer<typeof TourneySchema>,
-  committees: Committee[]
+  committees: Committee[],
+  creatorId: string
 ) {
   const tourneyId = createId();
   const allChairIds: string[] = [];
 
   const data = {
     id: tourneyId,
-    creatorId: values.creatorId,
+    creatorId,
     name: values.name,
     description: values.description,
     school: values.school,
@@ -45,9 +46,11 @@ export default async function createTourney(
   };
 
   allChairIds.forEach(async (chairId) => {
+    const user = await clerkClient.users.getUser(chairId);
+
     await clerkClient.users.updateUserMetadata(chairId, {
       publicMetadata: {
-        cTourneys: tourneyId,
+        cTourneys: [...(user.publicMetadata.cTourneys as string[]), tourneyId],
       },
     });
   });
