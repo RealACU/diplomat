@@ -6,7 +6,6 @@ import { stateAbbreviations } from "@/lib/stateAbbreviations";
  * Schema for admins creating tournaments
  */
 export const TourneySchema = z.object({
-  creatorId: z.string().min(1),
   name: z.string({ required_error: "Please enter tournament name" }),
   description: z
     .string({ required_error: "Please enter description" })
@@ -19,9 +18,13 @@ export const TourneySchema = z.object({
       return { message: "Please select a state" };
     },
   }),
-  zip: z.string({ required_error: "Please enter zip code" }),
+  zip: z
+    .string({ required_error: "Please enter zip code" })
+    .min(5, { message: "Zip code must be at least 5 characters long" }),
   startDate: z.string({ required_error: "Please enter start date" }),
   endDate: z.string({ required_error: "Please enter end date" }),
+  primaryColor: z.string(),
+  secondaryColor: z.string(),
 });
 
 /**
