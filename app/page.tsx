@@ -131,7 +131,7 @@ export default function Home() {
 
         <nav className="relative grid sm:flex justify-center items-center gap-6 z-20 text-white text-xl font-semibold whitespace-nowrap">
           <a
-            href="/"
+            href="/view-tournaments"
             className="bg-gradient-to-bl from-[#dcc56a]/75 to-[#ba804d]/75 rounded-md mt-40 py-4 hover:bg-[#ba804d]/90 hover:bg-opacity-100 hover:scale-105 duration-100 md:px-20 px-10 text-center"
           >
             View Tournaments

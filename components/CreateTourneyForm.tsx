@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { stateAbbreviations } from "@/lib/stateAbbreviations";
 import { stateNames } from "@/lib/stateNames";
 import { TourneySchema } from "@/schemas";
+import { HexColorPicker } from "react-colorful";
 
 import { Input } from "@/components/ui/input";
 import {
@@ -76,6 +77,16 @@ const CreateTourneyForm = ({
 
   // Dialog state for adding chairs
   const [chairPreviews, setChairPreviews] = useState<User[]>();
+
+  // 
+  const DEFAULT_PRIMARY = "#284d6a";
+  const DEFAULT_SECONDARY = "#7FACCC";
+  // Dialog state for setting colors
+  const [primaryColor, setPrimaryColor] = useState<string>(DEFAULT_PRIMARY);
+  const [secondaryColor, setSecondaryColor] = useState<string>(DEFAULT_SECONDARY);
+  const [tempPrimary, setTempPrimary] = useState<string>(DEFAULT_PRIMARY);
+  const [tempSecondary, setTempSecondary] = useState<string>(DEFAULT_SECONDARY);
+
 
   const form = useForm<z.infer<typeof TourneySchema>>({
     resolver: zodResolver(TourneySchema),
@@ -332,8 +343,164 @@ const CreateTourneyForm = ({
           date for both the start and end date.
         </FormDescription>
 
-        <div className="bg-white border-[1px] rounded-md p-4 grid gap-2 grid-cols-1">
+      <div className="grid sm:grid-cols-2 gap-4">
+        <div className="bg-white w-full relative p-4 flex flex-col">
+          <p className="text-center mb-4 font-semibold">Tournament Page Preview</p>
+          <div className="grid grid-cols-2 mb-4 gap-x-4">
+            {/* Set primary color */}
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="text-xs lg:text-sm text-wrap" style={{ backgroundColor: primaryColor }}>
+                  Change Primary Color
+                </Button>
+              </DialogTrigger>
+
+              <DialogContent className="sm:max-w-md h-80">
+                <DialogHeader>
+                  <DialogTitle><p>Pick a Primary Color</p></DialogTitle>
+                </DialogHeader>
+                
+                <div className="flex flex-grow relative">
+                  <div className="flex flex-1 -mt-2">
+                    <HexColorPicker 
+                      color={tempPrimary} 
+                      onChange={setTempPrimary} 
+                      style={{ width: '100%', height: '100%' }}
+                    />
+                  </div>
+                  <div className="ml-6 flex items-center justify-center flex-col gap-y-3">
+                    <p>Hex: {tempPrimary}</p>
+                    <div
+                      style={{ backgroundColor: tempPrimary }}
+                      className="h-32 w-32 border border-gray-300"
+                    />
+                    <DialogClose asChild>
+                      <Button
+                        onClick={() => setPrimaryColor(tempPrimary)}
+                      >
+                        Save Color
+                      </Button>
+                    </DialogClose>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+
+            {/* Set secondary color */}
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button className="text-xs lg:text-sm text-wrap" style={{ backgroundColor: secondaryColor }}>
+                  Change Secondary Color
+                </Button>
+              </DialogTrigger>
+
+              <DialogContent className="sm:max-w-md h-80">
+                <DialogHeader>
+                  <DialogTitle><p>Pick a Secondary Color</p></DialogTitle>
+                </DialogHeader>
+                
+                <div className="flex flex-grow relative">
+                  <div className="flex flex-1 -mt-2">
+                    <HexColorPicker 
+                      color={tempSecondary} 
+                      onChange={setTempSecondary} 
+                      style={{ width: '100%', height: '100%' }}
+                    />
+                  </div>
+                  <div className="ml-6 flex items-center justify-center flex-col gap-y-3">
+                    <p>Hex: {tempSecondary}</p>
+                    <div
+                      style={{ backgroundColor: tempSecondary }}
+                      className="h-32 w-32 border border-gray-300"
+                    />
+                    <DialogClose asChild>
+                      <Button
+                        onClick={() => setSecondaryColor(tempSecondary )}
+                      >
+                        Save Color
+                      </Button>
+                    </DialogClose>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
+
+          {/*Preview of tourney page, as it's being created*/}
+          <div className="flex flex-col">
+            <div className="w-full aspect-[16/9] flex flex-col rounded-md overflow-hidden">
+              <div className="relative h-2/6 grid grid-cols-2 bg-frontpage overflow-hidden bg-cover">
+                <div className="absolute w-full h-full z-10 opacity-25" style={{ backgroundColor: secondaryColor }}/>
+                <div className="flex items-center p-8 text-white z-20 text-2xl">
+                  {form.watch("startDate") ? (
+                    form.watch("name")
+                  ) : (
+                    "(Name)"
+                  )}
+                </div>
+                <div className="flex flex-col justify-end text-right p-8 text-white z-20 text-md">
+                  <div>
+                    {form.watch("startDate") ? (
+                      new Date(form.watch("startDate")).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })
+                    ) : (
+                      "(Start Date)"
+                    )}
+                  </div>
+                  <div>
+                    {form.watch("city") ? (
+                      form.watch("city")
+                    ) : (
+                      "(City)"
+                    )} 
+                    , {form.watch("state") ? (
+                      form.watch("state")
+                    ) : (
+                      "(State)"
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div 
+                className="h-4/6 flex flex-row gap-x-3"
+                style={{
+                  background: `linear-gradient(to right, ${primaryColor}, ${secondaryColor})`,
+                }}
+              >
+                <div className="w-2/3 h-full rounded-md my-3 ml-3 bg-slate-300">
+
+                </div>
+                <div className="w-1/3 h-full rounded-md my-3 mr-3 bg-slate-50">
+
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full">
+              {(primaryColor !== DEFAULT_PRIMARY || secondaryColor !== DEFAULT_SECONDARY) && (
+              <Button
+                onClick={() => {
+                  setPrimaryColor(DEFAULT_PRIMARY); // Reset to default
+                  setSecondaryColor(DEFAULT_SECONDARY); // Reset to default
+                  setTempPrimary(DEFAULT_PRIMARY); 
+                  setTempSecondary(DEFAULT_SECONDARY); 
+                }}
+                className="text-black -m-4 mt-2 bg-white hover:bg-white hover:font-bold transition-all duration-100"
+              >
+                Reset to Default
+              </Button>
+            )}
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-white border-[1px] rounded-md p-4 gap-2">
           {/* Committees */}
+
+          <p className="text-center mb-4 font-semibold">Tournament Committees</p>
 
           {committees.map((committee, i) => (
             <div
@@ -462,7 +629,7 @@ const CreateTourneyForm = ({
 
           <Dialog>
             <DialogTrigger asChild>
-              <Button>
+              <Button className="w-full">
                 <Plus className="h-4 w-4" />
                 Add Committee
               </Button>
@@ -518,6 +685,7 @@ const CreateTourneyForm = ({
         <Button disabled={isPending} type="submit" className="w-full sm:w-16">
           Create
         </Button>
+        </div>
       </form>
     </Form>
   );
