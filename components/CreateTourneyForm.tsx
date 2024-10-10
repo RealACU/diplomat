@@ -105,25 +105,25 @@ const CreateTourneyForm = ({
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof TourneySchema>) => {
-    console.log("Erm guys this is an ERROR");
+  const onSubmit = (values: z.infer<typeof TourneySchema>) => {
+    startTransition(async () => {
+      const startDate = new Date(values.startDate);
+      const endDate = new Date(values.endDate);
 
-    const startDate = new Date(values.startDate);
-    const endDate = new Date(values.endDate);
+      if (startDate > endDate) {
+        return setError("Start date cannot be after end date");
+      }
 
-    if (startDate > endDate) {
-      return setError("Start date cannot be after end date");
-    }
-
-    const res = await createTourney(values, committees, creatorId);
-    if (res) {
-      Swal.fire({
-        title: "Success!",
-        text: "Did it without a hitch",
-        icon: "success",
-      });
-      return router.push("/");
-    }
+      const res = await createTourney(values, committees, creatorId);
+      if (res) {
+        Swal.fire({
+          title: "Success!",
+          text: "Did it without a hitch",
+          icon: "success",
+        });
+        return router.push("/");
+      }
+    });
   };
 
   const handleBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
