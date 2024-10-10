@@ -1,13 +1,48 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+  previewFeatures = ["fullTextIndex", "fullTextSearch"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  // uncomment next line if you use Prisma <5.10
-  // directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+model Tourney {
+  id                String      @id @default(cuid())
+  creatorId         String
+  name              String
+  description       String
+  school            String
+  address           String
+  city              String
+  state             States
+  zip               String
+  startDate         DateTime
+  endDate           DateTime
+  primaryColorHex   String
+  secondaryColorHex String
+  committees        Committee[]
+}
+
+model Committee {
+  id              Int              @id @default(autoincrement())
+  name            String
+  roomNumber      String
+  bgGuideLink     String
+  chairIds        String[]
+  delegateIds     String[]
+  tourneyId       String?
+  Tourney         Tourney?         @relation(fields: [tourneyId], references: [id], onDelete: Cascade)
+  delegateResults DelegateResult[]
+}
+
+model DelegateResult {
+  id          Int        @id @default(autoincrement())
+  delegateId  String
+  feedback    String
+  committeeId Int?
+  Committee   Committee? @relation(fields: [committeeId], references: [id], onDelete: Cascade)
 }
 
 enum States {
@@ -61,43 +96,4 @@ enum States {
   WV
   WI
   WY
-}
-
-model Tourney {
-  id                  String      @id @default(cuid())
-  creatorId           String
-  name                String
-  description         String
-  school              String
-  address             String
-  city                String
-  state               States
-  zip                 String
-  startDate           DateTime
-  endDate             DateTime
-  committees          Committee[]
-  primaryColorHex     String
-  secondaryColorHex   String
-}
-
-model Committee {
-  id              Int              @id @default(autoincrement())
-  name            String
-  roomNumber      String
-  bgGuideLink     String
-  chairIds        String[]
-  delegateIds     String[]
-  delegateResults DelegateResult[]
-
-  Tourney   Tourney? @relation(fields: [tourneyId], references: [id], onDelete: Cascade)
-  tourneyId String?
-}
-
-model DelegateResult {
-  id         Int    @id @default(autoincrement())
-  delegateId String
-  feedback   String
-
-  Committee   Committee? @relation(fields: [committeeId], references: [id], onDelete: Cascade)
-  committeeId Int?
 }

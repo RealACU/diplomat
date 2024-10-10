@@ -30,8 +30,8 @@ export default async function createTourney(
     // Nevada is UTC-7
     startDate: values.startDate + ":00.000-07:00",
     endDate: values.endDate + ":00.000-07:00",
-    primaryColorHex: values.primaryColor,
-    secondaryColorHex: values.secondaryColor,
+    primaryColorHex: values.name,
+    secondaryColorHex: values.name,
     committees: {
       create: committees.map((committee) => {
         return {

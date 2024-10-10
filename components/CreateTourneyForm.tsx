@@ -3,7 +3,7 @@
 import * as z from "zod";
 
 import { useState, useTransition } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { Trash2, Plus, MoveRight } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { stateAbbreviations } from "@/lib/stateAbbreviations";
@@ -103,33 +103,38 @@ const CreateTourneyForm = ({
     },
   });
 
-  const onSubmit = (values: z.infer<typeof TourneySchema>) => {
-    startTransition(async () => {
-      const startDate = new Date(values.startDate);
-      const endDate = new Date(values.endDate);
+  const onSubmit = async (values: z.infer<typeof TourneySchema>) => {
+    try {
+        const startDate = new Date(values.startDate);
+        const endDate = new Date(values.endDate);
 
-      if (startDate > endDate) {
-        return setError("Start date cannot be after end date");
-      }
+        if (startDate > endDate) {
+            return setError("Start date cannot be after end date");
+        }
 
-      createTourney(values, committees, creatorId).then((res) => {
+        const res = await createTourney(values, committees, creatorId);
         if (res) {
-          Swal.fire({
-            title: "Success!",
-            text: "Did it without a hitch",
-            icon: "success",
-          });
-
-          return router.push("/");
+            Swal.fire({
+                title: "Success!",
+                text: "Did it without a hitch",
+                icon: "success",
+            });
+            return router.push("/");
         }
 
         Swal.fire({
-          title: "Failure",
-          text: "Failed to create",
-          icon: "error",
+            title: "Failure",
+            text: "Failed to create",
+            icon: "error",
         });
-      });
-    });
+    } catch (error) {
+        console.error("Submission Error:", error);
+        Swal.fire({
+            title: "Error",
+            text: "An error occurred during submission.",
+            icon: "error",
+        });
+    }
   };
 
   const handleBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
@@ -146,8 +151,11 @@ const CreateTourneyForm = ({
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+    <FormProvider {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-6"
+      >
         <div className="grid sm:grid-cols-2 gap-4">
           <FormField
             control={form.control}
@@ -350,7 +358,7 @@ const CreateTourneyForm = ({
             {/* Set primary color */}
             <Dialog>
               <DialogTrigger asChild>
-                <Button className="text-xs lg:text-sm text-wrap" style={{ backgroundColor: primaryColor }}>
+                <Button className="text-xs lg:text-sm text-wrap hover:text-slate-300 transition-all duration-100" style={{ backgroundColor: primaryColor }}>
                   Change Primary Color
                 </Button>
               </DialogTrigger>
@@ -389,7 +397,7 @@ const CreateTourneyForm = ({
             {/* Set secondary color */}
             <Dialog>
               <DialogTrigger asChild>
-                <Button className="text-xs lg:text-sm text-wrap" style={{ backgroundColor: secondaryColor }}>
+                <Button className="text-xs lg:text-sm text-wrap duration-100 transition-all hover:text-slate-300" style={{ backgroundColor: secondaryColor }}>
                   Change Secondary Color
                 </Button>
               </DialogTrigger>
@@ -629,7 +637,7 @@ const CreateTourneyForm = ({
 
           <Dialog>
             <DialogTrigger asChild>
-              <Button className="w-full">
+              <Button className="w-full bg-slate-400 hover:bg-slate-500">
                 <Plus className="h-4 w-4" />
                 Add Committee
               </Button>
@@ -681,13 +689,15 @@ const CreateTourneyForm = ({
             </DialogContent>
           </Dialog>
         </div>
+      </div>
         {error && <p className="text-red-500">{error}</p>}
-        <Button disabled={isPending} type="submit" className="w-full sm:w-16">
-          Create
-        </Button>
+        <div className="flex justify-center mt-10">
+          <Button disabled={isPending} type="submit" className="text-lg w-64 h-12 bg-slate-500 hover:bg-slate-600">
+            Create Tournament
+          </Button>
         </div>
       </form>
-    </Form>
+    </FormProvider>
   );
 };
 

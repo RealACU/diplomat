@@ -23,8 +23,8 @@ export const TourneySchema = z.object({
     .min(5, { message: "Zip code must be at least 5 characters long" }),
   startDate: z.string({ required_error: "Please enter start date" }),
   endDate: z.string({ required_error: "Please enter end date" }),
-  primaryColor: z.string(),
-  secondaryColor: z.string(),
+  primaryColorHex: z.string().regex(/^#([0-9A-F]{3}){1,2}$/i, { message: "Invalid color" }),
+  secondaryColorHex: z.string().regex(/^#([0-9A-F]{3}){1,2}$/i, { message: "Invalid color" }),
 });
 
 /**
