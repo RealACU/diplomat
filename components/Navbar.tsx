@@ -47,7 +47,7 @@ const Navbar = async () => {
                 className="text-[16px] bg-gradient-to-tr from-slate-400 to-[#7388a2] py-2 px-6 rounded-md hover:bg-gradient-to-r transition-all hover:scale-105 duration-100 flex-shrink-0 font-semibold hidden sm:flex"
               >
                 <Link href="/admin/create-tournament">
-                  <Plus className="mr-1 px-0.5 -ml-2"/>
+                  <Plus className="mr-1 px-0.5 -ml-2" />
                   Create Tournament
                 </Link>
               </Button>
@@ -57,6 +57,7 @@ const Navbar = async () => {
               className="text-[16px] bg-gradient-to-tl from-[#c1ad5e] to-[#d6975f] py-2 px-6 rounded-md hover:bg-gradient-to-t transition-all hover:scale-105 duration-100 flex-shrink-0 font-semibold hidden md:flex"
             >
               <Link href="my-tournaments">
+                <Eye className="mr-1 px-0.5 -ml-2" />
                 My Tournaments
               </Link>
             </Button>
