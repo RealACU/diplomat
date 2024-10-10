@@ -19,6 +19,7 @@ const Navbar = async () => {
             alt="logo"
             className="h-auto -ml-2"
           />
+          <p className="mx-3 text-2xl font-bold">Diplomat</p>
         </Link>
       </div>
 
@@ -43,7 +44,7 @@ const Navbar = async () => {
             {(user?.publicMetadata.role as string) === "admin" && (
               <Button
                 asChild
-                className="text-[16px] bg-gradient-to-tr from-slate-400 to-[#7388a2] py-2 px-6 rounded-md hover:bg-gradient-to-r transition-all hover:scale-105 duration-100 flex-shrink-0 font-semibold hidden sm:flex"
+                className="text-[16px] bg-gradient-to-tr from-slate-400 to-[#7388a2] -mx-1 py-2 px-6 rounded-md hover:bg-gradient-to-r transition-all hover:scale-105 duration-100 flex-shrink-0 font-semibold hidden sm:flex"
               >
                 <Link href="/admin/create-tournament">
                   <Plus className="mr-1 px-0.5 -ml-2" />
@@ -53,7 +54,7 @@ const Navbar = async () => {
             )}
             <Button
               asChild
-              className="text-[16px] bg-gradient-to-tl from-[#c1ad5e] to-[#d6975f] py-2 px-6 rounded-md hover:bg-gradient-to-t transition-all hover:scale-105 duration-100 flex-shrink-0 font-semibold hidden sm:flex"
+              className="text-[16px] bg-gradient-to-tl from-[#c1ad5e] to-[#d6975f] -mx-1 py-2 px-6 rounded-md hover:bg-gradient-to-t transition-all hover:scale-105 duration-100 flex-shrink-0 font-semibold hidden sm:flex"
             >
               <Link href="my-tournaments">
                 <Eye className="mr-1 px-0.5 -ml-2" />
