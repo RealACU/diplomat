@@ -440,7 +440,7 @@ const CreateTourneyForm = ({
               <div className="relative h-2/6 grid grid-cols-2 bg-frontpage overflow-hidden bg-cover">
                 <div className="absolute w-full h-full z-10 opacity-25" style={{ backgroundColor: secondaryColor }}/>
                 <div className="flex items-center p-8 text-white z-20 text-2xl">
-                  {form.watch("startDate") ? (
+                  {form.watch("name") ? (
                     form.watch("name")
                   ) : (
                     "(Name)"

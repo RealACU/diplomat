@@ -123,23 +123,23 @@ export default function Home() {
           </ul>
         </div>
 
-        <div className="flex justify-center w-full items-center text-white text-[40px] leading-[1.25] lg:text-6xl absolute z-30 font-semibold pt-16 text-center h-28">
+        <div className="flex justify-center w-full px-6 items-center text-white text-[40px] leading-[1.25] lg:text-6xl absolute z-30 font-semibold pt-20 sm:pt-16 text-center h-28">
           <h1 className="md:w-full w-96">
             Your gateway to everything Model UN
           </h1>
         </div>
 
-        <nav className="mt-4 relative grid sm:flex justify-center items-center gap-6 z-20 text-white text-xl font-semibold whitespace-nowrap">
+        <nav className="mt-10 relative grid sm:flex justify-center items-center gap-6 z-20 text-white text-xl font-semibold whitespace-nowrap">
           <a
             href="/view-tournaments"
-            className="bg-gradient-to-bl from-[#dcc56a]/75 to-[#ba804d]/75 rounded-md mt-40 py-4 hover:bg-[#ba804d]/90 hover:bg-opacity-100 hover:scale-105 duration-100 md:px-20 px-10 text-center"
+            className="bg-gradient-to-bl from-[#dcc56a]/75 to-[#ba804d]/75 rounded-md mt-40 py-4 hover:bg-[#ba804d]/90 hover:bg-opacity-100 hover:scale-105 duration-100 md:px-20 px-12 text-center"
           >
             View Tournaments
           </a>
 
           <a
             href="/about"
-            className="bg-gradient-to-br from-docblue-200/50 to-docblue-100/75 rounded-md sm:mt-40 py-4 hover:to-docblue-100/100 bg-opacity-75 hover:bg-opacity-100 hover:scale-105 duration-100 md:px-28 px-10 text-center"
+            className="-mt-3 bg-gradient-to-br from-docblue-200/50 to-docblue-100/75 rounded-md sm:mt-40 py-4 hover:to-docblue-100/100 bg-opacity-75 hover:bg-opacity-100 hover:scale-105 duration-100 md:px-28 px-12 text-center"
           >
             Learn More
           </a>

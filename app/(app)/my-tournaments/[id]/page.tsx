@@ -93,6 +93,14 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                   )}
                 </div>
               </div>
+              <div className="bg-slate-300 mx-4 my-3 rounded-md font-medium text-md flex overflow-clip break-words">
+                <div className="h-80 w-full">
+                  <div className="px-4 py-3 h-12 w-full flex flex-row relative shadow-md rounded-md">
+                    <p className="relative z-10">Delegate resources</p>
+                    <p className="ml-auto text-right z-10">stuff</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
