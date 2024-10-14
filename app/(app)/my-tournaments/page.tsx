@@ -6,19 +6,24 @@ import getTourneyById from "@/actions/getTourneyById";
 const MyTournamentsPage = async () => {
   const user = await currentUser();
 
+  const chairTourneys: string[] =
+    (user?.publicMetadata.cTourneys as string[]) || [];
+  const delegateTourneys: string[] =
+    (user?.publicMetadata.dTourneys as string[]) || [];
+
   return (
     <div className="flex flex-col gap-4">
       {(user?.publicMetadata.role as string) === "admin" && (
         <>
-          <h1>Tournaments I've created</h1>
+          <h1 className="text-xl font-semibold">Tournaments I've created</h1>
           <Button>
-            <Link href={``}></Link>
+            <Link href={``}>Placeholder</Link>
           </Button>
         </>
       )}
       <h2 className="text-xl font-semibold">Tournaments where I'm a chair</h2>
-      {(user?.publicMetadata.cTourneys as string[]) &&
-        (user?.publicMetadata.cTourneys as string[]).map(async (cTourneyId) => {
+      {chairTourneys &&
+        chairTourneys.map(async (cTourneyId) => {
           const tourneyInfo = await getTourneyById(cTourneyId);
 
           if (!tourneyInfo) return null;
@@ -34,8 +39,8 @@ const MyTournamentsPage = async () => {
       <h2 className="text-xl font-semibold">
         Tournaments where I'm a delegate
       </h2>
-      {(user?.publicMetadata.dTourneys as string[]) &&
-        (user?.publicMetadata.dTourneys as string[]).map(async (dTourneyId) => {
+      {delegateTourneys &&
+        delegateTourneys.map(async (dTourneyId) => {
           const tourneyInfo = await getTourneyById(dTourneyId);
 
           if (!tourneyInfo) return null;
@@ -48,6 +53,7 @@ const MyTournamentsPage = async () => {
             </Button>
           );
         })}
+      {!delegateTourneys && <div>Nothing</div>}
     </div>
   );
 };

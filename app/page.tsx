@@ -1,11 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import SearchInput from "@/components/SearchInput";
 import { useState } from "react";
-import { Search } from "lucide-react";
 
 export default function Home() {
   const [tourneys, setTourneys] = useState<any[]>([]);
@@ -149,10 +147,7 @@ export default function Home() {
         <div className="flex flex-col sm:flex-row gap-6">
           <div className="bg-slate-50 w-full sm:w-2/3 rounded-lg">
             <div className="flex flex-col w-full">
-              <div className="bg-slate-50 w-full h-10 sm:h-14 rounded-lg filter drop-shadow-md flex items-center pr-4">
-                <button>
-                  <Search className="mx-4"/>
-                </button>
+              <div className="bg-slate-50 w-full h-10 sm:h-14 rounded-lg filter drop-shadow-md flex items-center px-2">
                 <SearchInput
                   className="text-lg sm:text-xl font-medium h-full py-1 w-full placeholder-slate-400"
                   onFetch={setTourneys}

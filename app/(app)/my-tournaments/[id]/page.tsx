@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import signUpDelegate from "@/actions/signUpDelegate";
 import { currentUser } from "@clerk/nextjs/server";
 import CommitteeSignUp from "@/components/CommitteeSignUp";
-
+import { CldUploadButton } from 'next-cloudinary';
 
 const tourneyPage = async ({ params }: { params: { id: string } }) => {
   const tourney = await db.tourney.findUnique({
