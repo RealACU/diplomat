@@ -78,13 +78,12 @@ const CreateTourneyForm = ({
   // Dialog state for adding chairs
   const [chairPreviews, setChairPreviews] = useState<User[]>();
 
-  //
-  const DEFAULT_PRIMARY = "#284d6a";
+  // Default colors
+  const DEFAULT_PRIMARY = "#284D6A";
   const DEFAULT_SECONDARY = "#7FACCC";
   // Dialog state for setting colors
   const [primaryColor, setPrimaryColor] = useState<string>(DEFAULT_PRIMARY);
-  const [secondaryColor, setSecondaryColor] =
-    useState<string>(DEFAULT_SECONDARY);
+  const [secondaryColor, setSecondaryColor] = useState<string>(DEFAULT_SECONDARY);
   const [tempPrimary, setTempPrimary] = useState<string>(DEFAULT_PRIMARY);
   const [tempSecondary, setTempSecondary] = useState<string>(DEFAULT_SECONDARY);
 
@@ -100,12 +99,14 @@ const CreateTourneyForm = ({
       zip: preset?.zip || "",
       startDate: preset?.startDate || "",
       endDate: preset?.endDate || "",
-      primaryColorHex: DEFAULT_PRIMARY,
-      secondaryColorHex: DEFAULT_SECONDARY,
+      primaryColorHex: preset?.primaryColorHex || DEFAULT_PRIMARY,
+      secondaryColorHex: preset?.secondaryColorHex || DEFAULT_SECONDARY,
     },
   });
+  
+  const { setValue } = form;
 
-  const onSubmit = (values: z.infer<typeof TourneySchema>) => {
+  const onSubmit = (values: z.infer<typeof TourneySchema>) => {  
     startTransition(async () => {
       const startDate = new Date(values.startDate);
       const endDate = new Date(values.endDate);
@@ -336,7 +337,7 @@ const CreateTourneyForm = ({
           If the tournament does not last for more than a day, pick the same
           date for both the start and end date.
         </FormDescription>
-
+        
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="bg-white w-full relative p-4 flex flex-col">
             <p className="text-center mb-4 font-semibold">
@@ -376,7 +377,12 @@ const CreateTourneyForm = ({
                         className="h-32 w-32 border border-gray-300"
                       />
                       <DialogClose asChild>
-                        <Button onClick={() => setPrimaryColor(tempPrimary)}>
+                        <Button
+                          onClick={() => {
+                            setPrimaryColor(tempPrimary);
+                            setValue("primaryColorHex", tempPrimary);
+                          }}
+                        >
                           Save Color
                         </Button>
                       </DialogClose>
@@ -419,7 +425,10 @@ const CreateTourneyForm = ({
                       />
                       <DialogClose asChild>
                         <Button
-                          onClick={() => setSecondaryColor(tempSecondary)}
+                          onClick={() => {
+                            setSecondaryColor(tempSecondary);
+                            setValue("secondaryColorHex", tempSecondary);
+                          }}
                         >
                           Save Color
                         </Button>

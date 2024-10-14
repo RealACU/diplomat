@@ -4,11 +4,25 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import SearchInput from "@/components/SearchInput";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Search } from "lucide-react";
+import getAllTourneys from "@/actions/getAllTourneys";
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
   const [tourneys, setTourneys] = useState<any[]>([]);
+  const searchInputRef = useRef(null);
+  
+  const fetchTourneys = async () => {
+    setLoading(true);
+    const allTourneys = await getAllTourneys();
+    setTourneys(allTourneys);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchTourneys();
+  }, []);
 
   return (
     <div>
@@ -161,7 +175,9 @@ export default function Home() {
             </div>
             <div className="w-full h-[465px] overflow-auto bg-white rounded-md shadow-md mt-2">
               <ul>
-                {tourneys.length > 0 ? (
+                {loading ? (
+                  <li className="py-2 flex justify-center items-center">Fetching tournaments...</li>
+                ) : tourneys.length > 0 ? (
                   tourneys.map(tourney => (
                     <li key={tourney.id}>
                       <Link href={`/my-tournaments/${tourney.id}`}>
