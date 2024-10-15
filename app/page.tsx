@@ -3,10 +3,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import SearchInput from "@/components/SearchInput";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { Search } from "lucide-react";
+import getAllTourneys from "@/actions/getAllTourneys";
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
   const [tourneys, setTourneys] = useState<any[]>([]);
+  const searchInputRef = useRef(null);
+  
+  const fetchTourneys = async () => {
+    setLoading(true);
+    const allTourneys = await getAllTourneys();
+    setTourneys(allTourneys);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchTourneys();
+  }, []);
 
   return (
     <div>
@@ -121,23 +136,23 @@ export default function Home() {
           </ul>
         </div>
 
-        <div className="flex justify-center w-full items-center text-white text-[40px] leading-[1.25] lg:text-6xl absolute z-30 font-semibold pt-16 text-center h-28">
+        <div className="flex justify-center w-full px-6 items-center text-white text-[40px] leading-[1.25] lg:text-6xl absolute z-30 font-semibold pt-20 sm:pt-16 text-center h-28">
           <h1 className="md:w-full w-96">
             Your gateway to everything Model UN
           </h1>
         </div>
 
-        <nav className="mt-4 relative grid sm:flex justify-center items-center gap-6 z-20 text-white text-xl font-semibold whitespace-nowrap">
+        <nav className="mt-10 relative grid sm:flex justify-center items-center gap-6 z-20 text-white text-xl font-semibold whitespace-nowrap">
           <a
             href="/view-tournaments"
-            className="bg-gradient-to-bl from-[#dcc56a]/75 to-[#ba804d]/75 rounded-md mt-40 py-4 hover:bg-[#ba804d]/90 hover:bg-opacity-100 hover:scale-105 duration-100 md:px-20 px-10 text-center"
+            className="bg-gradient-to-bl from-[#dcc56a]/75 to-[#ba804d]/75 rounded-md mt-40 py-4 hover:bg-[#ba804d]/90 hover:bg-opacity-100 hover:scale-105 duration-100 md:px-20 px-12 text-center"
           >
             View Tournaments
           </a>
 
           <a
             href="/about"
-            className="bg-gradient-to-br from-docblue-200/50 to-docblue-100/75 rounded-md sm:mt-40 py-4 hover:to-docblue-100/100 bg-opacity-75 hover:bg-opacity-100 hover:scale-105 duration-100 md:px-28 px-10 text-center"
+            className="-mt-3 bg-gradient-to-br from-docblue-200/50 to-docblue-100/75 rounded-md sm:mt-40 py-4 hover:to-docblue-100/100 bg-opacity-75 hover:bg-opacity-100 hover:scale-105 duration-100 md:px-28 px-12 text-center"
           >
             Learn More
           </a>
@@ -156,7 +171,9 @@ export default function Home() {
             </div>
             <div className="w-full h-[465px] overflow-auto bg-white rounded-md shadow-md mt-2">
               <ul>
-                {tourneys.length > 0 ? (
+                {loading ? (
+                  <li className="py-2 flex justify-center items-center">Fetching tournaments...</li>
+                ) : tourneys.length > 0 ? (
                   tourneys.map(tourney => (
                     <li key={tourney.id}>
                       <Link href={`/my-tournaments/${tourney.id}`}>
