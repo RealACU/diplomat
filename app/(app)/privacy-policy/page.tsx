@@ -10,9 +10,9 @@ const PrivacyPolicyPage = () => {
       <p className="privacy-intro">
         This Privacy Notice for Diplomat ("<strong>we</strong>", "
         <strong>us</strong>", or "<strong>our</strong>"), describes how and why
-        we might access, collect, store, use, and/or share ("
-        <strong>process</strong>") your personal information when you use our
-        services ("<strong>Services</strong>"), including when you:
+        we might access, collect, store, use, and/or share (
+        <strong>process</strong>) your personal information when you use our
+        services (<strong>Services</strong>), including when you:
       </p>
       <ul className="privacy-list">
         <li>Visit our website</li>
@@ -28,11 +28,8 @@ const PrivacyPolicyPage = () => {
       <p className="privacy-questions">
         <strong>Questions or concerns? </strong>Reading this Privacy Notice will
         help you understand your privacy rights and choices. If you have any
-        questions, please{" "}
-        <a href="/contact-us" className="privacy-link">
-          contact us
-        </a>
-        .
+        questions, please 
+        <a href="/contact-us" className="privacy-link">contact us</a>.
       </p>
 
       <h2 className="privacy-subheading">SUMMARY OF KEY POINTS</h2>
@@ -40,11 +37,8 @@ const PrivacyPolicyPage = () => {
         <strong>
           <em>
             This summary provides key points from our Privacy Notice. You can
-            find more details by using our{" "}
-            <a href="#toc" className="privacy-link">
-              table of contents
-            </a>
-            .
+            find more details by using our 
+            <a href="#toc" className="privacy-link">table of contents</a>.
           </em>
         </strong>
       </p>
@@ -53,11 +47,8 @@ const PrivacyPolicyPage = () => {
         visit, use, or navigate our Services, we may process personal
         information depending on how you interact with Diplomat and the
         Services, the choices you make, and the products and features you use.
-        Learn more about{" "}
-        <a href="#infocollect" className="privacy-link">
-          what information do we collect
-        </a>
-        .
+        Learn more about 
+        <a href="#infocollect" className="privacy-link">what information do we collect</a>.
       </p>
       <p className="privacy-content">
         <strong>Do we process any sensitive personal information?</strong> We do
@@ -72,146 +63,103 @@ const PrivacyPolicyPage = () => {
         information to provide, improve, and administer our Services,
         communicate with you, for security and fraud prevention, and to comply
         with law. We may also process your information for other purposes with
-        your consent. Learn more about{" "}
-        <a href="#infouse" className="privacy-link">
-          how we process your information
-        </a>
-        .
+        your consent. Learn more about 
+        <a href="#infouse" className="privacy-link">how we process your information</a>.
       </p>
       <p className="privacy-content">
-        <strong>
-          In what situations and with which parties do we share personal
-          information?
-        </strong>{" "}
-        We may share information in specific situations and with specific third
-        parties. Learn more about{" "}
-        <a href="#whoshare" className="privacy-link">
-          when and with whom we share your personal information
-        </a>
-        .
+        <strong>In what situations and with which parties do we share personal
+        information?</strong> We may share information in specific situations and with specific third
+        parties. Learn more about 
+        <a href="#whoshare" className="privacy-link">when and with whom we share your personal information</a>.
       </p>
       <p className="privacy-content">
         <strong>How do we keep your information safe?</strong> We have adequate
         organizational and technical processes and procedures in place to
         protect your personal information. However, no electronic transmission
         over the internet or information storage technology can be guaranteed to
-        be 100% secure. Learn more about{" "}
-        <a href="#infosafe" className="privacy-link">
-          how we keep your information safe
-        </a>
-        .
+        be 100% secure. Learn more about 
+        <a href="#infosafe" className="privacy-link">how we keep your information safe</a>.
       </p>
       <p className="privacy-content">
         <strong>What are your rights?</strong> Depending on where you are
         located geographically, the applicable privacy law may mean you have
-        certain rights regarding your personal information. Learn more about{" "}
-        <a href="#privacyrights" className="privacy-link">
-          your privacy rights
-        </a>
-        .
+        certain rights regarding your personal information. Learn more about 
+        <a href="#privacyrights" className="privacy-link">your privacy rights</a>.
       </p>
       <p className="privacy-content">
         <strong>How do you exercise your rights?</strong> The easiest way to
-        exercise your rights is by visiting{" "}
-        <a href="/" className="privacy-link">
-          Diplomat
-        </a>
-        , or by contacting us. We will consider and act upon any request in
+        exercise your rights is by visiting 
+        <a href="/" className="privacy-link">Diplomat</a>, or by contacting us. We will consider and act upon any request in
         accordance with applicable data protection laws.
       </p>
       <p className="privacy-content">
-        Want to learn more about what we do with any information we collect?{" "}
-        <a href="#toc" className="privacy-link">
-          Review the Privacy Notice in full
-        </a>
-        .
+        Want to learn more about what we do with any information we collect? 
+        <a href="#toc" className="privacy-link">Review the Privacy Notice in full</a>.
       </p>
 
       <p className="privacy-section-heading">TABLE OF CONTENTS</p>
-      <li>
-        {" "}
-        <a href="#infocollect" className="privacy-link">
-          {" "}
-          WHAT INFORMATION DO WE COLLECT?{" "}
-        </a>
-      </li>
-      <li>
-        {" "}
-        <a href="#infouse" className="privacy-link">
-          {" "}
-          HOW DO WE PROCESS YOUR INFORMATION?{" "}
-        </a>
-      </li>
-      <li>
-        {" "}
-        <a href="#whoshare" className="privacy-link">
-          {" "}
-          WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION{" "}
-        </a>
-      </li>
-      <li>
-        {" "}
-        <a href="#sociallogins" className="privacy-link">
-          {" "}
-          HOW DO WE HANDLE YOUR SOCIAL LOGINS?{" "}
-        </a>
-      </li>
-      <li>
-        {" "}
-        <a href="#inforetain" className="privacy-link">
-          {" "}
-          HOW LONG DO WE KEEP YOUR INFORMATION{" "}
-        </a>
-      </li>
-      <li>
-        {" "}
-        <a href="#infosafe" className="privacy-link">
-          {" "}
-          HOW DO WE KEEP YOUR INFORMATION SAFE?{" "}
-        </a>
-      </li>
-      <li>
-        {" "}
-        <a href="#privacyrights" className="privacy-link">
-          {" "}
-          WHAT ARE YOUR PRIVACY RIGHTS?{" "}
-        </a>
-      </li>
-      <li>
-        {" "}
-        <a href="#DNT" className="privacy-link">
-          {" "}
-          CONTROLS FOR DO-NOT-TRACK FEATURES?{" "}
-        </a>
-      </li>
-      <li>
-        {" "}
-        <a href="#uslaws" className="privacy-link">
-          {" "}
-          DO UNITED STATES RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?{" "}
-        </a>
-      </li>
-      <li>
-        {" "}
-        <a href="#policyupdates" className="privacy-link">
-          {" "}
-          DO WE MAKE UPDATES TO THIS NOTICE?{" "}
-        </a>
-      </li>
-      <li>
-        {" "}
-        <a href="#contact" className="privacy-link">
-          {" "}
-          HOW CAN YOU CONTACT US ABOUT THIS NOTICE?{" "}
-        </a>
-      </li>
-      <li>
-        {" "}
-        <a href="#request" className="privacy-link">
-          {" "}
-          HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?{" "}
-        </a>
-      </li>
+      <ul>
+        <li>
+          <a href="#infocollect" className="privacy-link">
+            WHAT INFORMATION DO WE COLLECT?
+          </a>
+        </li>
+        <li>
+          <a href="#infouse" className="privacy-link">
+            HOW DO WE PROCESS YOUR INFORMATION?
+          </a>
+        </li>
+        <li>
+          <a href="#whoshare" className="privacy-link">
+            WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION
+          </a>
+        </li>
+        <li>
+          <a href="#sociallogins" className="privacy-link">
+            HOW DO WE HANDLE YOUR SOCIAL LOGINS?
+          </a>
+        </li>
+        <li>
+          <a href="#inforetain" className="privacy-link">
+            HOW LONG DO WE KEEP YOUR INFORMATION
+          </a>
+        </li>
+        <li>
+          <a href="#infosafe" className="privacy-link">
+            HOW DO WE KEEP YOUR INFORMATION SAFE?
+          </a>
+        </li>
+        <li>
+          <a href="#privacyrights" className="privacy-link">
+            WHAT ARE YOUR PRIVACY RIGHTS?
+          </a>
+        </li>
+        <li>
+          <a href="#DNT" className="privacy-link">
+            CONTROLS FOR DO-NOT-TRACK FEATURES?
+          </a>
+        </li>
+        <li>
+          <a href="#uslaws" className="privacy-link">
+            DO UNITED STATES RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?
+          </a>
+        </li>
+        <li>
+          <a href="#policyupdates" className="privacy-link">
+            DO WE MAKE UPDATES TO THIS NOTICE?
+          </a>
+        </li>
+        <li>
+          <a href="#contact" className="privacy-link">
+            HOW CAN YOU CONTACT US ABOUT THIS NOTICE?
+          </a>
+        </li>
+        <li>
+          <a href="#request" className="privacy-link">
+            HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM YOU?
+          </a>
+        </li>
+      </ul>
 
       {/* Section 1 */}
       <h2 className="privacy-section-heading" id="infocollect">
@@ -224,7 +172,7 @@ const PrivacyPolicyPage = () => {
         <strong>In Short:</strong> We collect personal information that you
         provide to us.
       </p>
-      <p className="privacy-contentf">
+      <p className="privacy-content">
         We collect personal information that you voluntarily provide to us when
         you register on the Services, express an interest in obtaining
         information about us or our products and Services, when you participate
@@ -253,11 +201,10 @@ const PrivacyPolicyPage = () => {
         details, like your Facebook, X, or other social media account. If you
         choose to register in this way, we will collect certain profile
         information about you from the social media provider, as described in
-        the section called{" "}
+        the section called 
         <a href="#sociallogins" className="privacy-link">
           HOW DO WE HANDLE YOUR SOCIAL LOGINS?
-        </a>{" "}
-        below.
+        </a>.
       </p>
       <p className="privacy-content">
         All personal information that you provide to us must be true, complete,
@@ -284,12 +231,12 @@ const PrivacyPolicyPage = () => {
           <strong>
             To facilitate account creation and authentication and otherwise
             manage user accounts.
-          </strong>{" "}
+          </strong> 
           We may process your information so you can create and log in to your
           account, as well as keep your account in working order.
         </li>
         <li>
-          <strong>To respond to user inquiries/offer support to users.</strong>{" "}
+          <strong>To respond to user inquiries/offer support to users.</strong> 
           We may process your information to respond to your inquiries and solve
           any potential issues you might have with the requested service.
         </li>
@@ -409,11 +356,10 @@ const PrivacyPolicyPage = () => {
       </p>
       <p className="privacy-content">
         If you have questions or comments about your privacy rights, you may
-        email us at{" "}
+        email us at 
         <a href="/contact-us" className="privacy-link">
           Contact Us Form
-        </a>
-        .
+        </a>.
       </p>
 
       {/* Section 8 */}
@@ -581,34 +527,23 @@ const PrivacyPolicyPage = () => {
         categories through instances where you interact with us in person,
         online, or by phone or mail in the context of:
       </p>
-      <p className="privacy-list">
+      <ul className="privacy-list">
         <li>
-          Recieving help through our{" "}
-          <a href="/contact-us" className="privacy-link">
-            {" "}
-            Contact Us Form
-          </a>
+          Receiving help through our 
+          <a href="/contact-us" className="privacy-link">Contact Us Form</a>
         </li>
-      </p>
-      <p className="privacy-list">
         <li>Participation in customer surveys or contests</li>
-      </p>
-      <p className="privacy-list">
         <li>
           Facilitation in the delivery of our Services and to respond to your
           inquiries
         </li>
-      </p>
+      </ul>
 
       <p className="privacy-subheading">Sources of Personal Information</p>
 
       <p className="privacy-content">
-        Learn more about the sources of personal information we collect in "{" "}
-        <a href="#infocollect" className="privacy-link">
-          {" "}
-          WHAT INFORMATION DO WE COLLECT
-        </a>{" "}
-        "
+        Learn more about the sources of personal information we collect in 
+        <a href="#infocollect" className="privacy-link">WHAT INFORMATION DO WE COLLECT</a>.
       </p>
 
       <h2 className="privacy-subheading">
@@ -616,12 +551,8 @@ const PrivacyPolicyPage = () => {
       </h2>
 
       <p className="privacy-content">
-        Learn about how we use your personal information in the section, "{" "}
-        <a href="#infouse" className="privacy-link">
-          {" "}
-          HOW DO WE PROCESS YOUR INFORMATION{" "}
-        </a>
-        "
+        Learn about how we use your personal information in the section, 
+        <a href="#infouse" className="privacy-link">HOW DO WE PROCESS YOUR INFORMATION</a>.
       </p>
 
       <p className="privacy-content">
@@ -632,12 +563,7 @@ const PrivacyPolicyPage = () => {
         We may disclose your personal information with our service providers
         pursuant to a written contract between us and each service provider.
         Learn more about how we disclose personal information to in the section,
-        "
-        <a href="#whoshare" className="privacy-link">
-          {" "}
-          WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?{" "}
-        </a>{" "}
-        "
+        <a href="#whoshare" className="privacy-link">WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?</a>.
       </p>
 
       <p className="privacy-content">
@@ -659,96 +585,40 @@ const PrivacyPolicyPage = () => {
         these rights are not absolute, and in certain cases, we may decline your
         request as permitted by law. These rights include:
       </p>
-      <p className="privacy-list">
-        <li>
-          {" "}
-          <strong> Right to know</strong> whether or not we are processing your
-          personal data
-        </li>
-        <li>
-          {" "}
-          <strong> Right to access</strong> your personal data{" "}
-        </li>
-        <li>
-          {" "}
-          <strong> Right to correct</strong> inaccuaracies in your personal data{" "}
-        </li>
-        <li>
-          {" "}
-          <strong> Right to request</strong> the deletion of your personal data{" "}
-        </li>
-        <li>
-          {" "}
-          <strong> Right to obtain a copy</strong> of the personal data you
-          previously shared with us{" "}
-        </li>
-        <li>
-          {" "}
-          <strong> Right to non-discrimination</strong> for exercising your
-          rights{" "}
-        </li>
-        <li>
-          {" "}
-          <strong> Right to opt out</strong> of the processing of your personal
-          data if it is used for targeted advertising (or sharing as defined
-          under California’s privacy law), the sale of personal data, or
-          profiling in furtherance of decisions that produce legal or similarly
-          significant effects ("profiling"){" "}
-        </li>
-      </p>
+      <ul className="privacy-list">
+        <li><strong>Right to know</strong> whether or not we are processing your personal data</li>
+        <li><strong>Right to access</strong> your personal data</li>
+        <li><strong>Right to correct</strong> inaccuracies in your personal data</li>
+        <li><strong>Right to request</strong> the deletion of your personal data</li>
+        <li><strong>Right to obtain a copy</strong> of the personal data you previously shared with us</li>
+        <li><strong>Right to non-discrimination</strong> for exercising your rights</li>
+        <li><strong>Right to opt out</strong> of the processing of your personal data if it is used for targeted advertising (or sharing as defined under California’s privacy law), the sale of personal data, or profiling in furtherance of decisions that produce legal or similarly significant effects ("profiling")</li>
+      </ul>
       <p className="privacy-content">
-        Depending upon the state where you live, you may also have the following
-        rights:
+        Depending upon the state where you live, you may also have the following rights:
       </p>
-      <p className="privacy-list">
-        <li>
-          {" "}
-          <strong>Right to </strong> obtain a list of the categories of third
-          parties to which we have disclosed personal data (as permitted by
-          applicable law, including California's and Delaware's privacy law){" "}
-        </li>
-        <li>
-          {" "}
-          <strong>Right to </strong> obtain a list of specific third parties to
-          which we have disclosed personal data (as permitted by applicable law,
-          including Oregon’s privacy law){" "}
-        </li>
-        <li>
-          {" "}
-          <strong>Right to</strong> limit use and disclosure of sensitive
-          personal data (as permitted by applicable law, including California’s
-          privacy law){" "}
-        </li>
-        <li>
-          <strong> Right to </strong> opt out of the collection of sensitive
-          data and personal data collected through the operation of a voice or
-          facial recognition feature (as permitted by applicable law, including
-          Florida’s privacy law){" "}
-        </li>
-      </p>
+      <ul className="privacy-list">
+        <li><strong>Right to</strong> obtain a list of the categories of third parties to which we have disclosed personal data (as permitted by applicable law, including California's and Delaware's privacy law)</li>
+        <li><strong>Right to</strong> obtain a list of specific third parties to which we have disclosed personal data (as permitted by applicable law, including Oregon’s privacy law)</li>
+        <li><strong>Right to</strong> limit use and disclosure of sensitive personal data (as permitted by applicable law, including California’s privacy law)</li>
+        <li><strong>Right to</strong> opt out of the collection of sensitive data and personal data collected through the operation of a voice or facial recognition feature (as permitted by applicable law, including Florida’s privacy law)</li>
+      </ul>
 
       <h2 className="privacy-subheading">How To Exercise Your Rights</h2>
       <p className="privacy-content">
-        To exercise these rights, you can contact us by visiting{" "}
-        <a href="/" className="privacy-link">
-          Diplomat
-        </a>
-        , or by referring to the contact details at the bottom of this document.
+        To exercise these rights, you can contact us by visiting 
+        <a href="/" className="privacy-link">Diplomat</a>, or by referring to the contact details at the bottom of this document.
       </p>
       <p className="privacy-content">
-        We will honor your opt-out preferences if you enact the{" "}
-        <a href="https://globalprivacycontrol.org/" className="privacy-link">
-          {" "}
-          Global Privacy Control (GPC){" "}
-        </a>{" "}
-        opt-out signal on your browser.
+        We will honor your opt-out preferences if you enact the 
+        <a href="https://globalprivacycontrol.org/" className="privacy-link">Global Privacy Control (GPC)</a> opt-out signal on your browser.
       </p>
       <p className="privacy content">
         Under certain US state data protection laws, you can designate an
         authorized agent to make a request on your behalf. We may deny a request
         from an authorized agent that does not submit proof that they have been
         validly authorized to act on your behalf in accordance with applicable
-        laws.{" "}
+        laws.
       </p>
 
       <h2 className="privacy-subheading">Request Verification</h2>
@@ -789,11 +659,10 @@ const PrivacyPolicyPage = () => {
         third parties with which we shared personal information in the
         immediately preceding calendar year. If you are a California resident
         and would like to make such a request, please submit your request in
-        writing to us by using the contact details provided in the section{" "}
+        writing to us by using the contact details provided in the section 
         <a href="#contact" className="privacy-link">
-          {" "}
           "HOW CAN YOU CONTACT US ABOUT THIS NOTICE?"
-        </a>
+        </a>.
       </p>
 
       {/* Section 10 */}
@@ -819,11 +688,10 @@ const PrivacyPolicyPage = () => {
         11. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?
       </h2>
       <p className="privacy-content">
-        If you have questions or comments about this notice, you may email us at{" "}
+        If you have questions or comments about this notice, you may email us at 
         <a href="/contact-us" className="privacy-link">
           Contact Form
-        </a>{" "}
-        or contact us by post at:
+        </a> or contact us by post at:
       </p>
       <p className="privacy-content">
         Advanced Technologies Academy
@@ -842,11 +710,10 @@ const PrivacyPolicyPage = () => {
         may have the right to request access to the personal information we
         collect from you, details about how we have processed it, correct
         inaccuracies, or delete your personal information. To request to review,
-        update, or delete your personal information, please visit:{" "}
+        update, or delete your personal information, please visit: 
         <a href="/" className="privacy-link">
           Diplomat
-        </a>
-        .
+        </a>.
       </p>
     </div>
   );
