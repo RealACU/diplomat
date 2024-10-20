@@ -13,14 +13,6 @@ const MyTournamentsPage = async () => {
 
   return (
     <div className="flex flex-col gap-4">
-      {(user?.publicMetadata.role as string) === "admin" && (
-        <>
-          <h1 className="text-xl font-semibold">Tournaments I've created</h1>
-          <Button>
-            <Link href={``}>Placeholder</Link>
-          </Button>
-        </>
-      )}
       <h2 className="text-xl font-semibold">Tournaments where I'm a chair</h2>
       {chairTourneys &&
         chairTourneys.map(async (cTourneyId) => {
@@ -29,7 +21,7 @@ const MyTournamentsPage = async () => {
           if (!tourneyInfo) return null;
 
           return (
-            <Button>
+            <Button key={cTourneyId}>
               <Link href={`/my-tournaments/${cTourneyId}`}>
                 {tourneyInfo.name}
               </Link>
@@ -46,7 +38,7 @@ const MyTournamentsPage = async () => {
           if (!tourneyInfo) return null;
 
           return (
-            <Button>
+            <Button key={dTourneyId}>
               <Link href={`/my-tournaments/${dTourneyId}`}>
                 {tourneyInfo.name}
               </Link>
