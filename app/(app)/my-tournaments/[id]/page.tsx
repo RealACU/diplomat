@@ -1,8 +1,7 @@
 import { db } from "@/lib/db";
 import TabsComponent from "@/components/ui/tabs";
 import { currentUser } from "@clerk/nextjs/server";
-import CommitteeSignUpList from "@/components/CommitteeSignUp";
-import Image from "next/image";
+import CommitteeSignUpList from "@/components/CommitteeSignUpList";
 import MunLogoSVG from "@/components/MunLogoSVG";
 
 const tourneyPage = async ({ params }: { params: { id: string } }) => {
@@ -34,7 +33,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
       title: "Invitation",
       color: tourney.primaryColorHex,
       content: (
-        <div 
+        <div
           className="relative w-full h-[800px] sm:h-[700px] py-4 sm:py-8 px-4 sm:px-6 text-slate-800 z-20"
           style={{
             background: `
@@ -122,7 +121,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
       title: "Committees",
       color: tourney.primaryColorHex,
       content: (
-        <div 
+        <div
           className="relative w-full h-[700px] py-8 px-6 text-slate-800 z-20"
           style={{
             background: `
@@ -139,6 +138,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
               </div>
               <div className="w-full h-[465px] p-8">
                 <CommitteeSignUpList
+                  // @ts-ignore
                   userId={user?.id}
                   userDTourneys={user?.publicMetadata.dTourneys as string[]}
                   committees={committees}
@@ -160,7 +160,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
       title: "Register",
       color: tourney.primaryColorHex,
       content: (
-        <div 
+        <div
           className="relative w-full h-[700px] py-8 px-6 text-slate-800 z-20"
           style={{
             background: `
@@ -200,11 +200,11 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
           className="absolute mt-6 ml-8 opacity-60"
           style={{ color: secondaryColorHex }}
           width="315"
-          height="315" 
+          height="315"
         />
 
         <div className="absolute py-8 px-12 mt-6 ml-40 filter blur-2xl">
-          <div className="h-36 w-48 bg-slate-200"/>
+          <div className="h-36 w-48 bg-slate-200" />
         </div>
 
         <div className="w-full flex flex-col z-20 pb-[80px] ml-64 text-navy-100 space-y-6 justify-center">
@@ -227,7 +227,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
       </div>
 
       <div className="relative z-30">
-        <TabsComponent items={items}/>
+        <TabsComponent items={items} />
       </div>
     </div>
   );

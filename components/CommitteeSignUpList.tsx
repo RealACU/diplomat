@@ -1,6 +1,6 @@
 import { Committee } from "@prisma/client";
-import CommitteeSignUp from "@/components/CommitteeSignUp";
 import UploadButton from "./UploadButton";
+import CommitteeSignUp from "./CommitteeSignUp";
 
 const CommitteeSignUpList = ({
   userId,
@@ -30,16 +30,20 @@ const CommitteeSignUpList = ({
     );
   }
 
-  if (userId && committees.length > 0) {
-    return committees.map((committee) => (
-      <CommitteeSignUp
-        key={committee.name}
-        tourneyId={tourneyId}
-        committeeId={committee.id}
-        delegateId={userId}
-        committeeName={committee.name}
-      />
-    ));
+  if (userId && committees) {
+    return (
+      <div className="flex flex-col gap-4">
+        {committees.map((committee, i) => (
+          <CommitteeSignUp
+            key={i}
+            tourneyId={tourneyId}
+            committeeId={committee.id}
+            delegateId={userId}
+            committeeName={committee.name}
+          />
+        ))}
+      </div>
+    );
   }
 
   return <p>No committees (yet!)</p>;

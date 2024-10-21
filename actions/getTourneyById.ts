@@ -7,7 +7,7 @@ export default async function getTourneyById(tourneyId: string) {
     console.error("No tourney ID");
     return;
   }
-
+  
   const tourney = await db.tourney.findUnique({
     where: {
       id: tourneyId,
