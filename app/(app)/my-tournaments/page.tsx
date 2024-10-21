@@ -20,7 +20,7 @@ const MyTournamentsPage = async () => {
           className="relative w-full h-[800px] sm:h-[700px] px-4 sm:px-6 py-4 text-slate-800 z-20 bg-periwinkle-100 bg-opacity-75"
         >
           <SubTabsComponent 
-            title="Tournament Results"
+            title="Past Tournaments"
             subTabItems={[
               { 
                 title: "Tournaments I completed in", 
@@ -309,8 +309,8 @@ const MyTournamentsPage = async () => {
                         <ul className="bg-slate-300 px-4 py-1 font-bold text-md flex overflow-clip">
                             <div className="w-[60%] break-words pr-8">Name</div>
                             <div className="w-[25%] break-words flex">
-                                <p className="w-5/6">City</p>
-                                <p className="w-1/6">State</p>
+                              <p className="w-5/6">City</p>
+                              <p className="w-1/6">State</p>
                             </div>
                             <div className="ml-auto text-right w-[15%]">Start Date</div>
                         </ul>
