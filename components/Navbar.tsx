@@ -56,7 +56,7 @@ const Navbar = async () => {
               asChild
               className="text-[16px] bg-periwinkle-100 -mx-1 py-2 px-6 rounded-md hover:bg-periwinkle-200 transition-all hover:scale-105 duration-100 flex-shrink-0 font-semibold hidden sm:flex"
             >
-              <Link href="my-tournaments">
+              <Link href="/my-tournaments">
                 <Eye className="mr-1 px-0.5 -ml-2" />
                 My Tournaments
               </Link>
