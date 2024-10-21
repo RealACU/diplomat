@@ -1,34 +1,59 @@
 "use client";
 import { useState } from "react";
 import getTourneysByName from "@/actions/getTourneysByName";
+import { Search } from "lucide-react";
 
-const SearchInput: React.FC<{ onFetch: (data: any[]) => void } & React.InputHTMLAttributes<HTMLInputElement>> = ({
+const SearchInput: React.FC<{ onFetch: (data: any[]) => void; fetchAll: () => void } & React.InputHTMLAttributes<HTMLInputElement>> = ({
     onFetch,
+    fetchAll,
     className,
+    onChange,
   }) => {
     const [input, setInput] = useState("");
   
-
-    const handleBlur = async (e: React.FocusEvent<HTMLInputElement>) => {
-        if (!e.target.value){
-            return;
+    const handleSearch = async () => {
+        if (input.trim()) {
+            const fetchedTourneys = await getTourneysByName(input);
+            onFetch(fetchedTourneys);
+        } else {
+            fetchAll();
         }
-        const fetchedTourneys = (await getTourneysByName(e.target.value));
-        onFetch(fetchedTourneys);
-        
+    };
+
+    const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter" && input) {
+          e.preventDefault();
+          const fetchedTourneys = await getTourneysByName(input);
+          onFetch(fetchedTourneys);
+        }  
     }
+
+    const handleBlur = () => {
+        if (!input.trim()) {
+            fetchAll();
+        }
+    };
     
     return(
-        <div className="relative w-full">
+        <div className="relative w-full flex flex-row">
+            <button onClick={handleSearch} >
+                <Search className="mx-4"/>
+            </button>
             <input 
+            value={input}
+            onChange={(e) => {
+                setInput(e.target.value);
+                onChange && onChange(e);
+            }}
+            onKeyDown={handleKeyDown}
             onBlur={handleBlur}
             type="text"
             id="search-bar"
-            placeholder="Search for a tournament..."
+            placeholder="Search..."
             className={`w-full ${className}`}
             />
         </div>
-    )
+    );
 }
 
 export default SearchInput;

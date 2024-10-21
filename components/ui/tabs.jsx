@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
+import { ChevronLeft } from 'lucide-react';
 
-const TabsComponent = ({ items }) => {
+const TabsComponent = ({ items, marginTop = '-mt-[260px]' }) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const firstBtnRef = useRef();
 
@@ -11,32 +12,33 @@ const TabsComponent = ({ items }) => {
   },[]);
 
   return (
-    <div className="-mt-12">
-      <div className="w-auto h-[60px] flex sm:px-6 px-4 text-sm sm:text-lg font-semibold text-white gap-4 sm:gap-6 absolute">
+    <div className="-mt-16">
+      <div className={`w-auto h-auto flex flex-col ${marginTop} sm:px-12 px-6 text-2xl font-semibold text-navy-100 gap-6 absolute right-0`}>
         {items.map((item, index) => (
-          <button 
-            ref={index === 0 ? firstBtnRef : null}
-            key={index}
-            onClick={() => setSelectedTab(index)}
-            style={{ 
-              backgroundColor: selectedTab === index ? item.color : `${item.color}80`,
-              color: selectedTab === index ? 'white' : 'rgba(255, 255, 255, 0.5)', 
-            }}
-            className="w-auto h-[50px] sm:h-[60px] -mt-10 sm:-mt-12 px-4 sm:px-6 rounded-md flex items-center justify-center pb-[12px] duration-300 hover:scale-105 z-10"
-          >
-            <span className="text-white" style={{ opacity: 1 }}>{item.title}</span>
-          </button>
+          <div key={index} className="flex items-center justify-end">
+            <button 
+              ref={index === 0 ? firstBtnRef : null}
+              key={index}
+              onClick={() => setSelectedTab(index)}
+              className={`w-auto h-auto rounded-md flex items-center justify-center transition-all duration-300 hover:scale-105 z-10 focus:outline-none outline-none hover:outline-none mr-4 hover:mr-8 group ${selectedTab === index ? 'font-bold mr-8' : ''}`}
+            >
+              <span className="text-navy-100 flex justify-center items-center" style={{ opacity: 1 }}>
+                {item.title}
+              </span>
+              <ChevronLeft className={`transition-transform duration-300 transform ml-2 ${selectedTab === index ? 'rotate-180' : ''}`} />
+            </button>
+          </div>
         ))}
       </div>
       <div>
         {items.map((item, index) => (
-          <div className={`${selectedTab === index ? "" : "hidden"}`}>
+          <div className={`${selectedTab === index ? "" : "hidden"}`} key={index}>
             {item.content}
           </div>
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default TabsComponent

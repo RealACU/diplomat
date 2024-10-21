@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import signUpDelegate from "@/actions/signUpDelegate";
 import { currentUser } from "@clerk/nextjs/server";
 import CommitteeSignUp from "@/components/CommitteeSignUp";
-
+import Image from "next/image";
+import MunLogoSVG from "@/components/MunLogoSVG";
 
 const tourneyPage = async ({ params }: { params: { id: string } }) => {
   const tourney = await db.tourney.findUnique({
@@ -28,7 +29,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
       color: tourney.primaryColorHex,
       content: (
         <div 
-          className="relative w-full h-[800px] sm:h-[600px] py-4 sm:py-8 px-4 sm:px-6 text-slate-800 z-20"
+          className="relative w-full h-[800px] sm:h-[700px] py-4 sm:py-8 px-4 sm:px-6 text-slate-800 z-20"
           style={{
             background: `
               linear-gradient(130deg, ${tourney.primaryColorHex} 5%, ${tourney.secondaryColorHex} 70%)
@@ -111,7 +112,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
       color: tourney.primaryColorHex,
       content: (
         <div 
-          className="relative w-full h-[600px] py-8 px-6 text-slate-800 z-20"
+          className="relative w-full h-[700px] py-8 px-6 text-slate-800 z-20"
           style={{
             background: `
               linear-gradient(80deg, ${tourney.secondaryColorHex} 0%, transparent 15%),
@@ -158,7 +159,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
       color: tourney.primaryColorHex,
       content: (
         <div 
-          className="relative w-full h-[600px] py-8 px-6 text-slate-800 z-20"
+          className="relative w-full h-[700px] py-8 px-6 text-slate-800 z-20"
           style={{
             background: `
               linear-gradient(70deg, ${tourney.secondaryColorHex} 0%, transparent 30%),
@@ -190,23 +191,33 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
 
   return (
     <div className="relative">
-      <div className="w-full h-[260px] flex">
-        <div className="w-full h-[260px] bg-docblue-200 z-10 absolute bg-opacity-50 backdrop-filter backdrop-blur-lg" />
-        <div className="bg-frontpage w-full h-[260px] bg-top-3 bg-no-repeat bg-cover absolute z-0" />
+      <div className="w-full h-[430px] flex">
+        <div className="w-full h-[430px] absolute z-0" />
 
-        <div className="w-full grid grid-cols-2 z-20 pb-[80px] lg:mx-16 mx-8 text-white mt-8 sm:mt-0 sm:items-center">
-          <h1 className="lg:text-7xl md:text-6xl text-5xl font-medium break-words">
+        <MunLogoSVG
+          className="absolute mt-6 ml-8 opacity-60"
+          style={{ color: secondaryColorHex }}
+          width="315"
+          height="315" 
+        />
+
+        <div className="absolute py-8 px-12 mt-6 ml-40 filter blur-2xl">
+          <div className="h-36 w-48 bg-slate-200"/>
+        </div>
+
+        <div className="w-full flex flex-col z-20 pb-[80px] ml-64 text-navy-100 space-y-6 justify-center">
+          <h1 className="sm:text-8xl text-5xl font-semibold break-words">
             {tourney.name}
           </h1>
-          <div className="flex-col flex gap-y-2">
-            <h2 className="hidden lg:flex justify-end text-2xl">
+          <div className="flex-col flex gap-y-2 ml-2 font-semibold">
+            <h2 className="flex text-2xl">
               {startDate.toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
                 day: "numeric",
               })}
             </h2>
-            <h2 className="hidden lg:flex justify-end text-2xl break-words">
+            <h2 className="flex text-2xl break-words">
               {tourney.city}, {tourney.state}
             </h2>
           </div>
@@ -214,7 +225,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
       </div>
 
       <div className="relative z-30">
-        <TabsComponent items={items} />
+        <TabsComponent items={items}/>
       </div>
     </div>
   );

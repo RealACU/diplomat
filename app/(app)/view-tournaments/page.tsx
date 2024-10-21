@@ -7,13 +7,17 @@ import SearchInput from "@/components/SearchInput";
 import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import getAllTourneys from "@/actions/getAllTourneys";
+import getTourneysByName from "@/actions/getTourneysByName";
 
 export default function Home() {
   const [tourneys, setTourneys] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);  
   
   const fetchTourneys = async () => {
+    setLoading(true);
     const allTourneys = await getAllTourneys();
     setTourneys(allTourneys);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -21,52 +25,52 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-gradient-to-bl from-docblue-100 to-[#d6975f] h-full relative px-6 py-6 text-slate-800">
-        <div className="flex gap-6">
-            <div className="bg-slate-50 w-4/5 rounded-lg">
-                <div className="flex flex-col w-full">
+    <div className="h-full relative px-6 py-6 text-slate-800">
+        <div className="flex flex-col gap-6 items-center">
+            <h1 className="font-bold text-4xl text-navy-100 mt-12 mb-2">
+                Search for a tournament
+            </h1>
+            <div className="flex flex-col w-[800px] mb-10">
                 <div className="bg-slate-50 w-full h-14 rounded-lg filter drop-shadow-md flex items-center pr-4">
-                    <button>
-                    <Search className="mx-4"/>
-                    </button>
                     <SearchInput
-                    className="text-xl font-medium h-full py-1 w-full placeholder-slate-400"
-                    onFetch={setTourneys}
+                        className="text-xl font-medium h-full py-1 w-full placeholder-slate-400 bg-slate-50"
+                        onFetch={setTourneys}
+                        fetchAll={fetchTourneys}  
                     />
                 </div>
-                </div>
-                <div className="w-full h-[465px] overflow-auto bg-white rounded-md shadow-md mt-2">
-                    <ul>
-                        <div className="mx-4 px-4 my-1 rounded-md font-bold text-md flex overflow-clip">
-                            <div className="w-3/5 break-words pr-8">Name</div>
-                            <div className="w-1/5 break-words">City, State</div>
-                            <div className="ml-auto text-right">Start Date</div>
+            </div>
+            <div className="bg-slate-50 w-full rounded-lg">
+                <div className="w-full min-h-[465px] bg-white rounded-md shadow-md">
+                    <ul className="bg-slate-350 px-4 py-1 font-bold text-md flex overflow-clip">
+                        <div className="w-[60%] break-words pr-8">Name</div>
+                        <div className="w-[25%] break-words flex">
+                            <p className="w-5/6">City</p>
+                            <p className="w-1/6">State</p>
                         </div>
+                        <div className="ml-auto text-right w-[15%]">Start Date</div>
                     </ul>
                     <ul>
-                        {tourneys.length > 0 ? (
-                        tourneys.map(tourney => (
-                            <li key={tourney.id}>
-                            <Link href={`/my-tournaments/${tourney.id}`}>
-                                <div className="bg-slate-200 mx-4 px-4 py-3 my-3 rounded-md hover:bg-slate-300 duration-100 font-bold text-md flex overflow-clip">
-                                    <div className="w-3/5 break-words pr-8">{tourney.name}</div>
-                                    <div className="w-1/5 break-words">{tourney.city}, {tourney.state}</div>
-                                    <div className="ml-auto text-right">{tourney.startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
-                                </div>
-                            </Link>
-                            </li>
-                        ))
-                        ) : (
+                        {loading ? (
                         <li className="py-2 flex justify-center items-center">Fetching tournaments...</li>
+                        ) : tourneys.length > 0 ? (
+                            tourneys.map(tourney => (
+                                <li key={tourney.id} className="odd:bg-slate-100 even:bg-slate-200 odd:hover:bg-periwinkle-50 even:hover:bg-periwinkle-100 transition-all duration-200">
+                                    <Link href={`/my-tournaments/${tourney.id}`}>
+                                        <div className="px-4 py-3 rounded-md font-semibold text-md flex overflow-clip">
+                                            <div className="w-[60%] break-words pr-8">{tourney.name}</div>
+                                            <div className="w-[25%] break-words flex">
+                                                <p className="w-5/6">{tourney.city}</p>
+                                                <p className="w-1/6">{tourney.state}</p>
+                                            </div>
+                                            <div className="ml-auto text-right w-[15%]">{tourney.startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                                        </div>
+                                    </Link>
+                                </li>
+                            ))
+                        ) : (
+                        <li className="py-2 flex justify-center items-center">No tournaments found.</li>
                         )}
                     </ul>
-                </div>
-            </div>
-            <div className="bg-slate-300 w-1/5 rounded-lg">
-                <div className="bg-slate-300 w-full h-14 rounded-lg filter drop-shadow-md flex items-center">
-                <p className="text-xl font-semibold mx-8">
-                    Filter by
-                </p>
                 </div>
             </div>
         </div>

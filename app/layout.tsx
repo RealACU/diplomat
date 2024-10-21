@@ -25,11 +25,12 @@ export default function RootLayout({
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
     >
       <html lang="en">
-        <body className={inter.className}>
+        <body className={"bg-slate-200 min-h-screen h-auto flex flex-col ${inter.className}"}>
           <Navbar />
-          {children}
+          <main className="flex-grow">
+            {children}
+          </main>
           <Footer />
-          <div className="p-16"></div>
         </body>
       </html>
     </ClerkProvider>

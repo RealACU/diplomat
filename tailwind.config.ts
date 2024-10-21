@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss";
+import plugin from 'tailwindcss/plugin';
 
+/** @type {import('tailwindcss').Config} */
 const config = {
   darkMode: ["class"],
   content: [
@@ -21,20 +23,28 @@ const config = {
     extend: {
       backgroundImage: {
         frontpage: "url('/background_image.jpg')",
+        globe: "url('/globe.png')",
       },
       backgroundPosition: {
         "top-3": "center top -3rem",
       },
       colors: {
-        'docblue': {
-          100: "#7FACCC",
-          200: "#41769E",
+        'periwinkle': {
+          50: "#A6B8D7",
+          100: "#92A8CE",
+          150: "#8099C3",
+          200: "#6E89B8",
+          300: "#556F9D",
+          400: "#355981",
         },
-        'docorange': {
-          100: "#E9E4D0",
-          200: "#E9E4D0",
+        'navy': {
+          100: "#154364",
+          200: "#0A3351",
         },
-
+        'slate': {
+          350: '#B0BCCD',
+        },
+        
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -100,7 +110,9 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+  ],
 } satisfies Config;
 
 export default config;

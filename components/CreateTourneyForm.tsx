@@ -79,8 +79,8 @@ const CreateTourneyForm = ({
   const [chairPreviews, setChairPreviews] = useState<User[]>();
 
   // Default colors
-  const DEFAULT_PRIMARY = "#284D6A";
-  const DEFAULT_SECONDARY = "#7FACCC";
+  const DEFAULT_PRIMARY = "#5370A2";
+  const DEFAULT_SECONDARY = "#92A8CE";
   // Dialog state for setting colors
   const [primaryColor, setPrimaryColor] = useState<string>(DEFAULT_PRIMARY);
   const [secondaryColor, setSecondaryColor] = useState<string>(DEFAULT_SECONDARY);
@@ -442,15 +442,11 @@ const CreateTourneyForm = ({
             {/*Preview of tourney page, as it's being created*/}
             <div className="flex flex-col">
               <div className="w-full aspect-[16/9] flex flex-col rounded-md overflow-hidden">
-                <div className="relative h-2/6 grid grid-cols-2 bg-frontpage overflow-hidden bg-cover">
-                  <div
-                    className="absolute w-full h-full z-10 opacity-25"
-                    style={{ backgroundColor: secondaryColor }}
-                  />
-                  <div className="flex items-center p-8 text-white z-20 text-2xl">
+                <div className="relative h-2/6 grid grid-cols-2">
+                  <div className="flex items-center p-8 text-navy-100 z-20 text-2xl font-bold">
                     {form.watch("name") ? form.watch("name") : "(Name)"}
                   </div>
-                  <div className="flex flex-col justify-end text-right p-8 text-white z-20 text-md">
+                  <div className="flex flex-col justify-end text-right p-8 text-navy-100 z-20 text-md">
                     <div>
                       {form.watch("startDate")
                         ? new Date(form.watch("startDate")).toLocaleDateString(
@@ -638,7 +634,7 @@ const CreateTourneyForm = ({
 
             <Dialog>
               <DialogTrigger asChild>
-                <Button className="w-full bg-slate-400 hover:bg-slate-500">
+                <Button className="text-slate-800 w-full bg-slate-200 hover:bg-slate-300">
                   <Plus className="h-4 w-4" />
                   Add Committee
                 </Button>
@@ -696,7 +692,7 @@ const CreateTourneyForm = ({
           <Button
             disabled={isPending}
             type="submit"
-            className="text-lg w-64 h-12 bg-slate-500 hover:bg-slate-600"
+            className="text-lg w-64 h-12 bg-periwinkle-100 hover:bg-periwinkle-200"
           >
             Create Tournament
           </Button>
