@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import SearchInput from "@/components/SearchInput";
 import { useState, useRef, useEffect } from "react";
 import { Scroll, Search, ChevronRight } from "lucide-react";

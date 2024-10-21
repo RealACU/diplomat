@@ -5,7 +5,6 @@ import CommitteeSignUpList from "@/components/CommitteeSignUp";
 import Image from "next/image";
 import MunLogoSVG from "@/components/MunLogoSVG";
 
-
 const tourneyPage = async ({ params }: { params: { id: string } }) => {
   const tourney = await db.tourney.findUnique({
     where: { id: params.id },
@@ -51,7 +50,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                 </p>
               </div>
               <div className="w-full h-[300px] sm:h-[465px]">
-                <p className="text-sm sm:text-md px-4 py-3 sm:px-6 sm:py-4 whitespace-pre-wrap">
+                <p className="text-sm sm:text-base px-4 py-3 sm:px-6 sm:py-4 whitespace-pre-wrap">
                   {tourney.description}
                 </p>
               </div>
@@ -62,7 +61,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                   Tournament Information
                 </p>
               </div>
-              <div className="bg-slate-300 mx-4 px-4 py-3 my-3 rounded-md font-medium text-md flex overflow-clip break-words">
+              <div className="bg-slate-300 mx-4 px-4 py-3 my-3 rounded-md font-medium text-base flex overflow-clip break-words">
                 <p>
                   {new Date(tourney.startDate).toDateString() ===
                   new Date(tourney.endDate).toDateString()
@@ -90,11 +89,11 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                       )}`}
                 </p>
               </div>
-              <div className="bg-slate-300 mx-4 px-4 py-3 my-3 rounded-md font-medium text-md flex overflow-clip break-words">
+              <div className="bg-slate-300 mx-4 px-4 py-3 my-3 rounded-md font-medium text-base flex overflow-clip break-words">
                 <p>Location</p>
                 <p className="ml-auto text-right">{tourney.school}</p>
               </div>
-              <div className="bg-slate-300 mx-4 px-4 py-3 my-3 rounded-md font-medium text-md flex overflow-clip break-words">
+              <div className="bg-slate-300 mx-4 px-4 py-3 my-3 rounded-md font-medium text-base flex overflow-clip break-words">
                 <p>Committees</p>
                 <div className="ml-auto text-right">
                   {committees.length > 0 ? (
@@ -106,7 +105,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                   )}
                 </div>
               </div>
-              <div className="bg-slate-300 mx-4 my-3 rounded-md font-medium text-md flex overflow-clip break-words">
+              <div className="bg-slate-300 mx-4 my-3 rounded-md font-medium text-base flex overflow-clip break-words">
                 <div className="h-80 w-full">
                   <div className="px-4 py-3 h-12 w-full flex flex-row relative shadow-md rounded-md">
                     <p className="relative z-10">Delegate resources</p>
@@ -177,7 +176,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                 <p className="text-xl font-semibold">Register</p>
               </div>
               <div className="w-full h-[465px]">
-                <p className="text-md px-6 py-4">hello world!</p>
+                <p className="text-base px-6 py-4">hello world!</p>
               </div>
             </div>
 

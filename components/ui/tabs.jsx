@@ -41,4 +41,4 @@ const TabsComponent = ({ items, marginTop = '-mt-[260px]' }) => {
   );
 }
 
-export default TabsComponent
+export default TabsComponent;

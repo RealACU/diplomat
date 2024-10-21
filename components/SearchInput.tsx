@@ -1,8 +1,10 @@
 "use client";
+
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import getTourneysByName from "@/actions/getTourneysByName";
 import { Search } from "lucide-react";
+import { useState } from "react";
 
 const SearchInput: React.FC<{ onFetch: (data: any[]) => void; fetchAll: () => void } & React.InputHTMLAttributes<HTMLInputElement>> = ({
     onFetch,
