@@ -6,9 +6,20 @@ const nextConfig = {
         protocol: "https",
         hostname: "img.clerk.com",
         port: "",
-        pathname: "/*",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+        pathname: "/**",
       },
     ],
+  },
+  webpack: (config) => {
+    config.resolve.alias.canvas = false;
+
+    return config;
   },
 };
 

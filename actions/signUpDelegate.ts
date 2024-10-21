@@ -20,9 +20,11 @@ export default async function signUpDelegate(
     },
   });
 
+  const user = await clerkClient.users.getUser(delegateId);
+
   await clerkClient.users.updateUserMetadata(delegateId, {
     publicMetadata: {
-      dTourneys: tourneyId,
+      dTourneys: [user.publicMetadata.dTourneys as string[], tourneyId],
     },
   });
 

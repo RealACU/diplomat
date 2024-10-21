@@ -1,11 +1,10 @@
 import { db } from "@/lib/db";
 import TabsComponent from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import signUpDelegate from "@/actions/signUpDelegate";
 import { currentUser } from "@clerk/nextjs/server";
-import CommitteeSignUp from "@/components/CommitteeSignUp";
+import CommitteeSignUpList from "@/components/CommitteeSignUp";
 import Image from "next/image";
 import MunLogoSVG from "@/components/MunLogoSVG";
+
 
 const tourneyPage = async ({ params }: { params: { id: string } }) => {
   const tourney = await db.tourney.findUnique({
@@ -21,7 +20,15 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
 
   const user = await currentUser();
 
-  const { name, description, startDate, endDate, committees, primaryColorHex, secondaryColorHex } = tourney;
+  const {
+    name,
+    description,
+    startDate,
+    endDate,
+    committees,
+    primaryColorHex,
+    secondaryColorHex,
+  } = tourney;
 
   const items = [
     {
@@ -33,13 +40,15 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
           style={{
             background: `
               linear-gradient(130deg, ${tourney.primaryColorHex} 5%, ${tourney.secondaryColorHex} 70%)
-            `
+            `,
           }}
         >
           <div className="flex-col sm:flex-row sm:flex gap-4 sm:gap-6">
             <div className="bg-slate-300 bg-opacity-75 w-full sm:w-2/3 rounded-lg filter drop-shadow-lg">
               <div className="w-full h-10 sm:h-14 rounded-lg flex shadow-md items-center justify-center">
-                <p className="text-lg sm:text-xl font-semibold mx-2 sm:mx-8">Invitation Message</p>
+                <p className="text-lg sm:text-xl font-semibold mx-2 sm:mx-8">
+                  Invitation Message
+                </p>
               </div>
               <div className="w-full h-[300px] sm:h-[465px]">
                 <p className="text-sm sm:text-md px-4 py-3 sm:px-6 sm:py-4 whitespace-pre-wrap">
@@ -68,11 +77,14 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                         month: "long",
                         day: "numeric",
                       })
-                    : `${new Date(tourney.startDate).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })} - ${new Date(tourney.endDate).toLocaleDateString(
+                    : `${new Date(tourney.startDate).toLocaleDateString(
+                        "en-US",
+                        {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        }
+                      )} - ${new Date(tourney.endDate).toLocaleDateString(
                         "en-US",
                         { year: "numeric", month: "long", day: "numeric" }
                       )}`}
@@ -118,7 +130,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
               linear-gradient(80deg, ${tourney.secondaryColorHex} 0%, transparent 15%),
               linear-gradient(300deg, ${tourney.secondaryColorHex} 20%, transparent 85%),
               linear-gradient(180deg, ${tourney.primaryColorHex}, ${tourney.primaryColorHex})
-            `
+            `,
           }}
         >
           <div className="flex gap-6">
@@ -127,21 +139,12 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                 <p className="text-xl font-semibold">Committees</p>
               </div>
               <div className="w-full h-[465px] p-8">
-                {user && committees.length > 0 ? (
-                  committees.map((committee) => (
-                    <CommitteeSignUp
-                      tourneyId={params.id}
-                      committeeId={committee.id}
-                      committeeName={committee.name}
-                      delegateId={user.id}
-                      signedUp={(
-                        user.publicMetadata.dTourneys as string[]
-                      ).includes(params.id)}
-                    />
-                  ))
-                ) : (
-                  <p>No committees (yet!)</p>
-                )}
+                <CommitteeSignUpList
+                  userId={user?.id}
+                  userDTourneys={user?.publicMetadata.dTourneys as string[]}
+                  committees={committees}
+                  tourneyId={params.id}
+                />
               </div>
             </div>
 
@@ -165,7 +168,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
               linear-gradient(70deg, ${tourney.secondaryColorHex} 0%, transparent 30%),
               linear-gradient(310deg, ${tourney.secondaryColorHex} 20%, transparent 70%),
               linear-gradient(180deg, ${tourney.primaryColorHex}, ${tourney.primaryColorHex})
-            `
+            `,
           }}
         >
           <div className="flex gap-6">

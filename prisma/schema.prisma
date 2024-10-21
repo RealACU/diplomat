@@ -26,15 +26,16 @@ model Tourney {
 }
 
 model Committee {
-  id              Int              @id @default(autoincrement())
-  name            String
-  roomNumber      String
-  bgGuideLink     String
-  chairIds        String[]
-  delegateIds     String[]
-  tourneyId       String?
-  Tourney         Tourney?         @relation(fields: [tourneyId], references: [id], onDelete: Cascade)
-  delegateResults DelegateResult[]
+  id                 Int              @id @default(autoincrement())
+  name               String
+  roomNumber         String
+  bgGuideLink        String
+  chairIds           String[]
+  delegateIds        String[]
+  positionPaperLinks String[]
+  tourneyId          String?
+  Tourney            Tourney?         @relation(fields: [tourneyId], references: [id], onDelete: Cascade)
+  delegateResults    DelegateResult[]
 }
 
 model DelegateResult {

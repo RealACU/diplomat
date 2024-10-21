@@ -1,40 +1,71 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import signUpDelegate from "@/actions/signUpDelegate";
-import { useState } from "react";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
-interface CommitteeSignUpProps {
-  tourneyId: string;
-  committeeId: number;
-  committeeName: string;
-  delegateId: string;
-  signedUp: boolean;
-}
-
-const CommitteeSignUp: React.FC<CommitteeSignUpProps> = ({
+const CommitteeSignUp = ({
   tourneyId,
   committeeId,
-  committeeName,
   delegateId,
-  signedUp,
+  committeeName,
+}: {
+  tourneyId: string;
+  committeeId: number;
+  delegateId?: string;
+  committeeName: string;
 }) => {
-  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleSignUp = async () => {
-    setLoading(true);
-
-    await signUpDelegate(tourneyId, committeeId, delegateId).then((res) => {
-      if (res) {
-        setLoading(false);
-      }
-    });
+    if (delegateId) {
+      await signUpDelegate(tourneyId, committeeId, delegateId).then((res) => {
+        if(res){
+          router.refresh();
+        }
+      })
+    }
   };
 
   return (
-    <Button onClick={handleSignUp} key={committeeId} disabled={loading || signedUp}>
-      {loading ? "Signing up..." : signedUp ? `Signed up for ${committeeName}` : `Sign up for ${committeeName}`}
-    </Button>
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button className="text-xs lg:text-sm text-wrap hover:text-slate-300 transition-all duration-100">
+          Sign up for {committeeName}
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>
+            Are you sure you want to sign up for{" "}
+            <span className="font-extrabold">{committeeName}</span>?
+          </DialogTitle>
+        </DialogHeader>
+        <div>
+          <p>You cannot undo this action.</p>
+        </div>
+        <DialogFooter className="flex">
+          <DialogClose asChild>
+            <Button variant="destructive" onClick={handleSignUp}>
+              Yes
+            </Button>
+          </DialogClose>
+          <DialogClose asChild>
+            <Button>No</Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
 

@@ -20,7 +20,8 @@ const config = {
         "2xl": "1400px",
       },
     },
-    extend: {
+    extend: 
+    {
       backgroundImage: {
         frontpage: "url('/background_image.jpg')",
         globe: "url('/globe.png')",
@@ -108,7 +109,7 @@ const config = {
         "caret-blink": "caret-blink 1.25s ease-out infinite",
         'infinite-scroll': 'infinite-scroll 25s linear infinite',
       },
-    },
+    }, 
   },
   plugins: [
     require("tailwindcss-animate"),

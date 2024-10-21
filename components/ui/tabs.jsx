@@ -32,7 +32,7 @@ const TabsComponent = ({ items, marginTop = '-mt-[260px]' }) => {
       </div>
       <div>
         {items.map((item, index) => (
-          <div className={`${selectedTab === index ? "" : "hidden"}`} key={index}>
+          <div key={index} className={`${selectedTab === index ? "" : "hidden"}`}>
             {item.content}
           </div>
         ))}
