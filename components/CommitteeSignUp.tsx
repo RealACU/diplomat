@@ -29,10 +29,10 @@ const CommitteeSignUp = ({
   const handleSignUp = async () => {
     if (delegateId) {
       await signUpDelegate(tourneyId, committeeId, delegateId).then((res) => {
-        if(res){
+        if (res) {
           router.refresh();
         }
-      })
+      });
     }
   };
 

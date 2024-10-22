@@ -102,3 +102,214 @@ body,
   white-space: nowrap;
   animation: scroll-left 30s linear infinite; 
 }
+
+
+.privacy-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #595959;
+  line-height: 1.5;
+}
+
+
+.privacy-title {
+  font-size: 28px;
+  margin-bottom: 10px;
+  color: #000000;
+  font-weight: bold;
+}
+
+
+.privacy-updated {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+
+.privacy-intro {
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+
+.privacy-questions {
+  font-size: 15px;
+  margin-bottom: 20px;
+ 
+}
+
+
+.privacy-subheading {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: #000000;
+}
+
+
+.privacy-summary {
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+
+
+.privacy-toc-heading {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: #000000;
+}
+
+
+.privacy-toc {
+  list-style-type: decimal;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+
+.privacy-list {
+  list-style-type: square;
+  margin-left: 20px;
+  margin-bottom: 20px;
+ 
+}
+
+
+.privacy-link {
+  color: #003AFA;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+
+.privacy-link:hover {
+  text-decoration: underline;
+}
+
+
+.privacy-section-heading {
+  font-size: 22px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  color: #000000;
+  font-weight: bold;
+}
+
+
+.privacy-content {
+  font-size: 15px;
+  margin-bottom: 15px;
+ 
+}
+
+.privacy-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  color: #373737;
+}
+
+.privacy-table, .privacy-table th, .privacy-table td {
+  border: 1px solid black;
+}
+
+.privacy-table th, .privacy-table td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+
+.privacy-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.privacy-table td {
+  line-height: 1.5;
+}
+
+.privacy-table td:nth-child(3), .privacy-table th:nth-child(3) {
+  text-align: center;
+  width: 15%;
+}
+
+
+.terms-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #595959;
+  line-height: 1.5;
+}
+
+.terms-title {
+  font-size: 26px;
+  color: #000000;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.terms-updated {
+  font-size: 14px;
+  color: #595959;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.terms-content {
+  font-size: 15px;
+}
+
+.terms-heading {
+  font-size: 19px;
+  color: #000000;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.terms-subheading {
+  font-size: 17px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.terms-list {
+  list-style-type: square;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.terms-content p {
+  margin-bottom: 15px;
+}
+
+.terms-content a {
+  color: #3030f1;
+  text-decoration: none;
+}
+
+.terms-content a:hover {
+  text-decoration: underline;
+}
+
+.highlight {
+  animation: fadeBlink 1s ease-in-out 3;
+}
+
+@keyframes fadeBlink {
+  0% {
+    background-color: yellow;
+  }
+  50% {
+    background-color: transparent;
+  }
+  100% {
+    background-color: yellow;
+  }
+}

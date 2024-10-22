@@ -32,6 +32,7 @@ model Committee {
   bgGuideLink        String
   chairIds           String[]
   delegateIds        String[]
+  delegatesThatSent  String[]
   positionPaperLinks String[]
   tourneyId          String?
   Tourney            Tourney?         @relation(fields: [tourneyId], references: [id], onDelete: Cascade)

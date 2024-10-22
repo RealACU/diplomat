@@ -2,11 +2,10 @@
 
 import { db } from "@/lib/db";
 
-export default async function addPositionPaper(
+export default async function setBgGuide(
   paperLink: string,
   tourneyId: string,
-  committeeId: number,
-  delegateId: string
+  committeeId: number
 ) {
   const tourney = await db.committee.update({
     where: {
@@ -14,12 +13,7 @@ export default async function addPositionPaper(
       tourneyId: tourneyId,
     },
     data: {
-      positionPaperLinks: {
-        push: [paperLink],
-      },
-      delegatesThatSent: {
-        push: [delegateId],
-      },
+      bgGuideLink: paperLink,
     },
   });
 

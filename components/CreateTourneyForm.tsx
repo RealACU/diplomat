@@ -53,15 +53,7 @@ export type Committee = {
   chairs: User[];
 };
 
-const CreateTourneyForm = ({
-  creatorId,
-  preset,
-  committeeArray,
-}: {
-  creatorId: string;
-  preset?: z.infer<typeof TourneySchema>;
-  committeeArray?: Committee[];
-}) => {
+const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
   const router = useRouter();
 
   // Form state
@@ -71,9 +63,7 @@ const CreateTourneyForm = ({
   // Dialog state for adding committees
   const [name, setName] = useState<string>("");
   const [roomNumber, setRoomNumber] = useState<string>(""); // Some schools use letters
-  const [committees, setCommittees] = useState<Committee[]>(
-    committeeArray || []
-  );
+  const [committees, setCommittees] = useState<Committee[]>([]);
 
   // Dialog state for adding chairs
   const [chairPreviews, setChairPreviews] = useState<User[]>();
@@ -83,30 +73,31 @@ const CreateTourneyForm = ({
   const DEFAULT_SECONDARY = "#92A8CE";
   // Dialog state for setting colors
   const [primaryColor, setPrimaryColor] = useState<string>(DEFAULT_PRIMARY);
-  const [secondaryColor, setSecondaryColor] = useState<string>(DEFAULT_SECONDARY);
+  const [secondaryColor, setSecondaryColor] =
+    useState<string>(DEFAULT_SECONDARY);
   const [tempPrimary, setTempPrimary] = useState<string>(DEFAULT_PRIMARY);
   const [tempSecondary, setTempSecondary] = useState<string>(DEFAULT_SECONDARY);
 
   const form = useForm<z.infer<typeof TourneySchema>>({
     resolver: zodResolver(TourneySchema),
     defaultValues: {
-      name: preset?.name || "",
-      description: preset?.description || "",
-      school: preset?.school || "",
-      address: preset?.address || "",
-      city: preset?.city || "",
-      state: preset?.state || "",
-      zip: preset?.zip || "",
-      startDate: preset?.startDate || "",
-      endDate: preset?.endDate || "",
-      primaryColorHex: preset?.primaryColorHex || DEFAULT_PRIMARY,
-      secondaryColorHex: preset?.secondaryColorHex || DEFAULT_SECONDARY,
+      name: "",
+      description: "",
+      school: "",
+      address: "",
+      city: "",
+      state: "",
+      zip: "",
+      startDate: "",
+      endDate: "",
+      primaryColorHex: DEFAULT_PRIMARY,
+      secondaryColorHex: DEFAULT_SECONDARY,
     },
   });
-  
+
   const { setValue } = form;
 
-  const onSubmit = (values: z.infer<typeof TourneySchema>) => {  
+  const onSubmit = (values: z.infer<typeof TourneySchema>) => {
     startTransition(async () => {
       const startDate = new Date(values.startDate);
       const endDate = new Date(values.endDate);
@@ -337,7 +328,7 @@ const CreateTourneyForm = ({
           If the tournament does not last for more than a day, pick the same
           date for both the start and end date.
         </FormDescription>
-        
+
         <div className="grid sm:grid-cols-2 gap-4">
           <div className="bg-white w-full relative p-4 flex flex-col">
             <p className="text-center mb-4 font-semibold">

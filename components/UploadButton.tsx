@@ -2,67 +2,47 @@
 
 import { CldUploadWidget } from "next-cloudinary";
 import { ScrollText } from "lucide-react";
-import { useCallback, useState } from "react";
-import { Document, Page, pdfjs } from "react-pdf";
-import { useResizeObserver } from "@wojtekmaj/react-hooks";
-
-import type { PDFDocumentProxy } from "pdfjs-dist";
+import { useState } from "react";
 import { Button } from "./ui/button";
+import setBgGuide from "@/actions/setBgGuide";
+import addPositionPaper from "@/actions/addPositionPaper";
 
 // Cloudinary
 declare global {
   var cloudinary: any;
 }
-
 const cloudName = "dxsogumfq";
 const uploadPreset = "Default";
 
-// react-pdf config
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.mjs",
-  import.meta.url
-).toString();
-
-const options = {
-  cMapUrl: "/cmaps/",
-  standardFontDataUrl: "/standard_fonts/",
-};
-
-const resizeObserverOptions = {};
-
-const maxWidth = 800;
-
-const PaperUpload = () => {
-  // PDF URL state
-  const [paperLink, setPaperLink] = useState<any>();
-
-  // PDF display states
-  const [numPages, setNumPages] = useState<number>();
-  const [containerRef, setContainerRef] = useState<HTMLElement | null>(null);
-  const [containerWidth, setContainerWidth] = useState<number>();
-
-  const onResize = useCallback<ResizeObserverCallback>((entries) => {
-    const [entry] = entries;
-
-    if (entry) {
-      setContainerWidth(entry.contentRect.width);
-    }
-  }, []);
-
-  useResizeObserver(containerRef, resizeObserverOptions, onResize);
-
-  function onDocumentLoadSuccess({
-    numPages: nextNumPages,
-  }: PDFDocumentProxy): void {
-    setNumPages(nextNumPages);
-  }
+const UploadButton = ({
+  type,
+  tourneyId,
+  committeeId,
+  delegateId,
+}: {
+  type: string;
+  tourneyId: string;
+  committeeId: number;
+  delegateId: string;
+}) => {
+  // PDF state
+  const [paperLink, setPaperLink] = useState<string>("");
 
   return (
     <CldUploadWidget
       uploadPreset={uploadPreset}
-      onSuccess={(result, { widget }) => {
+      onSuccess={async (result, { widget }) => {
         // @ts-ignore
-        setPaperLink(result?.info?.secure_url);
+        const url = result?.info?.secure_url;
+
+        setPaperLink(url);
+
+        if (type === "bg-guide") {
+          setBgGuide(url, tourneyId, committeeId);
+        }
+        if (type === "position-paper") {
+          addPositionPaper(url, tourneyId, committeeId, delegateId);
+        }
       }}
       onQueuesEnd={(result, { widget }) => {
         widget.close();
@@ -75,38 +55,17 @@ const PaperUpload = () => {
       {({ open }) => {
         return (
           <>
-            <Button
-              variant="ghost"
-              onClick={() => open()}
-              className="relative h-auto cursor-pointer hover:opacity-70 transition border-dashed border-2 p-10 border-neutral-300 flex flex-col justify-center items-center gap-4 text-neutral-600"
-            >
-              <ScrollText size={50} />
-              <div className="font-semibold text-lg">{paperLink ? "Upload another paper" : "Click to upload"}</div>
-            </Button>
-            {paperLink && (
-              <div
-                ref={setContainerRef}
-                className="inset-0 w-full h-full"
+            {!paperLink && (
+              <Button
+                variant="ghost"
+                onClick={() => open()}
+                className="h-auto w-full cursor-pointer hover:opacity-70 transition border-dashed border-2 p-6 border-neutral-300 flex flex-col justify-center items-center gap-4 text-neutral-600"
               >
-                <Document
-                  file={paperLink}
-                  onLoadSuccess={onDocumentLoadSuccess}
-                  options={options}
-                >
-                  {Array.from(new Array(numPages), (_el, index) => (
-                    <Page
-                      key={`page_${index + 1}`}
-                      pageNumber={index + 1}
-                      width={
-                        containerWidth
-                          ? Math.min(containerWidth, maxWidth)
-                          : maxWidth
-                      }
-                    />
-                  ))}
-                </Document>
-              </div>
+                <ScrollText size={50} />
+                <div className="font-semibold text-lg">Click to upload</div>
+              </Button>
             )}
+            {paperLink && <p>Paper submitted!</p>}
           </>
         );
       }}
@@ -114,4 +73,4 @@ const PaperUpload = () => {
   );
 };
 
-export default PaperUpload;
+export default UploadButton;
