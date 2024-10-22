@@ -23,15 +23,11 @@ const UploadButton = ({
 }: {
   type: string;
   tourneyId: string;
-  committeeId: number | null;
+  committeeId: number;
   delegateId: string;
 }) => {
   // PDF state
   const [paperLink, setPaperLink] = useState<string>("");
-
-  if (!committeeId) {
-    return null;
-  }
 
   return (
     <CldUploadWidget

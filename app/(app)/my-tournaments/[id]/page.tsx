@@ -21,6 +21,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
   }
 
   const user = await currentUser();
+  console.log(user);
 
   const {
     name,
@@ -33,6 +34,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
   } = tourney;
 
   const isCreator = user?.id === tourney.creatorId;
+  console.log("isCreator", isCreator);
 
   const isAdmin = user?.publicMetadata.role === "admin";
 
@@ -141,8 +143,8 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                       <UploadButton
                         type="delegate-resources"
                         tourneyId={params.id}
-                        // @ts-ignore
-                        committeeId={myCommittee.id}
+                        // Zero is fine since the type is "delegate-resources"
+                        committeeId={0}
                         delegateId={user.id}
                       />
                     )}
