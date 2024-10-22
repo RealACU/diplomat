@@ -145,9 +145,10 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                         delegateId={user.id}
                       />
                     )}
-                    {delegateResources.map((delegateResource) => {
+                    {delegateResources.map((delegateResource, i) => {
                       return (
                         <Link
+                          key={i}
                           href={delegateResource.link}
                           download={delegateResource.name}
                         >
