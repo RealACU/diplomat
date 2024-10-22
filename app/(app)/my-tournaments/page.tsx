@@ -31,8 +31,9 @@ const MyTournamentsPage = async () => {
 
   const items = [
     {
-      title: "Edit Your Tournaments",
-      content: (
+      //COMMENTING THIS OUT FOR NOW BECAUSE IT RUINS THE UI. WILL ADD IT BACK LATER ONCE FINISHED, BUT FOR FIRST DEPLOYMENT ITS UGLY
+      //title: "Edit Your Tournaments",
+      /*content: (
         <div className="relative w-full h-[800px] sm:h-[700px] px-4 sm:px-6 py-4 text-slate-800 z-20 bg-periwinkle-100 bg-opacity-75">
           <SubTabsComponent
             title="Edit Your Tournaments"
@@ -212,8 +213,7 @@ const MyTournamentsPage = async () => {
         </div>
       ),
     },
-
-    {
+    {*/
       title: "Results",
       content: (
         <div className="relative w-full h-[800px] sm:h-[700px] px-4 sm:px-6 py-4 text-slate-800 z-20 bg-periwinkle-100 bg-opacity-75">

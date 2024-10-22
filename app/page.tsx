@@ -29,7 +29,7 @@ export default function Home() {
 
   return (
     <div>
-      <div className="flex h-screen justify-between overflow-hidden">
+      <div className="flex-col sm:flex sm:flex-row h-[745px] sm:h-screen justify-between overflow-hidden">
         <div className="relative flex-grow w-full xl:flex-1">
 
           {/*absolutely ratchet solution to this blur thing, but I have spent far too long on this thus far. I digress*/}
@@ -37,15 +37,17 @@ export default function Home() {
             <div className="sm:h-64 sm:w-72 sm:bg-slate-200"/>
           </div>
 
-          <h1 style={{ lineHeight: '1.2' }} className="relative sm:absolute text-6xl sm:text-8xl font-semibold sm:text-left text-center sm:px-12 pt-10 sm:pt-20 z-30 text-navy-100">Your gateway to everything Model UN</h1>
-          <div className="relative sm:absolute my-12 sm:my-0 sm:mt-[480px] sm:mx-12 gap-x-6 flex sm:flex-row flex-col">
-            <Button className="mx-8 sm:mx-0 py-8 px-8 text-2xl font-bold bg-periwinkle-100 hover:bg-periwinkle-200 shadow-lg transition-all duration-110">
+          <h1 style={{ lineHeight: '1.2' }} className="relative sm:absolute text-5xl sm:text-8xl 2xl:text-9xl font-semibold sm:text-left text-center px-4 sm:px-12 pt-64 sm:pt-20 z-30 text-navy-100">
+            Your gateway to everything Model UN
+          </h1>
+          <div className="relative sm:absolute my-12 sm:my-0 sm:mt-[480px] 2xl:mt-[580px] sm:mx-12 gap-x-6 flex sm:flex-row flex-col">
+            <Button className="mx-12 sm:mx-0 py-6 sm:py-8 px-8 text-xl sm:text-2xl font-bold bg-periwinkle-100 hover:bg-periwinkle-200 shadow-lg transition-all duration-110">
               <Link href="/view-tournaments">View Tournaments</Link>
             </Button>
             <div className="mt-6 sm:mt-0 flex flex-row items-center justify-center">
               <Link 
                 href="/sign-up"
-                className="relative mx-6 text-2xl font-bold text-navy-100 z-50 hover:text-navy-200 hover:mr-8 transition-all duration-110"
+                className="relative mx-6 text-xl sm:text-2xl font-bold text-navy-100 z-50 hover:text-navy-200 hover:mr-8 transition-all duration-110"
               >
                 Sign up
               </Link>
@@ -53,8 +55,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex-1 h-full w-full relative overflow-visible">
-          <div className="absolute right-0 bottom-0 w-[167%] h-[167%] -mr-[28%] -mb-[25%] z-10 hidden xl:block">
+        <div className="flex lg:flex-1 h-full w-full relative overflow-visible -mt-[980px] sm:-mt-0 rotate-180 sm:rotate-0">
+          <div className="absolute right-0 bottom-0 w-[100%] h-[100%] md:w-[120%] md:h-[120%] lg:w-[167%] lg:h-[167%] sm:-mr-[28%] -mb-[25%] z-10">
             <Image
               src="/globe.png"
               alt="globe"
@@ -122,52 +124,3 @@ export default function Home() {
     </div>
   );
 }
-/*
-<div className="bg-docblue-100 h-auto relative py-4 sm:py-8 px-4 sm:px-6 text-slate-800">
-  <div className="flex flex-col sm:flex-row gap-6">
-    <div className="bg-slate-50 w-full sm:w-2/3 rounded-lg">
-      <div className="flex flex-col w-full">
-        <div className="bg-slate-50 w-full h-10 sm:h-14 rounded-lg filter drop-shadow-md flex items-center pr-4">
-          <button>
-            <Search className="mx-4"/>
-          </button>
-          <SearchInput
-            className="text-lg sm:text-xl font-medium h-full py-1 w-full placeholder-slate-400"
-            onFetch={setTourneys}
-          />
-        </div>
-      </div>
-      <div className="w-full h-[465px] overflow-auto bg-white rounded-md shadow-md mt-2">
-        <ul>
-          {loading ? (
-            <li className="py-2 flex justify-center items-center">Fetching tournaments...</li>
-          ) : tourneys.length > 0 ? (
-            tourneys.map(tourney => (
-              <li key={tourney.id}>
-                <Link href={`/my-tournaments/${tourney.id}`}>
-                  <div className="bg-slate-200 mx-4 px-4 py-3 my-3 rounded-md hover:bg-slate-300 duration-100 font-bold text-md flex overflow-clip">
-                    <div className="w-3/5 break-words pr-8">{tourney.name}</div>
-                    <div className="w-1/5 break-words">{tourney.city}, {tourney.state}</div>
-                    <div className="ml-auto text-right">{tourney.startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
-                  </div>
-                </Link>
-              </li>
-            ))
-          ) : (
-            <li className="py-2 flex justify-center items-center">No tournaments found.</li>
-          )}
-        </ul>
-      </div>
-    </div>
-    <div className="bg-slate-300 w-full sm:w-1/3 rounded-lg">
-      <div className="bg-slate-300 w-full h-14 rounded-lg filter drop-shadow-md flex items-center">
-        <p className="text-md sm:text-xl font-semibold mx-2 sm:mx-8">
-          My Tournaments
-        </p>
-        <p className="hidden sm:block">stuff</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-*/
