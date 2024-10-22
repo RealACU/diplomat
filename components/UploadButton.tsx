@@ -20,13 +20,11 @@ const UploadButton = ({
   tourneyId,
   committeeId,
   delegateId,
-  reloadOnSuccess,
 }: {
   type: string;
   tourneyId: string;
   committeeId: number | null;
   delegateId: string;
-  reloadOnSuccess?: boolean;
 }) => {
   if (!committeeId) {
     return null;
