@@ -144,6 +144,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                         // @ts-ignore
                         committeeId={myCommittee.id}
                         delegateId={user.id}
+                        reloadOnSuccess
                       />
                     )}
                     {tourney.delegateResources.map((resourceLink, i) => {

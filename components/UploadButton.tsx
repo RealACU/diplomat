@@ -7,6 +7,7 @@ import { Button } from "./ui/button";
 import setBgGuide from "@/actions/setBgGuide";
 import addPositionPaper from "@/actions/addPositionPaper";
 import addDelegateResource from "@/actions/addDelegateResource";
+import { useRouter } from "next/navigation";
 
 // Cloudinary
 declare global {
@@ -20,16 +21,19 @@ const UploadButton = ({
   tourneyId,
   committeeId,
   delegateId,
+  reloadOnSuccess,
 }: {
   type: string;
   tourneyId: string;
   committeeId: number | null;
   delegateId: string;
+  reloadOnSuccess?: boolean;
 }) => {
-  if(!committeeId)
-  {
+  if (!committeeId) {
     return null;
   }
+
+  const router = useRouter();
 
   // PDF state
   const [paperLink, setPaperLink] = useState<string>("");
@@ -49,8 +53,12 @@ const UploadButton = ({
         if (type === "bg-guide") {
           setBgGuide(url, tourneyId, committeeId);
         }
-        if(type === "delegate-resources") {
+        if (type === "delegate-resources") {
           addDelegateResource(url, tourneyId);
+        }
+
+        if (reloadOnSuccess) {
+          router.refresh();
         }
       }}
       onQueuesEnd={(result, { widget }) => {
