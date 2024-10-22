@@ -315,7 +315,7 @@ const MyTournamentsPage = async () => {
                           } else {
                             return (
                               <li className="py-4 flex justify-center items-center text-center w-full">
-                                Talk to your advisor about chairing at your school's tournament! 
+                                {"Talk to your advisor about chairing at your school's tournament!"}
                               </li>
                             );
                           }
@@ -430,7 +430,7 @@ const MyTournamentsPage = async () => {
                           } else {
                             return (
                               <li className="py-4 flex justify-center items-center text-center w-full">
-                                Talk to your advisor about chairing at your school's tournament! 
+                                {"Talk to your advisor about chairing at your school's tournament!"}
                               </li>
                             );
                           }
@@ -545,7 +545,7 @@ const MyTournamentsPage = async () => {
                           } else {
                             return (
                               <li className="py-4 flex justify-center items-center text-center w-full">
-                                Talk to your advisor about chairing at your school's tournament! 
+                                {"Talk to your advisor about chairing at your school's tournament!"}
                               </li>
                             );
                           }
