@@ -35,7 +35,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
       color: tourney.primaryColorHex,
       content: (
         <div 
-          className="relative w-full h-[800px] sm:h-[700px] py-4 sm:py-8 px-4 sm:px-6 text-slate-800 z-20"
+          className="relative w-full h-[980px] sm:h-[665px] py-4 sm:py-8 px-4 sm:px-6 text-slate-800 z-20"
           style={{
             background: `
               linear-gradient(130deg, ${tourney.primaryColorHex} 5%, ${tourney.secondaryColorHex} 70%)
@@ -43,7 +43,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
           }}
         >
           <div className="flex-col sm:flex-row sm:flex gap-4 sm:gap-6">
-            <div className="bg-slate-300 bg-opacity-75 w-full sm:w-2/3 rounded-lg filter drop-shadow-lg">
+            <div className="bg-slate-300 bg-opacity-75 pb-0  w-full sm:w-2/3 rounded-lg filter drop-shadow-lg">
               <div className="w-full h-10 sm:h-14 rounded-lg flex shadow-md items-center justify-center">
                 <p className="text-lg sm:text-xl font-semibold mx-2 sm:mx-8">
                   Invitation Message
@@ -55,7 +55,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                 </p>
               </div>
             </div>
-            <div className="bg-slate-50 pb-16 sm:pb-0 bg-opacity-85 my-4 sm:my-0 w-full sm:w-1/3 rounded-lg drop-shadow-lg">
+            <div className="bg-slate-50 pb-0 bg-opacity-85 my-4 sm:my-0 w-full sm:w-1/3 rounded-lg drop-shadow-lg">
               <div className="w-full h-10 sm:h-14 rounded-lg flex shadow-md items-center justify-center mb-5">
                 <p className="text-lg sm:text-xl font-semibold mx-8">
                   Tournament Information
@@ -105,7 +105,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                   )}
                 </div>
               </div>
-              <div className="bg-slate-300 mx-4 my-3 rounded-md font-medium text-base flex overflow-clip break-words">
+              <div className="bg-slate-300 mx-4 my-3 mb-5 rounded-md font-medium text-base flex overflow-clip break-words">
                 <div className="h-80 w-full">
                   <div className="px-4 py-3 h-12 w-full flex flex-row relative shadow-md rounded-md">
                     <p className="relative z-10">Delegate resources</p>
@@ -139,6 +139,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
               </div>
               <div className="w-full h-[465px] p-8">
                 <CommitteeSignUpList
+                  // @ts-ignore
                   userId={user?.id}
                   userDTourneys={user?.publicMetadata.dTourneys as string[]}
                   committees={committees}
@@ -197,18 +198,18 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
         <div className="w-full h-[430px] absolute z-0" />
 
         <MunLogoSVG
-          className="absolute mt-6 ml-8 opacity-60"
+          className="absolute mt-6 ml-6 sm:ml-8 opacity-20 sm:opacity-60"
           style={{ color: secondaryColorHex }}
           width="315"
           height="315" 
         />
 
-        <div className="absolute py-8 px-12 mt-6 ml-40 filter blur-2xl">
+        <div className="absolute py-8 px-12 mt-6 ml-10 sm:ml-40 filter blur-2xl">
           <div className="h-36 w-48 bg-slate-200"/>
         </div>
 
-        <div className="w-full flex flex-col z-20 pb-[80px] ml-64 text-navy-100 space-y-6 justify-center">
-          <h1 className="sm:text-8xl text-5xl font-semibold break-words">
+        <div className="w-full flex flex-col z-20 pb-[250px] sm:pb-[80px] ml-8 sm:ml-64 text-navy-100 space-y-6 justify-center">
+          <h1 className="sm:text-8xl text-5xl sm:pr-64 font-semibold break-words">
             {tourney.name}
           </h1>
           <div className="flex-col flex gap-y-2 ml-2 font-semibold">

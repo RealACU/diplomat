@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { ChevronLeft } from 'lucide-react';
 
-const TabsComponent = ({ items, marginTop = '-mt-[260px]' }) => {
+const TabsComponent = ({ items, marginTop = '-mt-[180px] sm:-mt-[260px]' }) => {
   const [selectedTab, setSelectedTab] = useState(0);
   const firstBtnRef = useRef();
 
@@ -13,7 +13,7 @@ const TabsComponent = ({ items, marginTop = '-mt-[260px]' }) => {
 
   return (
     <div className="-mt-16">
-      <div className={`w-auto h-auto flex flex-col ${marginTop} sm:px-12 px-6 text-2xl font-semibold text-navy-100 gap-6 absolute right-0`}>
+      <div className={`w-auto h-auto flex flex-col ${marginTop} sm:px-12 px-4 text-2xl font-semibold text-navy-100 gap-2 sm:gap-6 absolute right-0`}>
         {items.map((item, index) => (
           <div key={index} className="flex items-center justify-end">
             <button 

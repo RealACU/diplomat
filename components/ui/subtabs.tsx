@@ -18,8 +18,8 @@ const SubTabsComponent: React.FC<SubTabsProps> = ({ title, subTabItems }) => {
     return (
         <div className="">
             <div className="flex mb-4">
-                <p className="w-full text-white text-2xl font-bold px-2">{title}</p>
-                <div className="flex space-x-6">
+                <p className="hidden sm:block w-full text-white text-2xl font-bold px-2">{title}</p>
+                <div className="flex sm:flex-row flex-col space-x-6">
                     {subTabItems.map((item, index) => (
                         <button
                             key={index}
