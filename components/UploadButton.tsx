@@ -45,7 +45,10 @@ const UploadButton = ({
           setBgGuide(url, tourneyId, committeeId);
         }
         if (type === "delegate-resources") {
-          addDelegateResource(url, tourneyId);
+          // @ts-ignore
+          const name = result?.info?.original_filename;
+
+          addDelegateResource(url, name, tourneyId);
         }
       }}
       onQueuesEnd={(result, { widget }) => {

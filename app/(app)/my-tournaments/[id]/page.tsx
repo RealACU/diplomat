@@ -7,14 +7,10 @@ import UploadButton from "@/components/UploadButton";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Download } from "lucide-react";
+import getTourneyById from "@/actions/getTourneyById";
 
 const tourneyPage = async ({ params }: { params: { id: string } }) => {
-  const tourney = await db.tourney.findUnique({
-    where: { id: params.id },
-    include: {
-      committees: true,
-    },
-  });
+  const tourney = await getTourneyById(params.id);
 
   if (!tourney) {
     return <div>Tournament not found</div>;
@@ -31,6 +27,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
     committees,
     primaryColorHex,
     secondaryColorHex,
+    delegateResources,
   } = tourney;
 
   const isCreator = user?.id === tourney.creatorId;
@@ -148,13 +145,14 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                         delegateId={user.id}
                       />
                     )}
-                    {tourney.delegateResources.map((resourceLink, i) => {
+                    {delegateResources.map((delegateResource) => {
                       return (
                         <Link
-                          key={i}
-                          href={resourceLink}
-                          download={`Delegate resource ${i + 1}`}
-                        >{`Delegate resource ${i + 1}`}</Link>
+                          href={delegateResource.link}
+                          download={delegateResource.name}
+                        >
+                          {delegateResource.name}
+                        </Link>
                       );
                     })}
                   </div>

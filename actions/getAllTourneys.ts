@@ -6,6 +6,7 @@ export default async function getAllTourneys() {
   const tourneys = await db.tourney.findMany({
     include: {
       committees: true,
+      delegateResources: true,
     },
     orderBy: {
       startDate: "asc",

@@ -12,6 +12,7 @@ export default async function getTourneysByName(query: string) {
     },
     include: {
       committees: true,
+      delegateResources: true,
     },
     orderBy: {
       startDate: "asc",

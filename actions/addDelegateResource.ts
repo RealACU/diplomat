@@ -3,19 +3,19 @@
 import { db } from "@/lib/db";
 
 export default async function addDelegateResource(
-  paperLink: string,
+  resourceLink: string,
+  resourceName: string,
   tourneyId: string
 ) {
-  const tourney = await db.tourney.update({
-    where: {
-      id: tourneyId,
-    },
+  const delegateResource = await db.delegateResource.create({
     data: {
-      delegateResources: {
-        push: [paperLink],
+      name: resourceName,
+      link: resourceLink,
+      Tourney: {
+        connect: { id: tourneyId },
       },
     },
   });
 
-  return tourney;
+  return delegateResource;
 }

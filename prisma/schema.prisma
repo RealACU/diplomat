@@ -9,7 +9,7 @@ datasource db {
 }
 
 model Tourney {
-  id                String      @id @default(cuid())
+  id                String             @id @default(cuid())
   creatorId         String
   name              String
   description       String
@@ -22,7 +22,7 @@ model Tourney {
   endDate           DateTime
   primaryColorHex   String
   secondaryColorHex String
-  delegateResources String[]
+  delegateResources DelegateResource[]
   committees        Committee[]
 }
 
@@ -38,6 +38,14 @@ model Committee {
   tourneyId          String?
   Tourney            Tourney?         @relation(fields: [tourneyId], references: [id], onDelete: Cascade)
   delegateResults    DelegateResult[]
+}
+
+model DelegateResource {
+  id        Int      @id @default(autoincrement())
+  name      String
+  link      String
+  Tourney   Tourney? @relation(fields: [tourneyId], references: [id], onDelete: Cascade)
+  tourneyId String?
 }
 
 model DelegateResult {
