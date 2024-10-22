@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 import setBgGuide from "@/actions/setBgGuide";
 import addPositionPaper from "@/actions/addPositionPaper";
+import addDelegateResource from "@/actions/addDelegateResource";
 
 // Cloudinary
 declare global {
@@ -22,9 +23,14 @@ const UploadButton = ({
 }: {
   type: string;
   tourneyId: string;
-  committeeId: number;
+  committeeId: number | null;
   delegateId: string;
 }) => {
+  if(!committeeId)
+  {
+    return null;
+  }
+
   // PDF state
   const [paperLink, setPaperLink] = useState<string>("");
 
@@ -37,11 +43,14 @@ const UploadButton = ({
 
         setPaperLink(url);
 
+        if (type === "position-paper") {
+          addPositionPaper(url, tourneyId, committeeId, delegateId);
+        }
         if (type === "bg-guide") {
           setBgGuide(url, tourneyId, committeeId);
         }
-        if (type === "position-paper") {
-          addPositionPaper(url, tourneyId, committeeId, delegateId);
+        if(type === "delegate-resources") {
+          addDelegateResource(url, tourneyId);
         }
       }}
       onQueuesEnd={(result, { widget }) => {

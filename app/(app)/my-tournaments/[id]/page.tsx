@@ -32,6 +32,8 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
     secondaryColorHex,
   } = tourney;
 
+  const isCreator = user?.id === tourney.creatorId;
+
   const isAdmin = user?.publicMetadata.role === "admin";
 
   const isChair =
@@ -57,7 +59,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
       title: "Invitation",
       color: tourney.primaryColorHex,
       content: (
-        <div 
+        <div
           className="relative w-full h-[980px] sm:h-[665px] py-4 sm:py-8 px-4 sm:px-6 text-slate-800 z-20"
           style={{
             background: `
@@ -132,7 +134,27 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                 <div className="h-80 w-full">
                   <div className="px-4 py-3 h-12 w-full flex flex-row relative shadow-md rounded-md">
                     <p className="relative z-10">Delegate resources</p>
-                    <p className="ml-auto text-right z-10">stuff</p>
+                    <p className="ml-auto text-right z-10">Map, etc.</p>
+                  </div>
+                  <div className="p-4">
+                    {isCreator && (
+                      <UploadButton
+                        type="delegate-resources"
+                        tourneyId={params.id}
+                        // @ts-ignore
+                        committeeId={myCommittee.id}
+                        delegateId={user.id}
+                      />
+                    )}
+                    {tourney.delegateResources.map((resourceLink, i) => {
+                      return (
+                        <Link
+                          key={i}
+                          href={resourceLink}
+                          download={`Delegate resource ${i + 1}`}
+                        >{`Delegate resource ${i + 1}`}</Link>
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -298,7 +320,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
         />
 
         <div className="absolute py-8 px-12 mt-6 ml-10 sm:ml-40 filter blur-2xl">
-          <div className="h-36 w-48 bg-slate-200"/>
+          <div className="h-36 w-48 bg-slate-200" />
         </div>
 
         <div className="w-full flex flex-col z-20 pb-[250px] sm:pb-[80px] ml-8 sm:ml-64 text-navy-100 space-y-6 justify-center">

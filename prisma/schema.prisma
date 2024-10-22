@@ -22,6 +22,7 @@ model Tourney {
   endDate           DateTime
   primaryColorHex   String
   secondaryColorHex String
+  delegateResources String[]
   committees        Committee[]
 }
 
