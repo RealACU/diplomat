@@ -1,5 +1,3 @@
-import "./privacyPolicy.css";
-
 const PrivacyPolicyPage = () => {
   return (
     <div className="privacy-container">
