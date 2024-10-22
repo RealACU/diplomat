@@ -7,7 +7,6 @@ import { Button } from "./ui/button";
 import setBgGuide from "@/actions/setBgGuide";
 import addPositionPaper from "@/actions/addPositionPaper";
 import addDelegateResource from "@/actions/addDelegateResource";
-import { useRouter } from "next/navigation";
 
 // Cloudinary
 declare global {
@@ -33,8 +32,6 @@ const UploadButton = ({
     return null;
   }
 
-  const router = useRouter();
-
   // PDF state
   const [paperLink, setPaperLink] = useState<string>("");
 
@@ -55,10 +52,6 @@ const UploadButton = ({
         }
         if (type === "delegate-resources") {
           addDelegateResource(url, tourneyId);
-        }
-
-        if (reloadOnSuccess) {
-          router.refresh();
         }
       }}
       onQueuesEnd={(result, { widget }) => {
