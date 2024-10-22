@@ -29,8 +29,8 @@ const TermsOfUsePage = () => {
       <div className="terms-content">
         <h1 className="terms-heading">AGREEMENT TO OUR LEGAL TERMS</h1>
         <p>
-          We are <strong>Diplomat</strong> ("<strong>Company</strong>", "
-          <strong>we</strong>", "<strong>us</strong>", "<strong>our</strong>"),
+          We are <strong>Diplomat</strong> (&quot;<strong>Company</strong>&quot;, &quot;
+          <strong>we</strong>&quot;, &quot;<strong>us</strong>&quot;, &quot;<strong>our</strong>&quot;),
           a company registered in Nevada, United States, located at 1411 Robin
           St, Las Vegas, NV 89106.
         </p>
@@ -42,8 +42,8 @@ const TermsOfUsePage = () => {
 
         <p>
           These Legal Terms constitute a legally binding agreement made between
-          you, whether personally or on behalf of an entity ("
-          <strong>you</strong>"), and <strong>Diplomat</strong>, concerning your
+          you, whether personally or on behalf of an entity (&quot;
+          <strong>you</strong>&quot;), and <strong>Diplomat</strong>, concerning your
           access to and use of the Services. You agree that by accessing the
           Services, you have read, understood, and agreed to be bound by all of
           these Legal Terms. IF YOU DO NOT AGREE WITH ALL OF THESE LEGAL TERMS,
@@ -56,8 +56,8 @@ const TermsOfUsePage = () => {
           the Services from time to time are hereby expressly incorporated
           herein by reference. We reserve the right, in our sole discretion, to
           make changes or modifications to these Legal Terms at any time and for
-          any reason. We will alert you about any changes by updating the "Last
-          updated" date of these Legal Terms, and you waive any right to receive
+          any reason. We will alert you about any changes by updating the &quot;Last
+          updated&quot; date of these Legal Terms, and you waive any right to receive
           specific notice of each such change. It is your responsibility to
           periodically review these Legal Terms to stay informed of updates. You
           will be subject to, and will be deemed to have been made aware of and
@@ -314,8 +314,8 @@ const TermsOfUsePage = () => {
           We are the owner or the licensee of all intellectual property rights
           in our Services, including all source code, databases, functionality,
           software, website designs, audio, video, text, photographs, and
-          graphics in the Services (collectively, the "Content"), as well as the
-          trademarks, service marks, and logos contained therein (the "Marks").
+          graphics in the Services (collectively, the &quot;Content&quot;), as well as the
+          trademarks, service marks, and logos contained therein (the &quot;Marks&quot;).
         </p>
 
         <p>
@@ -325,15 +325,15 @@ const TermsOfUsePage = () => {
         </p>
 
         <p>
-          The Content and Marks are provided in or through the Services "AS IS"
+          The Content and Marks are provided in or through the Services &quot;AS IS&quot;
           for your personal, non-commercial use or internal business purpose
           only.
         </p>
 
         <h2 className="terms-subheading">Your use of our Services</h2>
         <p>
-          Subject to your compliance with these Legal Terms, including the "
-          <a href="#prohibited">PROHIBITED ACTIVITIES</a>" section below, we
+          Subject to your compliance with these Legal Terms, including the &quot;
+          <a href="#prohibited">PROHIBITED ACTIVITIES</a>&quot; section below, we
           grant you a non-exclusive, non-transferable, revocable license to:
         </p>
 
@@ -384,8 +384,8 @@ const TermsOfUsePage = () => {
 
         <h2 className="terms-subheading">Your submissions</h2>
         <p>
-          Please review this section and the "
-          <a href="#prohibited">PROHIBITED ACTIVITIES</a>" section carefully
+          Please review this section and the &quot;
+          <a href="#prohibited">PROHIBITED ACTIVITIES</a>&quot; section carefully
           prior to using our Services to understand the (a) rights you give us
           and (b) obligations you have when you post or upload any content
           through the Services.
@@ -394,7 +394,7 @@ const TermsOfUsePage = () => {
         <p>
           <strong>Submissions:</strong> By directly sending us any question,
           comment, suggestion, idea, feedback, or other information about the
-          Services ("Submissions"), you agree to assign to us all intellectual
+          Services (&quot;Submissions&quot;), you agree to assign to us all intellectual
           property rights in such Submission. You agree that we shall own this
           Submission and be entitled to its unrestricted use and dissemination
           for any lawful purpose, commercial or otherwise, without
@@ -408,8 +408,8 @@ const TermsOfUsePage = () => {
 
         <ul className="terms-list">
           <li>
-            confirm that you have read and agree with our "
-            <a href="#prohibited">PROHIBITED ACTIVITIES</a>" and will not post,
+            confirm that you have read and agree with our &quot;
+            <a href="#prohibited">PROHIBITED ACTIVITIES</a>&quot; and will not post,
             send, publish, upload, or transmit through the Services any
             Submission that is illegal, harassing, hateful, harmful, defamatory,
             obscene, bullying, abusive, discriminatory, threatening to any
@@ -617,7 +617,7 @@ const TermsOfUsePage = () => {
           </li>
 
           <li>
-            Copy or adapt the Services' software, including but not limited to
+            Copy or adapt the Services&apos; software, including but not limited to
             Flash, PHP, HTML, JavaScript, or other code.
           </li>
 
@@ -635,9 +635,9 @@ const TermsOfUsePage = () => {
             Upload or transmit (or attempt to upload or to transmit) any
             material that acts as a passive or active information collection or
             transmission mechanism, including without limitation, clear graphics
-            interchange formats ("gifs"), 1×1 pixels, web bugs, cookies, or
-            other similar devices (sometimes referred to as "spyware" or
-            "passive collection mechanisms" or "pcms").
+            interchange formats (&quot;gifs&quot;), 1×1 pixels, web bugs, cookies, or
+            other similar devices (sometimes referred to as &quot;spyware&quot; or
+              &quot;passive collection mechanisms&quot; or &quot;pcms&quot;).
           </li>
 
           <li>
@@ -677,7 +677,7 @@ const TermsOfUsePage = () => {
           materials to us or on the Services, including but not limited to text,
           writings, video, audio, photographs, graphics, comments, suggestions,
           or personal information or other material (collectively,
-          "Contributions"). Contributions may be viewable by other users of the
+            &quot;Contributions&quot;). Contributions may be viewable by other users of the
           Services and through third-party websites. As such, any Contributions
           you transmit may be treated as non-confidential and non-proprietary.
           When you create or make available any Contributions, you thereby
@@ -824,7 +824,7 @@ const TermsOfUsePage = () => {
         <p>
           As part of the functionality of the Services, you may link your
           account with online accounts you have with third-party service
-          providers (each such account, a "Third-Party Account") by either: (1)
+          providers (each such account, a &quot;Third-Party Account&quot;) by either: (1)
           providing your Third-Party Account login information through the
           Services; or (2) allowing us to access your Third-Party Account, as is
           permitted under the applicable terms and conditions that govern your
@@ -837,8 +837,8 @@ const TermsOfUsePage = () => {
           third-party service provider of the Third-Party Account. By granting
           us access to any Third-Party Accounts, you understand that (1) we may
           access, make available, and store (if applicable) any content that you
-          have provided to and stored in your Third-Party Account (the "Social
-          Network Content") so that it is available on and through the Services
+          have provided to and stored in your Third-Party Account (the &quot;Social
+          Network Content&quot;) so that it is available on and through the Services
           via your account, including without limitation any friend lists and
           (2) we may submit to and receive from your Third-Party Account
           additional information to the extent you are notified when you link
@@ -1031,9 +1031,9 @@ const TermsOfUsePage = () => {
         <h2 className="terms-subheading">Informal Negotiations</h2>
         <p>
           To expedite resolution and control the cost of any dispute,
-          controversy, or claim related to these Legal Terms (each a "Dispute"
-          and collectively, the "Disputes") brought by either you or us
-          (individually, a "Party" and collectively, the "Parties"), the Parties
+          controversy, or claim related to these Legal Terms (each a &quot;Dispute&quot;
+          and collectively, the &quot;Disputes&quot;) brought by either you or us
+          (individually, a &quot;Party&quot; and collectively, the &quot;Parties&quot;), the Parties
           agree to first attempt to negotiate any Dispute (except those Disputes
           expressly provided below) informally for at least thirty (30) days
           before initiating arbitration. Such informal negotiations commence
@@ -1047,9 +1047,9 @@ const TermsOfUsePage = () => {
           arbitration. YOU UNDERSTAND THAT WITHOUT THIS PROVISION, YOU WOULD
           HAVE THE RIGHT TO SUE IN COURT AND HAVE A JURY TRIAL. The arbitration
           shall be commenced and conducted under the Commercial Arbitration
-          Rules of the American Arbitration Association ("AAA") and, where
+          Rules of the American Arbitration Association (&quot;AAA&quot;) and, where
           appropriate, the AAA’s Supplementary Procedures for Consumer Related
-          Disputes ("AAA Consumer Rules"), both of which are available at the
+          Disputes (&quot;AAA Consumer Rules&quot;), both of which are available at the
           AAA website: www.adr.org. Your arbitration fees and your share of
           arbitrator compensation shall be governed by the AAA Consumer Rules
           and, where appropriate, limited by the AAA Consumer Rules. The

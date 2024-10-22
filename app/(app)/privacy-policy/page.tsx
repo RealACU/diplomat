@@ -6,8 +6,8 @@ const PrivacyPolicyPage = () => {
         <strong>Last updated September 19, 2024</strong>
       </p>
       <p className="privacy-intro">
-        This Privacy Notice for Diplomat ("<strong>we</strong>", "
-        <strong>us</strong>", or "<strong>our</strong>"), describes how and why
+        This Privacy Notice for Diplomat (&quot;<strong>we</strong>&quot;, &quot;
+        <strong>us</strong>&quot;, or &quot;<strong>our</strong>&quot;), describes how and why
         we might access, collect, store, use, and/or share (
         <strong>process</strong>) your personal information when you use our
         services (<strong>Services</strong>), including when you:
@@ -366,7 +366,7 @@ const PrivacyPolicyPage = () => {
       </h2>
       <p className="privacy-content">
         Most web browsers and some mobile operating systems and mobile
-        applications include a Do-Not-Track ("DNT") feature or setting you can
+        applications include a Do-Not-Track (&quot;DNT&quot;) feature or setting you can
         activate to signal your privacy preference not to have data about your
         online browsing activities monitored and collected. At this stage, no
         uniform technology standard for recognizing and implementing DNT signals
@@ -567,7 +567,7 @@ const PrivacyPolicyPage = () => {
       <p className="privacy-content">
         We may use your personal information for our own business purposes, such
         as for undertaking internal research for technological development and
-        demonstration. This is not considered to be "selling" of your personal
+        demonstration. This is not considered to be &quot;selling&quot; of your personal
         information.
       </p>
       <p className="privacy-content">
@@ -590,13 +590,13 @@ const PrivacyPolicyPage = () => {
         <li><strong>Right to request</strong> the deletion of your personal data</li>
         <li><strong>Right to obtain a copy</strong> of the personal data you previously shared with us</li>
         <li><strong>Right to non-discrimination</strong> for exercising your rights</li>
-        <li><strong>Right to opt out</strong> of the processing of your personal data if it is used for targeted advertising (or sharing as defined under California’s privacy law), the sale of personal data, or profiling in furtherance of decisions that produce legal or similarly significant effects ("profiling")</li>
+        <li><strong>Right to opt out</strong> of the processing of your personal data if it is used for targeted advertising (or sharing as defined under California’s privacy law), the sale of personal data, or profiling in furtherance of decisions that produce legal or similarly significant effects (&quot;profiling&quot;)</li>
       </ul>
       <p className="privacy-content">
         Depending upon the state where you live, you may also have the following rights:
       </p>
       <ul className="privacy-list">
-        <li><strong>Right to</strong> obtain a list of the categories of third parties to which we have disclosed personal data (as permitted by applicable law, including California's and Delaware's privacy law)</li>
+        <li><strong>Right to</strong> obtain a list of the categories of third parties to which we have disclosed personal data (as permitted by applicable law, including California’s and Delaware’s privacy law)</li>
         <li><strong>Right to</strong> obtain a list of specific third parties to which we have disclosed personal data (as permitted by applicable law, including Oregon’s privacy law)</li>
         <li><strong>Right to</strong> limit use and disclosure of sensitive personal data (as permitted by applicable law, including California’s privacy law)</li>
         <li><strong>Right to</strong> opt out of the collection of sensitive data and personal data collected through the operation of a voice or facial recognition feature (as permitted by applicable law, including Florida’s privacy law)</li>
@@ -647,10 +647,10 @@ const PrivacyPolicyPage = () => {
         submit a complaint to your state attorney general.
       </p>
 
-      <h2 className="privacy-subheading">California " SHINE THE LIGHT " Law</h2>
+      <h2 className="privacy-subheading">California &apos; SHINE THE LIGHT &apos; Law</h2>
       <p>
-        California Civil Code Section 1798.83, also known as the "Shine The
-        Light" law, permits our users who are California residents to request
+        California Civil Code Section 1798.83, also known as the &apos;Shine The
+        Light&apos; law, permits our users who are California residents to request
         and obtain from us, once a year and free of charge, information about
         categories of personal information (if any) we disclosed to third
         parties for direct marketing purposes and the names and addresses of all
@@ -659,7 +659,7 @@ const PrivacyPolicyPage = () => {
         and would like to make such a request, please submit your request in
         writing to us by using the contact details provided in the section 
         <a href="#contact" className="privacy-link">
-          "HOW CAN YOU CONTACT US ABOUT THIS NOTICE?"
+          {`"HOW CAN YOU CONTACT US ABOUT THIS NOTICE?"`}
         </a>.
       </p>
 
@@ -673,7 +673,7 @@ const PrivacyPolicyPage = () => {
       </p>
       <p className="privacy-content">
         We may update this Privacy Notice from time to time. The updated version
-        will be indicated by an updated "Revised" date at the top of this
+        will be indicated by an updated &apos;Revised&apos; date at the top of this
         Privacy Notice. If we make material changes to this Privacy Notice, we
         may notify you either by prominently posting a notice of such changes or
         by directly sending you a notification. We encourage you to review this
