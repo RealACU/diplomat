@@ -1,8 +1,12 @@
 import { db } from "@/lib/db";
 import TabsComponent from "@/components/ui/tabs";
 import { currentUser } from "@clerk/nextjs/server";
-import CommitteeSignUpList from "@/components/CommitteeSignUpList";
+import CommitteeSignUp from "@/components/CommitteeSignUp";
 import MunLogoSVG from "@/components/MunLogoSVG";
+import UploadButton from "@/components/UploadButton";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Download } from "lucide-react";
 
 const tourneyPage = async ({ params }: { params: { id: string } }) => {
   const tourney = await db.tourney.findUnique({
@@ -27,6 +31,26 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
     primaryColorHex,
     secondaryColorHex,
   } = tourney;
+
+  const isAdmin = user?.publicMetadata.role === "admin";
+
+  const isChair =
+    user &&
+    committees.some((committee) => committee.chairIds.includes(user?.id));
+
+  const isDelegate =
+    user &&
+    committees.some((committee) => committee.delegateIds.includes(user?.id));
+
+  const myCommittee = isChair
+    ? committees.filter(
+        (committee) => user && committee.chairIds.includes(user.id)
+      )[0]
+    : isDelegate
+    ? committees.filter(
+        (committee) => user && committee.delegateIds.includes(user.id)
+      )[0]
+    : null;
 
   const items = [
     {
@@ -136,14 +160,84 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
               <div className="w-full h-14 rounded-lg flex shadow-md items-center justify-center">
                 <p className="text-xl font-semibold">Committees</p>
               </div>
-              <div className="w-full h-[465px] p-8">
-                <CommitteeSignUpList
-                  // @ts-ignore
-                  userId={user?.id}
-                  userDTourneys={user?.publicMetadata.dTourneys as string[]}
-                  committees={committees}
-                  tourneyId={params.id}
-                />
+              <div className="w-full h-[465px] p-8 space-y-2">
+                {isChair && myCommittee && (
+                  <>
+                    <p>You are a chair for {myCommittee.name}</p>
+                    <p>Position papers:</p>
+                    {!myCommittee.positionPaperLinks && (
+                      <p>No position papers submitted yet.</p>
+                    )}
+                    {myCommittee.positionPaperLinks.map((positionPaperLink) => {
+                      return (
+                        <Button key={positionPaperLink} asChild>
+                          <Link
+                            href={positionPaperLink}
+                            download={`${myCommittee.name} position paper`}
+                          >
+                            <Download />
+                            {myCommittee.name} position paper
+                          </Link>
+                        </Button>
+                      );
+                    })}
+                    {myCommittee.bgGuideLink && (
+                      <>
+                        <p>Upload background guide</p>
+                        <UploadButton
+                          type="bg-guide"
+                          tourneyId={params.id}
+                          committeeId={myCommittee.id}
+                          delegateId={user.id}
+                        />
+                      </>
+                    )}
+                  </>
+                )}
+                {isDelegate && myCommittee && (
+                  <>
+                    <p>You are a delegate for {myCommittee.name}</p>
+                    <p>Background guide:</p>
+                    {!myCommittee.bgGuideLink && (
+                      <p>Chair has not sent a background guide yet.</p>
+                    )}
+                    {myCommittee.bgGuideLink && (
+                      <Button asChild>
+                        <Link
+                          href={myCommittee.bgGuideLink}
+                          download={`${myCommittee.name} background guide`}
+                        >
+                          <Download />
+                          {myCommittee.name} background guide
+                        </Link>
+                      </Button>
+                    )}
+                    {!myCommittee.delegatesThatSent.includes(user.id) && (
+                      <>
+                        <p>Upload position paper</p>
+                        <UploadButton
+                          type="position-paper"
+                          tourneyId={params.id}
+                          committeeId={myCommittee.id}
+                          delegateId={user?.id}
+                        />
+                      </>
+                    )}
+                  </>
+                )}
+                {!isAdmin && !isChair && !isDelegate && (
+                  <div className="flex flex-col gap-4">
+                    {committees.map((committee) => (
+                      <CommitteeSignUp
+                        key={committee.id}
+                        tourneyId={params.id}
+                        committeeId={committee.id}
+                        delegateId={user?.id}
+                        committeeName={committee.name}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
 

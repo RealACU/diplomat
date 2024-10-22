@@ -24,7 +24,7 @@ export default async function signUpDelegate(
 
   await clerkClient.users.updateUserMetadata(delegateId, {
     publicMetadata: {
-      dTourneys: [user.publicMetadata.dTourneys as string[], tourneyId],
+      dTourneys: [...(user.publicMetadata.dTourneys as string[]), tourneyId],
     },
   });
 

@@ -1,11 +1,9 @@
-import { db } from "@/lib/db";
 import { Button } from "@/components/ui/button";
 import { currentUser } from "@clerk/nextjs/server";
 import Link from "next/link";
 import getTourneyById from "@/actions/getTourneyById";
 import MunLogoSVG from "@/components/MunLogoSVG";
 import TabsComponent from "@/components/ui/tabs";
-import getAllTourneys from "@/actions/getAllTourneys";
 import SubTabsComponent from "@/components/ui/subtabs";
 import { isBefore, isSameDay, isAfter } from 'date-fns';
 
