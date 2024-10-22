@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="bg-slate-50 border-t-2 border-slate-200 h-32 flex justify-center items-center w-full">
       <div className="w-full max-w-screen-2xl flex justify-between items-center px-6">
-        <p>Copyright © 2024 Asher & Danny & Shivansh</p>
+        <p>Diplomat 2024 Asher & Danny & Shivansh</p>
         <div className="flex space-x-4">
           <Button variant="link">
             <a href="/terms-of-use">Terms of Use</a>
