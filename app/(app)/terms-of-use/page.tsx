@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import "./termsOfUse.css";
 
 const TermsOfUsePage = () => {
   const [highlightedSection, setHighlightedSection] = useState<string | null>(
