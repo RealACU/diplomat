@@ -1,4 +1,3 @@
-import { db } from "@/lib/db";
 import TabsComponent from "@/components/ui/tabs";
 import { currentUser } from "@clerk/nextjs/server";
 import CommitteeSignUp from "@/components/CommitteeSignUp";
@@ -145,17 +144,18 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                         delegateId={user.id}
                       />
                     )}
-                    {delegateResources.map((delegateResource, i) => {
-                      return (
-                        <Link
-                          key={i}
-                          href={delegateResource.link}
-                          download={delegateResource.name}
-                        >
-                          {delegateResource.name}
-                        </Link>
-                      );
-                    })}
+                    {(isDelegate || isChair || isCreator) &&
+                      delegateResources.map((delegateResource, i) => {
+                        return (
+                          <Link
+                            key={i}
+                            href={delegateResource.link}
+                            download={delegateResource.name}
+                          >
+                            {delegateResource.name}
+                          </Link>
+                        );
+                      })}
                   </div>
                 </div>
               </div>
@@ -215,6 +215,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                         />
                       </>
                     )}
+                    <div>Upload delegate results & feedback</div>
                   </>
                 )}
                 {isDelegate && myCommittee && (

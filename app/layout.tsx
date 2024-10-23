@@ -11,6 +11,12 @@ export const metadata: Metadata = {
   title: "Diplomat",
   description:
     "A platform for Model United Nations (MUN) that streamlines the process of hosting, viewing, and applying to tournaments.",
+  robots: {
+    index: true,
+    googleBot: {
+      index: true,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -25,11 +31,11 @@ export default function RootLayout({
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
     >
       <html lang="en">
-        <body className={"bg-slate-200 min-h-screen h-auto flex flex-col ${inter.className}"}>
+        <body
+          className={`bg-slate-200 min-h-screen h-auto flex flex-col ${inter.className}`}
+        >
           <Navbar />
-          <main className="flex-grow">
-            {children}
-          </main>
+          <main className="flex-grow">{children}</main>
           <Footer />
         </body>
       </html>
