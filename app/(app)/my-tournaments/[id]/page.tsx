@@ -215,7 +215,6 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                         />
                       </>
                     )}
-                    <div>Upload delegate results & feedback</div>
                   </>
                 )}
                 {isDelegate && myCommittee && (
