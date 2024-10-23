@@ -115,13 +115,15 @@ const ContactUsPage = () => {
               </FormItem>
             )}
           />
-          <Button
-            disabled={isPending}
-            type="submit"
-            className="w-full sm:w-16 bg-docorange-100 hover:bg-docorange-200"
-          >
-            Send
-          </Button>
+          <div className="w-full flex justify-center items-center">
+            <Button
+              disabled={isPending}
+              type="submit"
+              className="w-full sm:w-48 bg-periwinkle-100 hover:bg-periwinkle-200 text-lg"
+            >
+              Send!
+            </Button>
+          </div>
         </form>
       </Form>
     </section>
