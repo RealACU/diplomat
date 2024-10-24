@@ -37,7 +37,7 @@ export default function Home() {
             <div className="sm:h-64 sm:w-72 sm:bg-slate-200"/>
           </div>
 
-          <h1 style={{ lineHeight: '1.2' }} className="relative sm:absolute text-5xl sm:text-8xl 2xl:text-9xl font-semibold sm:text-left text-center pl-4 sm:pl-12 -mr-16 xl:-mr-8 pt-64 sm:pt-20 z-30 text-navy-100">
+          <h1 style={{ lineHeight: '1.2' }} className="relative sm:absolute text-5xl sm:text-8xl 2xl:text-9xl font-semibold sm:text-left text-center pl-4 pr-4 sm:pr-0 sm:pl-12 sm:-mr-16 xl:-mr-8 pt-64 sm:pt-20 z-30 text-navy-100">
             Your gateway to everything Model UN
           </h1>
           <div className="relative sm:absolute my-12 sm:my-0 sm:mt-[480px] 2xl:mt-[580px] sm:mx-12 gap-x-6 flex sm:flex-row flex-col">
