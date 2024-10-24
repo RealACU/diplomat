@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { updateUserMetadata } from "@/actions/updateUserMetadata";
 import { Input } from "@/components/ui/input";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 
 function SchoolAffiliationPage() {
@@ -29,10 +29,10 @@ function SchoolAffiliationPage() {
         icon: "success",
         confirmButtonText: "OK",
         customClass: {
-          confirmButton: 'bg-periwinkle-100 hover:bg-periwinkle-200 text-white',
+          confirmButton: "bg-periwinkle-100 hover:bg-periwinkle-200 text-white",
         },
       });
-      router.push('/');
+      router.push("/");
     } else {
       console.error("Error updating user metadata:", result.error);
       alert("Failed to update school affiliation. Please try again.");
@@ -48,7 +48,9 @@ function SchoolAffiliationPage() {
       <form onSubmit={handleSubmit} className="w-full mx-10">
         <h3 className="font-bold text-lg text-gray-800">
           Additional Details
-          <p className="font-light text-sm text-gray-500">You're almost there!</p>
+          <p className="font-light text-sm text-gray-500">
+            {"You're almost there!"}
+          </p>
         </h3>
         <div className="my-8">
           <p className="text-start text-sm mx-0.5 mb-1">School Name</p>
@@ -61,7 +63,7 @@ function SchoolAffiliationPage() {
             required
           />
         </div>
-        <button 
+        <button
           type="submit"
           className="text-sm bg-gradient-to-t from-gray-800 to-gray-700 hover:bg-gradient-to-b text-white rounded-md py-1.5 w-full"
         >
