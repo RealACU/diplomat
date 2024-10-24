@@ -29,6 +29,12 @@ const config = {
       backgroundPosition: {
         "top-3": "center top -3rem",
       },
+      fontSize: {
+        '8.5xl': ['7rem', '1'],
+      },
+      screens: {
+        '3xl': '1860px', 
+      },
       colors: {
         'periwinkle': {
           50: "#A6B8D7",
