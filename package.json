@@ -12,7 +12,7 @@
   "dependencies": {
     "@clerk/clerk-sdk-node": "^5.0.54",
     "@clerk/nextjs": "^5.7.5",
-    "@clerk/types": "^4.26.0",
+    "@clerk/types": "^4.28.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@hookform/resolvers": "^3.3.4",
