@@ -29,6 +29,7 @@ model Tourney {
 model Committee {
   id                 Int              @id @default(autoincrement())
   name               String
+  description        String?
   roomNumber         String
   bgGuideLink        String
   chairIds           String[]

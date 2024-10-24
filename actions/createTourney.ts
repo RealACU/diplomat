@@ -37,6 +37,7 @@ export default async function createTourney(
         return {
           name: committee.name,
           roomNumber: committee.roomNumber,
+          description: committee.description,
           bgGuideLink: "",
           chairIds: committee.chairs.map((chair) => {
             allChairIds.push(chair.id);

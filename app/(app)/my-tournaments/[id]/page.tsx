@@ -6,9 +6,9 @@ import MunLogoSVG from "@/components/MunLogoSVG";
 import UploadButton from "@/components/UploadButton";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-// @ts-ignore
-import { Download, FileText, File, FileChartPie, FileSpreadsheet, FileImage, FileVideo, FileArchive, FileQuestion } from "lucide-react";
+import { Download } from 'lucide-react';
 import getTourneyById from "@/actions/getTourneyById";
+import TournamentInformation from '@/components/TournamentInformation';
 
 const tourneyPage = async ({ params }: { params: { id: string } }) => {
   const tourney = await getTourneyById(params.id);
@@ -54,37 +54,13 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
       )[0]
     : null;
 
-  const getFileTypeIcon = (link: string) => {
-    const parts = link.split('.');
-    const extension = parts.length > 1 ? parts.pop() : '';
-  
-    //File type icons
-    const types: { [key: string]: JSX.Element } = {
-      pdf: <FileText/>,
-      doc: <File />,
-      docx: <File />,
-      ppt: <FileChartPie />,
-      pptx: <FileChartPie />,
-      xls: <FileSpreadsheet />,
-      xlsx: <FileSpreadsheet />,
-      png: <FileImage />,
-      jpg: <FileImage />,
-      jpeg: <FileImage />,
-      mp4: <FileVideo />,
-      zip: <FileArchive />,
-      // Add more file types as needed
-    };
-  
-    return extension && extension in types ? types[extension] : <FileQuestion  />;
-  };    
-
   const items = [
     {
       title: "Invitation",
       color: tourney.primaryColorHex,
       content: (
         <div
-          className="relative w-full h-[980px] sm:h-[665px] py-4 sm:py-8 px-4 sm:px-6 text-slate-800 z-20"
+          className="relative w-full h-auto py-4 sm:py-8 px-4 sm:px-6 text-slate-800 z-20"
           style={{
             background: `
               linear-gradient(130deg, ${tourney.primaryColorHex} 5%, ${tourney.secondaryColorHex} 70%)
@@ -104,95 +80,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                 </p>
               </div>
             </div>
-            <div className="bg-slate-50 pb-0 bg-opacity-85 my-4 sm:my-0 w-full sm:w-1/3 rounded-lg drop-shadow-lg">
-              <div className="w-full h-10 sm:h-14 rounded-lg flex shadow-md items-center justify-center mb-5">
-                <p className="text-lg sm:text-xl font-semibold mx-8">
-                  Tournament Information
-                </p>
-              </div>
-              <div className="bg-slate-300 mx-4 px-4 py-3 my-3 rounded-md font-medium text-base flex overflow-clip break-words">
-                <p>
-                  {new Date(tourney.startDate).toDateString() ===
-                  new Date(tourney.endDate).toDateString()
-                    ? "Date"
-                    : "Dates"}
-                </p>
-                <p className="ml-auto text-right">
-                  {new Date(tourney.startDate).toDateString() ===
-                  new Date(tourney.endDate).toDateString()
-                    ? new Date(tourney.startDate).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })
-                    : `${new Date(tourney.startDate).toLocaleDateString(
-                        "en-US",
-                        {
-                          year: "numeric",
-                          month: "long",
-                          day: "numeric",
-                        }
-                      )} - ${new Date(tourney.endDate).toLocaleDateString(
-                        "en-US",
-                        { year: "numeric", month: "long", day: "numeric" }
-                      )}`}
-                </p>
-              </div>
-              <div className="bg-slate-300 mx-4 px-4 py-3 my-3 rounded-md font-medium text-base flex overflow-clip break-words">
-                <p>Location</p>
-                <p className="ml-auto text-right">{tourney.school}</p>
-              </div>
-              <div className="bg-slate-300 mx-4 px-4 py-3 my-3 rounded-md font-medium text-base flex overflow-clip break-words">
-                <p>Committees</p>
-                <div className="ml-auto text-right">
-                  {committees.length > 0 ? (
-                    committees.map((committee) => (
-                      <div key={committee.id}>{committee.name}</div>
-                    ))
-                  ) : (
-                    <p>No committees (yet!)</p>
-                  )}
-                </div>
-              </div>
-              <div className="bg-slate-300 mx-4 my-3 mb-5 rounded-md font-medium text-base flex overflow-clip break-words">
-                <div className="h-80 w-full">
-                  <div className="px-4 py-3 h-12 w-full flex items-center justify-center relative shadow-md rounded-md">
-                    <p className="text-center z-10">Delegate resources</p>
-                  </div>
-                  <div className="p-4">
-                    <div className="grid grid-cols-3 gap-4">
-                      {(isDelegate || isChair || isCreator) &&
-                        delegateResources.map((delegateResource, i) => {
-                          return (
-                            <a
-                              key={i}
-                              href={delegateResource.link}
-                              target="_blank" //open in new tab
-                              rel="noopener noreferrer"
-                              className="w-full aspect-[1/1] flex flex-col items-center justify-center rounded-md border-slate-400 border-2 hover:bg-slate-400 transition-all duration-200"
-                            >
-                              <span className="w-16 h-16">
-                                {React.cloneElement(getFileTypeIcon(delegateResource.link), { size: 64, stroke: '#334155' })}
-                              </span>
-                              <span className="mt-2 text-center text-xs">{delegateResource.name}</span>
-                            </a>
-                          );
-                        }
-                      )}
-                    </div>
-                    {isCreator && (
-                      <UploadButton
-                        type="delegate-resources"
-                        tourneyId={params.id}
-                        // Zero is fine since the type is "delegate-resources"
-                        committeeId={0}
-                        delegateId={user.id}
-                      />
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <TournamentInformation tourney={tourney} user={user} />
           </div>
         </div>
       ),
@@ -202,7 +90,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
       color: tourney.primaryColorHex,
       content: (
         <div
-          className="relative w-full h-[700px] py-8 px-6 text-slate-800 z-20"
+          className="relative w-full h-auto py-8 px-6 text-slate-800 z-20"
           style={{
             background: `
               linear-gradient(80deg, ${tourney.secondaryColorHex} 0%, transparent 15%),
@@ -214,7 +102,56 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
           <div className="flex gap-6">
             <div className="bg-slate-300 bg-opacity-75 w-2/3 rounded-lg filter drop-shadow-lg">
               <div className="w-full h-14 rounded-lg flex shadow-md items-center justify-center">
-                <p className="text-xl font-semibold">Committees</p>
+                <p className="text-xl font-semibold">Committee Information</p>
+              </div>
+              <div className="w-full h-[465px]">
+                <div className="text-base px-6 py-4">
+                  {committees.length > 0 ? (
+                    committees.map((committee) => (
+                      <div className="mb-4">
+                        <div 
+                          key={committee.id}
+                          className="text-lg font-bold"
+                        >
+                          {committee.name}
+                        </div>
+                        <div 
+                          key={committee.id} 
+                          className="text-base font-medium ml-2"
+                        >
+                          {committee.description}
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                  <p>No committees (yet!)</p>
+                  )}
+                </div>
+              </div>
+            </div>
+            <TournamentInformation tourney={tourney} user={user} />
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Register",
+      color: tourney.primaryColorHex,
+      content: (
+        <div
+          className="relative w-full h-auto py-8 px-6 text-slate-800 z-20"
+          style={{
+            background: `
+              linear-gradient(70deg, ${tourney.secondaryColorHex} 0%, transparent 30%),
+              linear-gradient(310deg, ${tourney.secondaryColorHex} 20%, transparent 70%),
+              linear-gradient(180deg, ${tourney.primaryColorHex}, ${tourney.primaryColorHex})
+            `,
+          }}
+        >
+        <div className="flex gap-6">
+            <div className="bg-slate-300 bg-opacity-75 w-2/3 rounded-lg filter drop-shadow-lg">
+              <div className="w-full h-14 rounded-lg flex shadow-md items-center justify-center">
+                <p className="text-xl font-semibold">Register</p>
               </div>
               <div className="w-full h-[465px] p-8 space-y-2">
                 {isChair && myCommittee && (
@@ -296,45 +233,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                 )}
               </div>
             </div>
-
-            <div className="bg-slate-50 bg-opacity-85 w-1/3 rounded-lg drop-shadow-lg">
-              <div className="w-full h-14 rounded-lg flex shadow-md items-center justify-center mb-5">
-                <p className="text-xl font-semibold">Tournament Information</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
-      title: "Register",
-      color: tourney.primaryColorHex,
-      content: (
-        <div
-          className="relative w-full h-[700px] py-8 px-6 text-slate-800 z-20"
-          style={{
-            background: `
-              linear-gradient(70deg, ${tourney.secondaryColorHex} 0%, transparent 30%),
-              linear-gradient(310deg, ${tourney.secondaryColorHex} 20%, transparent 70%),
-              linear-gradient(180deg, ${tourney.primaryColorHex}, ${tourney.primaryColorHex})
-            `,
-          }}
-        >
-          <div className="flex gap-6">
-            <div className="bg-slate-300 bg-opacity-75 w-2/3 rounded-lg filter drop-shadow-lg">
-              <div className="w-full h-14 rounded-lg flex shadow-md items-center justify-center">
-                <p className="text-xl font-semibold">Register</p>
-              </div>
-              <div className="w-full h-[465px]">
-                <p className="text-base px-6 py-4">hello world!</p>
-              </div>
-            </div>
-
-            <div className="bg-slate-50 bg-opacity-85 w-1/3 rounded-lg drop-shadow-lg">
-              <div className="w-full h-14 rounded-lg flex shadow-md items-center justify-center mb-5">
-                <p className="text-xl font-semibold">Tournament Information</p>
-              </div>
-            </div>
+            <TournamentInformation tourney={tourney} user={user} />
           </div>
         </div>
       ),

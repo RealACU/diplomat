@@ -51,6 +51,7 @@ export type Committee = {
   name: string;
   roomNumber: string;
   chairs: User[];
+  description: string;
 };
 
 const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
@@ -64,6 +65,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
   const [name, setName] = useState<string>("");
   const [roomNumber, setRoomNumber] = useState<string>(""); // Some schools use letters
   const [committees, setCommittees] = useState<Committee[]>([]);
+  const [description, setDescription] = useState<string>("");
 
   // Dialog state for adding chairs
   const [chairPreviews, setChairPreviews] = useState<User[]>();
@@ -561,6 +563,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                                       ? {
                                           name: comm.name,
                                           roomNumber: comm.roomNumber,
+                                          description: comm.description, 
                                           chairs: [
                                             ...comm.chairs,
                                             chairPreview,
@@ -592,7 +595,49 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
-                <div className="py-2 flex flex-col gap-1">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button variant="outline" className="mt-2">
+                      <Plus className="h-4 w-4" />
+                      Add Description
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                      <DialogTitle>Add Description</DialogTitle>
+                    </DialogHeader>
+                    <Label htmlFor="description">Committee Description</Label>
+                    <textarea
+                      id="description"
+                      placeholder="Enter committee description"
+                      style={{ height: '240px' }}
+                      value={description} // Bind the value of textarea to state
+                      onChange={(e) => setDescription(e.target.value)} 
+                      onBlur={(e) => setDescription(e.target.value)} // Store the description
+                    />
+                    <DialogClose>
+                      <Button
+                        className="h-auto w-full bg-slate-100 hover:bg-slate-200 text-black"
+                        type="submit"
+                        onClick={() => {
+                          setCommittees((committees) =>
+                            committees.map((comm) =>
+                              comm === committee // Assuming committee has an 'id'
+                                ? {
+                                    ...comm, // Keep other properties unchanged
+                                    description: description, // Update the description
+                                  }
+                                : comm
+                            )
+                          );
+                        }}
+                      >
+                        Save Description
+                      </Button>
+                    </DialogClose>
+                  </DialogContent>
+                </Dialog>
+                <div className="pt-2 flex flex-col gap-1">
                   {committee.chairs.map((chair, k) => (
                     <Button
                       key={k}
@@ -604,6 +649,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                               ? {
                                   name: comm.name,
                                   roomNumber: comm.roomNumber,
+                                  description: comm.description,
                                   // Creates a committee object without this specific chair
                                   chairs: comm.chairs.filter(
                                     (c) => c !== chair
@@ -623,6 +669,14 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
                       />
                     </Button>
                   ))}
+                </div>
+                <div className="pt-2 flex flex-col gap-1 text-sm">
+                  {committee.description && ( // Conditionally render the box if the description is not empty
+                    <div className="h-auto w-full flex p-1 rounded-md border-[1px] bg-slate-100">
+                      {/* Display the description */}
+                      <p className="m-2">{committee.description}</p> {/* Adjust margin as needed */}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -667,7 +721,7 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
 
                         setCommittees((committees) => [
                           ...committees,
-                          { name: name, roomNumber: roomNumber, chairs: [] },
+                          { name: name, roomNumber: roomNumber, chairs: [], description: description },
                         ]);
 
                         setName("");
