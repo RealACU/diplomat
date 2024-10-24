@@ -1,0 +1,14 @@
+{
+    "headers": [
+      {
+        "source": "/path/to/clerk.browser.js",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "https://www.mundiplomat.com"
+          }
+        ]
+      }
+    ]
+  }
+  
