@@ -29,7 +29,7 @@ export default function Home() {
 
   return (
     <div>
-      <div className="flex-col sm:flex sm:flex-row h-[745px] sm:h-screen justify-between overflow-hidden">
+      <div className="flex-col sm:flex sm:flex-row h-[745px] sm:min-h-screen justify-between overflow-hidden">
         <div className="relative flex-grow w-full xl:flex-1">
 
           {/*absolutely ratchet solution to this blur thing, but I have spent far too long on this thus far. I digress*/}
@@ -37,10 +37,10 @@ export default function Home() {
             <div className="sm:h-64 sm:w-72 sm:bg-slate-200"/>
           </div>
 
-          <h1 style={{ lineHeight: '1.2' }} className="relative sm:absolute text-5xl sm:text-8xl 2xl:text-8.5xl 3xl:text-9xl font-semibold sm:text-left text-center pl-4 pr-4 sm:pr-0 sm:pl-12 sm:-mr-16 xl:-mr-8 pt-64 sm:pt-20 z-30 text-navy-100">
+          <h1 style={{ lineHeight: '1.2' }} className="relative sm:absolute text-5xl sm:text-8xl 2xl:text-8.5xl 3xl:text-9xl font-semibold sm:text-left text-center pl-4 pr-4 sm:pr-0 sm:pl-12 sm:-mr-16 xl:-mr-8 pt-64 sm:pt-16 z-30 text-navy-100">
             Your gateway to everything Model UN
           </h1>
-          <div className="relative sm:absolute my-12 sm:my-0 sm:mt-[480px] 2xl:mt-[580px] sm:mx-12 gap-x-6 flex sm:flex-row flex-col">
+          <div className="relative sm:absolute my-12 sm:my-0 sm:mt-[480px] 2xl:mt-[500px] sm:mx-12 gap-x-6 flex sm:flex-row flex-col">
             <Button className="mx-12 sm:mx-0 py-6 sm:py-8 px-8 text-xl sm:text-2xl font-bold bg-periwinkle-100 hover:bg-periwinkle-200 shadow-lg transition-all duration-110">
               <Link href="/view-tournaments">View Tournaments</Link>
             </Button>
