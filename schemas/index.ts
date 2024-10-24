@@ -9,7 +9,7 @@ export const TourneySchema = z.object({
   name: z.string({ required_error: "Please enter tournament name" }),
   description: z
     .string({ required_error: "Please enter description" })
-    .max(500, { message: "Description cannot be longer than 500 characters" }),
+    .max(5000, { message: "Description cannot be longer than 5000 characters" }),
   school: z.string({ required_error: "Please enter school name" }),
   address: z.string({ required_error: "Please enter first address line" }),
   city: z.string({ required_error: "Please enter city" }),
