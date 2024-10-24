@@ -74,7 +74,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                   Invitation Message
                 </p>
               </div>
-              <div className="w-full h-[300px] sm:h-[465px]">
+              <div className="w-full h-auto">
                 <p className="text-sm sm:text-base px-4 py-3 sm:px-6 sm:py-4 whitespace-pre-wrap">
                   {tourney.description}
                 </p>
@@ -99,12 +99,12 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
             `,
           }}
         >
-          <div className="flex gap-6">
-            <div className="bg-slate-300 bg-opacity-75 w-2/3 rounded-lg filter drop-shadow-lg">
+          <div className="flex-col sm:flex-row sm:flex gap-4 sm:gap-6">
+            <div className="bg-slate-300 bg-opacity-75 w-full sm:w-2/3 rounded-lg filter drop-shadow-lg">
               <div className="w-full h-14 rounded-lg flex shadow-md items-center justify-center">
                 <p className="text-xl font-semibold">Committee Information</p>
               </div>
-              <div className="w-full h-[465px]">
+              <div className="w-full h-auto">
                 <div className="text-base px-6 py-4">
                   {committees.length > 0 ? (
                     committees.map((committee) => (
@@ -142,12 +142,12 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
             `,
           }}
         >
-          <div className="flex gap-6">
-            <div className="bg-slate-300 bg-opacity-75 w-2/3 rounded-lg filter drop-shadow-lg">
+          <div className="flex-col sm:flex-row sm:flex gap-4 sm:gap-6">
+            <div className="bg-slate-300 bg-opacity-75 w-full sm:w-2/3 rounded-lg filter drop-shadow-lg">
               <div className="w-full h-14 rounded-lg flex shadow-md items-center justify-center">
                 <p className="text-xl font-semibold">Register</p>
               </div>
-              <div className="w-full h-[465px] p-8 space-y-2">
+              <div className="w-full h-auto p-8 space-y-2">
                 {isChair && myCommittee && (
                   <>
                     <p>You are a chair for {myCommittee.name}</p>
