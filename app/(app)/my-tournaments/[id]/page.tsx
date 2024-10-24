@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import TabsComponent from "@/components/ui/tabs";
 import { currentUser } from "@clerk/nextjs/server";
 import CommitteeSignUp from "@/components/CommitteeSignUp";
@@ -6,9 +6,9 @@ import MunLogoSVG from "@/components/MunLogoSVG";
 import UploadButton from "@/components/UploadButton";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Download } from 'lucide-react';
+import { Download } from "lucide-react";
 import getTourneyById from "@/actions/getTourneyById";
-import TournamentInformation from '@/components/TournamentInformation';
+import TournamentInformation from "@/components/TournamentInformation";
 
 const tourneyPage = async ({ params }: { params: { id: string } }) => {
   const tourney = await getTourneyById(params.id);
@@ -108,23 +108,17 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                 <div className="text-base px-6 py-4">
                   {committees.length > 0 ? (
                     committees.map((committee) => (
-                      <div className="mb-4">
-                        <div 
-                          key={committee.id}
-                          className="text-lg font-bold"
-                        >
+                      <div key={committee.id} className="mb-4">
+                        <div className="text-lg font-bold">
                           {committee.name}
                         </div>
-                        <div 
-                          key={committee.id} 
-                          className="text-base font-medium ml-2"
-                        >
+                        <div className="text-base font-medium ml-2">
                           {committee.description}
                         </div>
                       </div>
                     ))
                   ) : (
-                  <p>No committees (yet!)</p>
+                    <p>No committees (yet!)</p>
                   )}
                 </div>
               </div>
@@ -148,7 +142,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
             `,
           }}
         >
-        <div className="flex gap-6">
+          <div className="flex gap-6">
             <div className="bg-slate-300 bg-opacity-75 w-2/3 rounded-lg filter drop-shadow-lg">
               <div className="w-full h-14 rounded-lg flex shadow-md items-center justify-center">
                 <p className="text-xl font-semibold">Register</p>
