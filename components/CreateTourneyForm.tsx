@@ -112,6 +112,10 @@ const CreateTourneyForm = ({ creatorId }: { creatorId: string }) => {
           title: "Success!",
           text: "Did it without a hitch",
           icon: "success",
+          confirmButtonText: "OK",
+          customClass: {
+            confirmButton: 'bg-periwinkle-100 hover:bg-periwinkle-200 text-white',
+          },
         });
         return router.push("/");
       }

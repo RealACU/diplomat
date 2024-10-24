@@ -9,23 +9,22 @@ import { isBefore, isSameDay, isAfter } from "date-fns";
 
 const MyTournamentsPage = async () => {
   const user = await currentUser();
+  //use this when you want to call schoolaffiliation
+  //{String(user?.publicMetadata?.schoolAffiliation || 'School affiliation not provided')}
 
-  // Explicitly define the types for tournament arrays
   const dTourneys: string[] = Array.isArray(user?.publicMetadata.dTourneys) ? user.publicMetadata.dTourneys : [];
   const cTourneys: string[] = Array.isArray(user?.publicMetadata.cTourneys) ? user.publicMetadata.cTourneys : [];
   
-  // Helper function to fetch tournaments
   const fetchTournaments = async (tourneyIds: string[]) => {
     const tournamentPromises = tourneyIds.map(async (tourneyId: string) => {
       const tourneyInfo = await getTourneyById(tourneyId);
-      return tourneyInfo || null; // Return null if no tournament info is found
+      return tourneyInfo || null;
     });
   
     const results = await Promise.all(tournamentPromises);
-    return results.filter(Boolean); // Filter out null values
+    return results.filter(Boolean); 
   };
 
-  // Fetch tournaments for the user
   const tournaments = await fetchTournaments(dTourneys);
   const chairedTournaments = await fetchTournaments(cTourneys);
 
