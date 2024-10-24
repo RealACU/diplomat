@@ -220,7 +220,7 @@ const MyTournamentsPage = async () => {
             title="Past Tournaments"
             subTabItems={[
               {
-                title: "Tournaments I completed in",
+                title: "Tournaments I competed in",
                 content: (
                   <div className="bg-slate-50 w-full rounded-lg">
                     <div className="w-full h-[465px] overflow-auto bg-white rounded-md shadow-md">
@@ -337,7 +337,7 @@ const MyTournamentsPage = async () => {
             title="Current Tournaments"
             subTabItems={[
               { 
-                title: "Tournaments I completed in", 
+                title: "Tournaments I'm competing in", 
                 content: (
                   <div className="bg-slate-50 w-full rounded-lg">
                     <div className="w-full h-[465px] overflow-auto bg-white rounded-md shadow-md">
@@ -390,7 +390,7 @@ const MyTournamentsPage = async () => {
                 ),
               },
               { 
-                title: "Tournaments I chaired/diased for", 
+                title: "Tournaments I'm chairing/diasing for", 
                 content: (
                   <div className="bg-slate-50 w-full rounded-lg">
                     <div className="w-full h-[465px] overflow-auto bg-white rounded-md shadow-md">
@@ -452,7 +452,7 @@ const MyTournamentsPage = async () => {
             title="Past Tournaments"
             subTabItems={[
               { 
-                title: "Tournaments I completed in", 
+                title: "Tournaments I will compete in", 
                 content: (
                   <div className="bg-slate-50 w-full rounded-lg">
                     <div className="w-full h-[465px] overflow-auto bg-white rounded-md shadow-md">
@@ -505,7 +505,7 @@ const MyTournamentsPage = async () => {
                 ),
               },
               { 
-                title: "Tournaments I chaired/diased for", 
+                title: "Tournaments I will chair/dias for", 
                 content: (
                   <div className="bg-slate-50 w-full rounded-lg">
                     <div className="w-full h-[465px] overflow-auto bg-white rounded-md shadow-md">

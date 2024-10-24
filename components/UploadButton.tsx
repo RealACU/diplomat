@@ -1,7 +1,7 @@
 "use client";
 
 import { CldUploadWidget } from "next-cloudinary";
-import { ScrollText } from "lucide-react";
+import { ScrollText, Plus } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import setBgGuide from "@/actions/setBgGuide";
@@ -62,13 +62,23 @@ const UploadButton = ({
       {({ open }) => {
         return (
           <>
-            {!paperLink && (
+            {!paperLink && type !== "delegate-resources" && (
               <Button
                 variant="ghost"
                 onClick={() => open()}
                 className="h-auto w-full cursor-pointer hover:opacity-70 transition border-dashed border-2 p-6 border-neutral-300 flex flex-col justify-center items-center gap-4 text-neutral-600"
               >
                 <ScrollText size={50} />
+                <div className="font-semibold text-lg">Click to upload</div>
+              </Button>
+            )}
+            {!paperLink && type === "delegate-resources" && (
+              <Button
+              variant="ghost"
+              onClick={() => open()}
+              className="h-auto w-full cursor-pointer hover:opacity-70 transition border-dashed border-2 p-2 mt-4 border-neutral-300 flex flex-row justify-center items-center gap-4 text-slate-700"
+              >
+                <Plus size={20} />
                 <div className="font-semibold text-lg">Click to upload</div>
               </Button>
             )}

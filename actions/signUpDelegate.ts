@@ -3,6 +3,10 @@
 import { db } from "@/lib/db";
 import { clerkClient } from "@clerk/nextjs/server";
 
+type UserPublicMetadata = {
+  dTourneys?: string[]; 
+};
+
 export default async function signUpDelegate(
   tourneyId: string,
   committeeId: number,
@@ -22,9 +26,14 @@ export default async function signUpDelegate(
 
   const user = await clerkClient.users.getUser(delegateId);
 
+  const publicMetadata = user.publicMetadata as UserPublicMetadata;
+
   await clerkClient.users.updateUserMetadata(delegateId, {
     publicMetadata: {
-      dTourneys: [...(user.publicMetadata.dTourneys as string[]), tourneyId],
+      dTourneys: [
+        ...(publicMetadata.dTourneys || []),
+        tourneyId,
+      ],
     },
   });
 

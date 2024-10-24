@@ -1,3 +1,4 @@
+import React from 'react';
 import TabsComponent from "@/components/ui/tabs";
 import { currentUser } from "@clerk/nextjs/server";
 import CommitteeSignUp from "@/components/CommitteeSignUp";
@@ -5,7 +6,8 @@ import MunLogoSVG from "@/components/MunLogoSVG";
 import UploadButton from "@/components/UploadButton";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Download } from "lucide-react";
+// @ts-ignore
+import { Download, FileText, File, FileChartPie, FileSpreadsheet, FileImage, FileVideo, FileArchive, FileQuestion } from "lucide-react";
 import getTourneyById from "@/actions/getTourneyById";
 
 const tourneyPage = async ({ params }: { params: { id: string } }) => {
@@ -51,6 +53,30 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
         (committee) => user && committee.delegateIds.includes(user.id)
       )[0]
     : null;
+
+  const getFileTypeIcon = (link: string) => {
+    const parts = link.split('.');
+    const extension = parts.length > 1 ? parts.pop() : '';
+  
+    //File type icons
+    const types: { [key: string]: JSX.Element } = {
+      pdf: <FileText/>,
+      doc: <File />,
+      docx: <File />,
+      ppt: <FileChartPie />,
+      pptx: <FileChartPie />,
+      xls: <FileSpreadsheet />,
+      xlsx: <FileSpreadsheet />,
+      png: <FileImage />,
+      jpg: <FileImage />,
+      jpeg: <FileImage />,
+      mp4: <FileVideo />,
+      zip: <FileArchive />,
+      // Add more file types as needed
+    };
+  
+    return extension && extension in types ? types[extension] : <FileQuestion  />;
+  };    
 
   const items = [
     {
@@ -130,11 +156,30 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
               </div>
               <div className="bg-slate-300 mx-4 my-3 mb-5 rounded-md font-medium text-base flex overflow-clip break-words">
                 <div className="h-80 w-full">
-                  <div className="px-4 py-3 h-12 w-full flex flex-row relative shadow-md rounded-md">
-                    <p className="relative z-10">Delegate resources</p>
-                    <p className="ml-auto text-right z-10">Map, etc.</p>
+                  <div className="px-4 py-3 h-12 w-full flex items-center justify-center relative shadow-md rounded-md">
+                    <p className="text-center z-10">Delegate resources</p>
                   </div>
                   <div className="p-4">
+                    <div className="grid grid-cols-3 gap-4">
+                      {(isDelegate || isChair || isCreator) &&
+                        delegateResources.map((delegateResource, i) => {
+                          return (
+                            <a
+                              key={i}
+                              href={delegateResource.link}
+                              target="_blank" //open in new tab
+                              rel="noopener noreferrer"
+                              className="w-full aspect-[1/1] flex flex-col items-center justify-center rounded-md border-slate-400 border-2 hover:bg-slate-400 transition-all duration-200"
+                            >
+                              <span className="w-16 h-16">
+                                {React.cloneElement(getFileTypeIcon(delegateResource.link), { size: 64, stroke: '#334155' })}
+                              </span>
+                              <span className="mt-2 text-center text-xs">{delegateResource.name}</span>
+                            </a>
+                          );
+                        }
+                      )}
+                    </div>
                     {isCreator && (
                       <UploadButton
                         type="delegate-resources"
@@ -144,18 +189,6 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                         delegateId={user.id}
                       />
                     )}
-                    {(isDelegate || isChair || isCreator) &&
-                      delegateResources.map((delegateResource, i) => {
-                        return (
-                          <Link
-                            key={i}
-                            href={delegateResource.link}
-                            download={delegateResource.name}
-                          >
-                            {delegateResource.name}
-                          </Link>
-                        );
-                      })}
                   </div>
                 </div>
               </div>
