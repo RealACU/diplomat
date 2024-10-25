@@ -39,7 +39,7 @@ const CommitteeSignUp = ({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="text-xs lg:text-sm text-wrap hover:text-slate-300 transition-all duration-100">
+        <Button className="text-xs lg:text-sm text-wrap text-slate-800 bg-slate-300 hover:bg-periwinkle-100 transition-all duration-200">
           Sign up for {committeeName}
         </Button>
       </DialogTrigger>

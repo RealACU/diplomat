@@ -107,29 +107,37 @@ const TournamentInformation = ({ tourney, user }: { tourney: any, user: any }) =
                     </div>
                     <div className="p-4">
                         <div className="grid grid-cols-3 gap-4">
-                            {delegateResources.map((delegateResource: { link: string; name: string; protected: boolean }, i: number) => (
-                                (!delegateResource.protected || isChair || isDelegate || isCreator) ? (
-                                    <a
-                                        key={i}
-                                        href={delegateResource.link}
-                                        target="_blank" // open in new tab
-                                        rel="noopener noreferrer"
-                                        className="w-full aspect-[1/1] flex flex-col items-center justify-center rounded-md border-slate-400 border-2 hover:bg-slate-400 transition-all duration-200"
-                                    >
-                                        <span className="w-16 h-16">
-                                            {React.cloneElement(getFileTypeIcon(delegateResource.link), { size: 64, stroke: '#334155' })}
-                                        </span>
-                                        <span className="mt-2 text-center text-xs">{delegateResource.name}</span>
-                                    </a>
-                                ) : (
-                                    <div key={i} className="w-full aspect-[1/1] flex flex-col items-center justify-center rounded-md border-slate-400 border-2 border-dashed">
-                                        <span className="w-16 h-16">
-                                            {React.cloneElement(getFileTypeIcon(delegateResource.link), { size: 64, stroke: '#334155' })}
-                                        </span>
-                                        <span className="mt-2 text-center text-xs">{delegateResource.name} (Protected)</span>
+                        {delegateResources.map((delegateResource: { link: string; name: string; protected: boolean }, i: number) => (
+                            (!delegateResource.protected || isChair || isDelegate || isCreator) ? (
+                                <a
+                                    key={i}
+                                    href={delegateResource.link}
+                                    target="_blank" // open in new tab
+                                    rel="noopener noreferrer"
+                                    className="w-full aspect-[1/1] flex flex-col items-center justify-center rounded-md border-slate-400 border-2 hover:bg-slate-400 transition-all duration-200"
+                                >
+                                    <span className="w-16 h-16">
+                                        {React.cloneElement(getFileTypeIcon(delegateResource.link), { size: 64, stroke: '#334155' })}
+                                    </span>
+                                    <span className="mt-2 text-center text-xs">{delegateResource.name}</span>
+                                </a>
+                            ) : (
+                                <div 
+                                    key={i} 
+                                    className="w-full aspect-[1/1] flex flex-col items-center justify-center rounded-md border-slate-400 border-2 border-dashed relative group"
+                                >
+                                    <span className="w-16 h-16">
+                                        {React.cloneElement(getFileTypeIcon(delegateResource.link), { size: 64, stroke: '#334155' })}
+                                    </span>
+                                    <span className="mt-2 text-center text-xs">{delegateResource.name} (Protected)</span>
+                                    
+                                    {/* Tooltip */}
+                                    <div className="absolute hidden group-hover:block top-full mt-2 px-2 py-1 text-xs text-white bg-periwinkle-200 rounded-md shadow-lg z-10">
+                                        Please register to view this resource
                                     </div>
-                                )
-                            ))}
+                                </div>
+                            )
+                        ))}
                         </div>
                         {isCreator && (
                             <UploadButton

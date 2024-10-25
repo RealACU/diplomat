@@ -187,7 +187,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
               <div className="w-full h-14 rounded-lg flex shadow-md items-center justify-center">
                 <p className="text-xl font-semibold">Register</p>
               </div>
-              <div className="w-full h-auto p-8 space-y-2">
+              <div className="w-full h-auto py-6 px-8 space-y-2">
                 {isChair && myCommittee && (
                   <>
                     <p>You are a chair for {myCommittee.name}</p>
@@ -239,7 +239,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                   </>
                 )}
                 {!isAdmin && !isChair && !isDelegate && (
-                  <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-3">
                     {committees.map((committee) => (
                       <CommitteeSignUp
                         key={committee.id}
