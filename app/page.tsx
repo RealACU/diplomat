@@ -14,7 +14,9 @@ import { isAfter, isToday } from "date-fns";
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [tourneys, setTourneys] = useState<any[]>([]);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  const isScreenSmall = () => typeof window !== "undefined" && window.innerWidth < 768
+  const [isSmallScreen, setIsSmallScreen] = useState(isScreenSmall());
   const searchInputRef = useRef(null);
   
   const fetchTourneys = async () => {
@@ -25,7 +27,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    const handleResize = () => setIsSmallScreen(window.innerWidth < 768);
+    const handleResize = () => setIsSmallScreen(isScreenSmall());
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -69,7 +71,7 @@ export default function Home() {
               src="/globe.png"
               alt="globe"
               layout="fill" // Makes it responsive
-              style={{ objectFit: isSmallScreen ? "contain" : "cover" }} // Makes it cover the space
+              style={{ objectFit: isSmallScreen ? "contain" : "cover" }} // Makes it cover the space based on screen size
               className="opacity-80"
             />
           </div>
