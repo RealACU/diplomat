@@ -114,10 +114,11 @@ export default function Home() {
               <p className="text-md sm:text-xl font-semibold mx-2 sm:mx-8">
                 My Tournaments
               </p>
-              <p className="hidden sm:block">
-                
-              </p>
             </div>
+            <p className="py-4 justify-center items-center text-center w-full hidden sm:block">
+              Sign up for a tournament! 
+              <Link href="/view-tournaments" className="text-blue-500 font-semibold hover:underline ml-2">View tournaments</Link>
+            </p>
           </div>
         </div>
       </div>

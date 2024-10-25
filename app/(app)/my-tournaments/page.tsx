@@ -260,8 +260,8 @@ const MyTournamentsPage = async () => {
                             ));
                           } else {
                             return (
-                              <li className="py-4 flex justify-center items-center text-center w-full">
-                                Sign up for a tournament! 
+                              <li className="py-4 flex-col sm:flex-row flex justify-center items-center text-center w-full">
+                                <p>Sign up for a tournament!</p>
                                 <Link href="/view-tournaments" className="text-blue-500 font-semibold hover:underline ml-2">View tournaments</Link>
                               </li>
                             );
@@ -313,8 +313,8 @@ const MyTournamentsPage = async () => {
                             ));
                           } else {
                             return (
-                              <li className="py-4 flex justify-center items-center text-center w-full">
-                                {"Talk to your advisor about chairing at your school's tournament!"}
+                              <li className="py-4 px-6 sm:px-0 flex justify-center items-center text-center w-full">
+                                <p>Talk to your advisor about chairing at your school's tournament!</p>
                               </li>
                             );
                           }
@@ -377,8 +377,8 @@ const MyTournamentsPage = async () => {
                             ));
                           } else {
                             return (
-                              <li className="py-4 flex justify-center items-center text-center w-full">
-                                Sign up for a tournament! 
+                              <li className="py-4 flex-col sm:flex-row flex justify-center items-center text-center w-full">
+                                <p>Sign up for a tournament!</p>
                                 <Link href="/view-tournaments" className="text-blue-500 font-semibold hover:underline ml-2">View tournaments</Link>
                               </li>
                             );
@@ -395,12 +395,14 @@ const MyTournamentsPage = async () => {
                   <div className="bg-slate-50 w-full rounded-lg">
                     <div className="w-full h-[465px] overflow-auto bg-white rounded-md shadow-md">
                       <ul className="bg-slate-300 px-4 py-1 font-bold text-md flex overflow-clip">
-                        <div className="w-[60%] break-words pr-8">Name</div>
+                        <div className="w-[50%] sm:w-[60%] break-words pr-8">Name</div>
                         <div className="w-[25%] break-words flex">
-                          <p className="w-5/6">City</p>
-                          <p className="w-1/6">State</p>
+                          <p className="w-full block sm:hidden">City, State</p>
+                          <p className="w-0 sm:w-5/6 hidden sm:block">City</p>
+                          <p className="w-0 sm:w-1/6 hidden sm:block">State</p>
                         </div>
-                        <div className="ml-auto text-right w-[15%]">Start Date</div>
+                        <div className="ml-auto text-right w-0 sm:w-[15%] hidden sm:block">Start Date</div>
+                        <div className="ml-auto text-right w-[25%] sm:w-0 block sm:hidden">Date</div>
                       </ul>
                       <ul>
                         {(() => {
@@ -428,8 +430,8 @@ const MyTournamentsPage = async () => {
                             ));
                           } else {
                             return (
-                              <li className="py-4 flex justify-center items-center text-center w-full">
-                                {"Talk to your advisor about chairing at your school's tournament!"}
+                              <li className="py-4 px-6 sm:px-0 flex justify-center items-center text-center w-full">
+                                <p>Talk to your advisor about chairing at your school's tournament!</p>
                               </li>
                             );
                           }
@@ -449,7 +451,7 @@ const MyTournamentsPage = async () => {
       content: (
         <div className="relative w-full h-[800px] sm:h-[700px] px-4 sm:px-6 py-4 text-slate-800 z-20 bg-periwinkle-100 bg-opacity-75">
           <SubTabsComponent 
-            title="Past Tournaments"
+            title="Future Tournaments"
             subTabItems={[
               { 
                 title: "Tournaments I will compete in", 
@@ -492,8 +494,8 @@ const MyTournamentsPage = async () => {
                             ));
                           } else {
                             return (
-                              <li className="py-4 flex justify-center items-center text-center w-full">
-                                Sign up for a tournament! 
+                              <li className="py-4 flex-col sm:flex-row flex justify-center items-center text-center w-full">
+                                <p>Sign up for a tournament!</p>
                                 <Link href="/view-tournaments" className="text-blue-500 font-semibold hover:underline ml-2">View tournaments</Link>
                               </li>
                             );
@@ -510,12 +512,14 @@ const MyTournamentsPage = async () => {
                   <div className="bg-slate-50 w-full rounded-lg">
                     <div className="w-full h-[465px] overflow-auto bg-white rounded-md shadow-md">
                       <ul className="bg-slate-300 px-4 py-1 font-bold text-md flex overflow-clip">
-                        <div className="w-[60%] break-words pr-8">Name</div>
+                        <div className="w-[50%] sm:w-[60%] break-words pr-8">Name</div>
                         <div className="w-[25%] break-words flex">
-                          <p className="w-5/6">City</p>
-                          <p className="w-1/6">State</p>
+                          <p className="w-full block sm:hidden">City, State</p>
+                          <p className="w-0 sm:w-5/6 hidden sm:block">City</p>
+                          <p className="w-0 sm:w-1/6 hidden sm:block">State</p>
                         </div>
-                        <div className="ml-auto text-right w-[15%]">Start Date</div>
+                        <div className="ml-auto text-right w-0 sm:w-[15%] hidden sm:block">Start Date</div>
+                        <div className="ml-auto text-right w-[25%] sm:w-0 block sm:hidden">Date</div>
                       </ul>
                       <ul>
                         {(() => {
@@ -543,8 +547,8 @@ const MyTournamentsPage = async () => {
                             ));
                           } else {
                             return (
-                              <li className="py-4 flex justify-center items-center text-center w-full">
-                                {"Talk to your advisor about chairing at your school's tournament!"}
+                              <li className="py-4 px-6 sm:px-0 flex justify-center items-center text-center w-full">
+                                <p>Talk to your advisor about chairing at your school's tournament!</p>
                               </li>
                             );
                           }

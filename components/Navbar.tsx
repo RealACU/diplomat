@@ -29,6 +29,7 @@ const Navbar = () => {
       {/* Hamburger button */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
+        onBlur={() => setIsOpen((prev) => !prev)}
         className="md:hidden flex items-center py-2 rounded text-gray-700"
       >
         <svg
