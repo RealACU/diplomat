@@ -147,6 +147,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                               href={committee.bgGuideLink}
                               target="_blank" //open in new tab
                               rel="noopener noreferrer"
+                              download={committee.bgGuideLink} 
                               className="w-32 aspect-square flex flex-col items-center justify-center rounded-md border-slate-400 border-2 hover:bg-slate-400 transition-all duration-200"
                             >
                               <span className="w-12 h-12">

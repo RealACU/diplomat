@@ -114,6 +114,7 @@ const TournamentInformation = ({ tourney, user }: { tourney: any, user: any }) =
                                     href={delegateResource.link}
                                     target="_blank" // open in new tab
                                     rel="noopener noreferrer"
+                                    download={delegateResource.name} 
                                     className="w-full aspect-[1/1] flex flex-col items-center justify-center rounded-md border-slate-400 border-2 hover:bg-slate-400 transition-all duration-200"
                                 >
                                     <span className="w-16 h-16">
