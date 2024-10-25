@@ -29,7 +29,6 @@ const Navbar = () => {
       {/* Hamburger button */}
       <button
         onClick={() => setIsOpen((prev) => !prev)}
-        onBlur={() => setIsOpen((prev) => !prev)}
         className="md:hidden flex items-center py-2 rounded text-gray-700"
       >
         <svg
@@ -112,7 +111,11 @@ const Navbar = () => {
       </div>
 
       {isOpen && (
-        <div className={`md:hidden absolute top-16 ${user ? 'left-0 w-full' : '-right-4 pr-2 w-4/5'} bg-white bg-opacity-50 shadow-md flex justify-end text-end rounded-xl pt-4`}>
+        <div 
+          tabIndex={0}
+          onBlur={() => setIsOpen(false)}
+          className={`md:hidden absolute top-16 ${user ? 'left-0 w-full' : '-right-4 pr-2 w-4/5'} bg-white bg-opacity-50 shadow-md flex justify-end text-end rounded-xl pt-4`}
+        >
           <SignedIn>
             <div className="h-auto w-auto flex flex-col items-center justify-center mr-1">
               <UserButton/>

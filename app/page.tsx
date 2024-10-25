@@ -14,6 +14,7 @@ import { isAfter, isToday } from "date-fns";
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [tourneys, setTourneys] = useState<any[]>([]);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const searchInputRef = useRef(null);
   
   const fetchTourneys = async () => {
@@ -22,6 +23,13 @@ export default function Home() {
     setTourneys(allTourneys);
     setLoading(false);
   };
+
+  useEffect(() => {
+    const handleResize = () => setIsSmallScreen(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     fetchTourneys();
@@ -37,17 +45,17 @@ export default function Home() {
             <div className="sm:h-64 sm:w-72 sm:bg-slate-200"/>
           </div>
 
-          <h1 style={{ lineHeight: '1.2' }} className="relative sm:absolute text-5xl sm:text-8xl 2xl:text-8.5xl 3xl:text-9xl font-semibold sm:text-left text-center pl-4 pr-4 sm:pr-0 sm:pl-12 sm:-mr-16 xl:-mr-8 pt-64 sm:pt-16 z-30 text-navy-100">
+          <h1 style={{ lineHeight: '1.2' }} className="relative sm:absolute text-5xl sm:text-8xl 2xl:text-8.5xl 3xl:text-9xl font-semibold sm:text-left text-center pl-4 pr-4 sm:pr-0 sm:pl-12 sm:-mr-16 xl:-mr-8 pt-[320px] sm:pt-16 z-30 text-navy-100">
             Your gateway to everything Model UN
           </h1>
-          <div className="relative sm:absolute my-12 sm:my-0 sm:mt-[480px] 2xl:mt-[500px] sm:mx-12 gap-x-6 flex sm:flex-row flex-col">
-            <Button className="mx-12 sm:mx-0 py-6 sm:py-8 px-8 text-xl sm:text-2xl font-bold bg-periwinkle-100 hover:bg-periwinkle-200 shadow-lg transition-all duration-110">
+          <div className="relative sm:absolute my-8 sm:my-0 sm:mt-[480px] 2xl:mt-[500px] sm:mx-12 gap-x-6 flex flex-row">
+            <Button className="ml-8 sm:mx-0 py-6 sm:py-8 px-4 sm:px-8 text-base sm:text-2xl font-bold bg-periwinkle-100 hover:bg-periwinkle-200 shadow-lg transition-all duration-110 z-50">
               <Link href="/view-tournaments">View Tournaments</Link>
             </Button>
-            <div className="mt-6 sm:mt-0 flex flex-row items-center justify-center">
+            <div className="mt-0 flex flex-row items-center justify-center">
               <Link 
                 href="/sign-up"
-                className="relative mx-6 text-xl sm:text-2xl font-bold text-navy-100 z-50 hover:text-navy-200 hover:mr-8 transition-all duration-110"
+                className="relative ml-0 mr-2 sm:mr-6 sm:ml-6 text-base sm:text-2xl font-bold text-navy-100 z-50 hover:text-navy-200 hover:mr-8 transition-all duration-110"
               >
                 Sign up
               </Link>
@@ -55,13 +63,13 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="flex lg:flex-1 h-full w-full relative overflow-visible -mt-[980px] sm:-mt-0 rotate-180 sm:rotate-0">
-          <div className="absolute right-0 bottom-0 w-[100%] h-[100%] md:w-[120%] md:h-[120%] lg:w-[167%] lg:h-[167%] sm:-mr-[28%] -mb-[25%] z-10">
+        <div className="flex lg:flex-1 h-full w-full relative overflow-visible -mt-[830px] sm:-mt-0">
+          <div className="absolute right-0 bottom-0 w-[130%] h-[130%] md:w-[120%] md:h-[120%] lg:w-[167%] lg:h-[167%] -mr-[56px] sm:-mr-[28%] -mb-[25%] z-0">
             <Image
               src="/globe.png"
               alt="globe"
               layout="fill" // Makes it responsive
-              objectFit="cover" // Makes it cover the space
+              style={{ objectFit: isSmallScreen ? "contain" : "cover" }} // Makes it cover the space
               className="opacity-80"
             />
           </div>
