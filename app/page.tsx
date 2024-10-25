@@ -13,25 +13,25 @@ import { isAfter, isToday } from "date-fns";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
+  const [showGlobe, setShowGlobe] = useState(false); 
   const [tourneys, setTourneys] = useState<any[]>([]);
-
-  const isScreenSmall = () => typeof window !== "undefined" && window.innerWidth < 768
-  const [isSmallScreen, setIsSmallScreen] = useState(isScreenSmall());
+  const [isSmallScreen, setIsSmallScreen] = useState(true);
   const searchInputRef = useRef(null);
   
+  useEffect(() => {
+    const handleResize = () => setIsSmallScreen(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const fetchTourneys = async () => {
     setLoading(true);
     const allTourneys = await getAllTourneys();
     setTourneys(allTourneys);
     setLoading(false);
+    setShowGlobe(true); 
   };
-
-  useEffect(() => {
-    const handleResize = () => setIsSmallScreen(isScreenSmall());
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     fetchTourneys();
@@ -67,13 +67,15 @@ export default function Home() {
         </div>
         <div className="flex lg:flex-1 h-full w-full relative overflow-visible -mt-[830px] sm:-mt-0">
           <div className="absolute right-0 bottom-0 w-[130%] h-[130%] md:w-[120%] md:h-[120%] lg:w-[167%] lg:h-[167%] -mr-[56px] sm:-mr-[28%] -mb-[25%] z-0">
-            <Image
-              src="/globe.png"
-              alt="globe"
-              layout="fill" // Makes it responsive
-              style={{ objectFit: isSmallScreen ? "contain" : "cover" }} // Makes it cover the space based on screen size
-              className="opacity-80"
-            />
+            {showGlobe && (
+              <Image
+                src="/globe.png"
+                alt="globe"
+                layout="fill" // Makes it responsive
+                style={{ objectFit: isSmallScreen ? "contain" : "cover" }} // Makes it cover the space based on screen size
+                className="opacity-80"
+              />
+            )}
           </div>
         </div>
       </div>
