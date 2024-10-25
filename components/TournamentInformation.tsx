@@ -107,23 +107,29 @@ const TournamentInformation = ({ tourney, user }: { tourney: any, user: any }) =
                     </div>
                     <div className="p-4">
                         <div className="grid grid-cols-3 gap-4">
-                            {(isDelegate || isChair || isCreator) &&
-                                delegateResources.map((delegateResource: { link: string; name: string }, i: number) => {
-                                return (
+                            {delegateResources.map((delegateResource: { link: string; name: string; protected: boolean }, i: number) => (
+                                (!delegateResource.protected || isChair || isDelegate || isCreator) ? (
                                     <a
                                         key={i}
                                         href={delegateResource.link}
-                                        target="_blank" //open in new tab
+                                        target="_blank" // open in new tab
                                         rel="noopener noreferrer"
                                         className="w-full aspect-[1/1] flex flex-col items-center justify-center rounded-md border-slate-400 border-2 hover:bg-slate-400 transition-all duration-200"
                                     >
                                         <span className="w-16 h-16">
-                                        {React.cloneElement(getFileTypeIcon(delegateResource.link), { size: 64, stroke: '#334155' })}
+                                            {React.cloneElement(getFileTypeIcon(delegateResource.link), { size: 64, stroke: '#334155' })}
                                         </span>
                                         <span className="mt-2 text-center text-xs">{delegateResource.name}</span>
                                     </a>
-                                );
-                            })}
+                                ) : (
+                                    <div key={i} className="w-full aspect-[1/1] flex flex-col items-center justify-center rounded-md border-slate-400 border-2 border-dashed">
+                                        <span className="w-16 h-16">
+                                            {React.cloneElement(getFileTypeIcon(delegateResource.link), { size: 64, stroke: '#334155' })}
+                                        </span>
+                                        <span className="mt-2 text-center text-xs">{delegateResource.name} (Protected)</span>
+                                    </div>
+                                )
+                            ))}
                         </div>
                         {isCreator && (
                             <UploadButton

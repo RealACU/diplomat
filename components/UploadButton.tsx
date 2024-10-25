@@ -66,10 +66,10 @@ const UploadButton = ({
               <Button
                 variant="ghost"
                 onClick={() => open()}
-                className="h-auto w-full cursor-pointer hover:opacity-70 transition border-dashed border-2 p-6 border-neutral-300 flex flex-col justify-center items-center gap-4 text-neutral-600"
+                className="h-auto w-full cursor-pointer hover:opacity-70 border-dashed border-2 p-2 border-slate-400 hover:bg-slate-400 transition-all duration-200 flex flex-col justify-center items-center gap-4 text-slate-700"
               >
-                <ScrollText size={50} />
-                <div className="font-semibold text-lg">Click to upload</div>
+                <ScrollText size={64} />
+                <div className="font-medium text-xs break-words">Click to upload</div>
               </Button>
             )}
             {!paperLink && type === "delegate-resources" && (

@@ -22,8 +22,8 @@ model Tourney {
   endDate           DateTime
   primaryColorHex   String
   secondaryColorHex String
-  delegateResources DelegateResource[]
   committees        Committee[]
+  delegateResources DelegateResource[]
 }
 
 model Committee {
@@ -45,8 +45,9 @@ model DelegateResource {
   id        Int      @id @default(autoincrement())
   name      String
   link      String
-  Tourney   Tourney? @relation(fields: [tourneyId], references: [id], onDelete: Cascade)
+  protected Boolean?
   tourneyId String?
+  Tourney   Tourney? @relation(fields: [tourneyId], references: [id], onDelete: Cascade)
 }
 
 model DelegateResult {

@@ -6,7 +6,7 @@ import MunLogoSVG from "@/components/MunLogoSVG";
 import UploadButton from "@/components/UploadButton";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Download } from "lucide-react";
+import { Download, File } from "lucide-react";
 import getTourneyById from "@/actions/getTourneyById";
 import TournamentInformation from "@/components/TournamentInformation";
 
@@ -107,13 +107,53 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
               <div className="w-full h-auto">
                 <div className="text-base px-6 py-4">
                   {committees.length > 0 ? (
-                    committees.map((committee) => (
-                      <div key={committee.id} className="mb-4">
-                        <div className="text-lg font-bold">
-                          {committee.name}
+                    committees
+                    .sort((a, b) => a.id - b.id)
+                    .map((committee) => (
+                      <div key={committee.id} className="flex flex-row items-center">
+                        <div className="mb-4">
+                          <div className="text-lg font-bold">
+                            {committee.name}
+                          </div>
+                          <div className="text-base font-medium ml-2">
+                            {committee.description}
+                          </div>
                         </div>
-                        <div className="text-base font-medium ml-2">
-                          {committee.description}
+                        <div className="w-full h-auto flex flex-col justify-end items-end mb-2">
+                          {(myCommittee || isCreator) && (
+                            <>
+                              <div className="w-32 h-20 flex">
+                                {isCreator ? (
+                                  <UploadButton
+                                    type="bg-guide"
+                                    tourneyId={params.id}
+                                    committeeId={committee.id}
+                                    delegateId={user.id}
+                                  />
+                                ) : (
+                                  isChair && myCommittee && myCommittee.id === committee.id && (
+                                    <UploadButton
+                                      type="bg-guide"
+                                      tourneyId={params.id}
+                                      committeeId={committee.id}
+                                      delegateId={user.id}
+                                    />
+                                  )
+                                )}
+                              </div>
+                            </>
+                            )}
+                            <a
+                              href={committee.bgGuideLink}
+                              target="_blank" //open in new tab
+                              rel="noopener noreferrer"
+                              className="w-32 aspect-square flex flex-col items-center justify-center rounded-md border-slate-400 border-2 hover:bg-slate-400 transition-all duration-200"
+                            >
+                              <span className="w-12 h-12">
+                                <File size={48} stroke="#334155" />
+                              </span>
+                              <span className="mt-2 text-center text-xs">View Background Guide</span>
+                            </a>
                         </div>
                       </div>
                     ))
@@ -185,20 +225,6 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                   <>
                     <p>You are a delegate for {myCommittee.name}</p>
                     <p>Background guide:</p>
-                    {!myCommittee.bgGuideLink && (
-                      <p>Chair has not sent a background guide yet.</p>
-                    )}
-                    {myCommittee.bgGuideLink && (
-                      <Button asChild>
-                        <Link
-                          href={myCommittee.bgGuideLink}
-                          download={`${myCommittee.name} background guide`}
-                        >
-                          <Download />
-                          {myCommittee.name} background guide
-                        </Link>
-                      </Button>
-                    )}
                     {!myCommittee.delegatesThatSent.includes(user.id) && (
                       <>
                         <p>Upload position paper</p>
