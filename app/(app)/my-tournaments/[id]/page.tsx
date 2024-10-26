@@ -112,14 +112,53 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                     .map((committee) => (
                       <div key={committee.id} className="flex flex-row items-center">
                         <div className="mb-4">
-                          <div className="text-lg font-bold">
-                            {committee.name}
+                          <div className="flex flex-row">
+                            <div className="text-lg font-bold">
+                              {committee.name}
+                            </div>
+                            <div className="sm:hidden w-full h-auto flex flex-col justify-end items-end mb-2">
+                              {(myCommittee || isCreator) && (
+                                <>
+                                  <div className="w-16 h-20 flex">
+                                    {isCreator ? (
+                                      <UploadButton
+                                        type="bg-guide"
+                                        tourneyId={params.id}
+                                        committeeId={committee.id}
+                                        delegateId={user.id}
+                                      />
+                                    ) : (
+                                      isChair && myCommittee && myCommittee.id === committee.id && (
+                                        <UploadButton
+                                          type="bg-guide"
+                                          tourneyId={params.id}
+                                          committeeId={committee.id}
+                                          delegateId={user.id}
+                                        />
+                                      )
+                                    )}
+                                  </div>
+                                </>
+                              )}
+                              <a
+                                href={committee.bgGuideLink}
+                                target="_blank" //open in new tab
+                                rel="noopener noreferrer"
+                                download={committee.bgGuideLink} 
+                                className="w-16 aspect-square flex flex-col items-center justify-center rounded-md border-slate-400 border-2 hover:bg-slate-400 transition-all duration-200"
+                              >
+                                <span className="w-9 h-10">
+                                  <File size={36} stroke="#334155" />
+                                </span>
+                                <span className="mt-2 text-center text-xs">View BG Guide</span>
+                              </a>
+                            </div>
                           </div>
                           <div className="text-base font-medium ml-2">
                             {committee.description}
                           </div>
                         </div>
-                        <div className="w-full h-auto flex flex-col justify-end items-end mb-2">
+                        <div className="hidden sm:flex w-full h-auto flex-col justify-end items-end mb-2">
                           {(myCommittee || isCreator) && (
                             <>
                               <div className="w-32 h-20 flex">
@@ -142,19 +181,19 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                                 )}
                               </div>
                             </>
-                            )}
-                            <a
-                              href={committee.bgGuideLink}
-                              target="_blank" //open in new tab
-                              rel="noopener noreferrer"
-                              download={committee.bgGuideLink} 
-                              className="w-32 aspect-square flex flex-col items-center justify-center rounded-md border-slate-400 border-2 hover:bg-slate-400 transition-all duration-200"
-                            >
-                              <span className="w-12 h-12">
-                                <File size={48} stroke="#334155" />
-                              </span>
-                              <span className="mt-2 text-center text-xs">View Background Guide</span>
-                            </a>
+                          )}
+                          <a
+                            href={committee.bgGuideLink}
+                            target="_blank" //open in new tab
+                            rel="noopener noreferrer"
+                            download={committee.bgGuideLink} 
+                            className="w-32 aspect-square flex flex-col items-center justify-center rounded-md border-slate-400 border-2 hover:bg-slate-400 transition-all duration-200"
+                          >
+                            <span className="w-12 h-12">
+                              <File size={48} stroke="#334155" />
+                            </span>
+                            <span className="mt-2 text-center text-xs">View Background Guide</span>
+                          </a>
                         </div>
                       </div>
                     ))
