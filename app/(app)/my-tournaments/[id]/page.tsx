@@ -296,7 +296,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                   </>
                 )}
                 {isSignedIn &&
-                  !isAdmin &&
+                  !isCreator &&
                   !isChair &&
                   !isDelegate &&
                   (isSchoolAffiliated ? (
