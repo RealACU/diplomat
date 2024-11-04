@@ -31,6 +31,8 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
     delegateResources,
   } = tourney;
 
+  const isSignedIn = user ? true : false;
+
   const isCreator = user?.id === tourney.creatorId;
   console.log("isCreator", isCreator);
 
@@ -293,7 +295,8 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                     )}
                   </>
                 )}
-                {!isAdmin &&
+                {isSignedIn &&
+                  !isAdmin &&
                   !isChair &&
                   !isDelegate &&
                   (isSchoolAffiliated ? (
@@ -310,16 +313,29 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                     </div>
                   ) : (
                     <p>
-                      Before you sign up for a committee, please tell us which
-                      school you are affiliated with{" "}
+                      Before you sign up for a committee, please tell us which{" "}
                       <Link
                         href="/sign-up/school-affiliation"
                         className="text-blue-500 underline"
                       >
-                        here
-                      </Link>
+                        school
+                      </Link>{" "}
+                      you are affiliated with.
                     </p>
                   ))}
+                {!isSignedIn && (
+                  <div>
+                    Please{" "}
+                    <Link href="/sign-up" className="text-blue-500 underline">
+                      sign up
+                    </Link>{" "}
+                    or{" "}
+                    <Link href="/sign-in" className="text-blue-500 underline">
+                      sign in
+                    </Link>{" "}
+                    to register for a committee.
+                  </div>
+                )}
               </div>
             </div>
             <TournamentInformation tourney={tourney} user={user} />
