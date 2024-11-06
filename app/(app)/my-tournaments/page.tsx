@@ -6,27 +6,103 @@ import MunLogoSVG from "@/components/MunLogoSVG";
 import TabsComponent from "@/components/ui/tabs";
 import SubTabsComponent from "@/components/ui/subtabs";
 import { isBefore, isSameDay, isAfter } from "date-fns";
+import { revalidatePath } from "next/cache";
+import { clerkClient } from "@clerk/nextjs/server";
+import { db } from "@/lib/db";
 
 const MyTournamentsPage = async () => {
   const user = await currentUser();
   //use this when you want to call schoolaffiliation
   //{String(user?.publicMetadata?.schoolAffiliation || 'School affiliation not provided')}
 
-  const dTourneys: string[] = Array.isArray(user?.publicMetadata.dTourneys) ? user.publicMetadata.dTourneys : [];
-  const cTourneys: string[] = Array.isArray(user?.publicMetadata.cTourneys) ? user.publicMetadata.cTourneys : [];
-  
+  if (!user) {
+    return {
+      redirect: {
+        destination: '/sign-in', 
+        permanent: false,
+      },
+    };
+  }
+
+  const fetchAccurateTournamentData = async () => {
+    // Assuming user has a `id` that can be used to fetch tournaments
+    const dTourneys = await db.tourney.findMany({
+      where: {
+        committees: {
+          some: {
+            delegateIds: {
+              has: user.id, // Assuming delegateIds is an array of user IDs
+            },
+          },
+        },
+      },
+      select: {
+        id: true, // Only fetch the IDs of the tournaments
+      },    
+    });
+
+    const cTourneys = await db.tourney.findMany({
+      where: {
+        committees: {
+          some: {
+            chairIds: {
+              has: user.id, // Assuming delegateIds is an array of user IDs
+            },
+          },
+        },
+      },
+      select: {
+        id: true, // Only fetch the IDs of the tournaments
+      },
+    
+    });
+
+    return {
+      dTourneys: dTourneys.map((tourney) => tourney.id), // Extract the tournament IDs
+      cTourneys: cTourneys.map((tourney) => tourney.id),
+    };
+  };
+
+  // Step 2: Fetch the accurate data
+  const { dTourneys, cTourneys } = await fetchAccurateTournamentData();
+
+  // Step 3: Update the user's publicMetadata to reflect the accurate data
+  const updateUserMetadata = async (newDTourneys: string[], newCTourneys: string[]) => {
+    try {
+      // Update the user's publicMetadata in Clerk
+      await clerkClient.users.updateUserMetadata(user.id, {
+        publicMetadata: {
+          ...user.publicMetadata, // Keep existing metadata, if any
+          dTourneys: newDTourneys,
+          cTourneys: newCTourneys,
+        },
+      });
+      console.log("User metadata updated successfully.");
+    } catch (error) {
+      console.error("Error updating user metadata: ", error);
+    }
+  };
+
+  // Step 4: Automatically update the metadata when the page loads
+  await updateUserMetadata(dTourneys, cTourneys);
+
+  // Step 5: Fetch tournaments using the updated tournament IDs
   const fetchTournaments = async (tourneyIds: string[]) => {
     const tournamentPromises = tourneyIds.map(async (tourneyId: string) => {
       const tourneyInfo = await getTourneyById(tourneyId);
       return tourneyInfo || null;
     });
-  
     const results = await Promise.all(tournamentPromises);
     return results.filter(Boolean); 
   };
 
+  // Fetch tournaments and chair tournaments using updated metadata
   const tournaments = await fetchTournaments(dTourneys);
-  const chairTournaments = await fetchTournaments(dTourneys);
+  const chairTournaments = await fetchTournaments(cTourneys);
+
+  // Revalidate the current path
+  revalidatePath('/my-tournaments');
+
 
   const items = [
     {

@@ -18,7 +18,6 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
   }
 
   const user = await currentUser();
-  console.log(user);
 
   const {
     name,

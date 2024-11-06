@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import signUpDelegate from "@/actions/signUpDelegate";
+import { revalidatePath } from "next/cache";
+
 import {
   Dialog,
   DialogClose,
@@ -31,6 +33,7 @@ const CommitteeSignUp = ({
       await signUpDelegate(tourneyId, committeeId, delegateId).then((res) => {
         if (res) {
           router.refresh();
+          revalidatePath('/my-tournaments');
         }
       });
     }
