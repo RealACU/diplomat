@@ -26,7 +26,7 @@ const MyTournamentsPage = async () => {
   };
 
   const tournaments = await fetchTournaments(dTourneys);
-  const chairedTournaments = await fetchTournaments(cTourneys);
+  const chairTournaments = await fetchTournaments(dTourneys);
 
   const items = [
     {
@@ -273,7 +273,7 @@ const MyTournamentsPage = async () => {
                 ),
               },
               { 
-                title: "Tournaments I completed in", 
+                title: "Tournaments I chaired/diased for", 
                 content: (
                   <div className="bg-slate-50 w-full rounded-lg">
                     <div className="w-full h-[465px] overflow-auto bg-white rounded-md shadow-md">
@@ -289,7 +289,7 @@ const MyTournamentsPage = async () => {
                       </ul>
                       <ul>
                         {(() => {
-                          const validTournaments = chairedTournaments.filter((tourneyInfo): tourneyInfo is NonNullable<typeof tourneyInfo> => 
+                          const validTournaments = chairTournaments.filter((tourneyInfo): tourneyInfo is NonNullable<typeof tourneyInfo> => 
                             tourneyInfo !== null && isBefore(new Date(tourneyInfo.endDate), new Date())
                           );                      
 
@@ -406,7 +406,7 @@ const MyTournamentsPage = async () => {
                       </ul>
                       <ul>
                         {(() => {
-                          const validTournaments = chairedTournaments.filter((tourneyInfo): tourneyInfo is NonNullable<typeof tourneyInfo> => 
+                          const validTournaments = chairTournaments.filter((tourneyInfo): tourneyInfo is NonNullable<typeof tourneyInfo> => 
                             tourneyInfo !== null && isSameDay(new Date(tourneyInfo.endDate), new Date())
                           );                      
 
@@ -523,7 +523,7 @@ const MyTournamentsPage = async () => {
                       </ul>
                       <ul>
                         {(() => {
-                          const validTournaments = chairedTournaments.filter((tourneyInfo): tourneyInfo is NonNullable<typeof tourneyInfo> => 
+                          const validTournaments = chairTournaments.filter((tourneyInfo): tourneyInfo is NonNullable<typeof tourneyInfo> => 
                             tourneyInfo !== null && isAfter(new Date(tourneyInfo.endDate), new Date())
                           );                      
 
