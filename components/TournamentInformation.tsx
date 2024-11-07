@@ -133,7 +133,7 @@ const TournamentInformation = ({ tourney, user }: { tourney: any, user: any }) =
                                     <span className="mt-2 text-center text-xs">{delegateResource.name} (Protected)</span>
                                     
                                     {/* Tooltip */}
-                                    <div className="absolute hidden group-hover:block top-full mt-2 px-2 py-1 text-xs text-white bg-periwinkle-200 rounded-md shadow-lg z-10">
+                                    <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-150 top-full mt-2 px-2 py-1 text-xs text-white bg-periwinkle-200 rounded-md shadow-lg z-10">
                                         Please register to view this resource
                                     </div>
                                 </div>

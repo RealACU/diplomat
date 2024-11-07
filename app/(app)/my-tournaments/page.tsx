@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { currentUser } from "@clerk/nextjs/server";
 import Link from "next/link";
+import getAllTourneys from "@/actions/getAllTourneys";
 import getTourneyById from "@/actions/getTourneyById";
 import MunLogoSVG from "@/components/MunLogoSVG";
 import TabsComponent from "@/components/ui/tabs";
@@ -9,11 +10,35 @@ import { isBefore, isSameDay, isAfter } from "date-fns";
 import { revalidatePath } from "next/cache";
 import { clerkClient } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
+import { Info, FileUp } from "lucide-react";
 
 const MyTournamentsPage = async () => {
   const user = await currentUser();
   //use this when you want to call schoolaffiliation
   //{String(user?.publicMetadata?.schoolAffiliation || 'School affiliation not provided')}
+
+  const tourneys = await getAllTourneys();
+  if (!tourneys || tourneys.length === 0) {
+    return <div>No tournaments found...</div>;
+  }
+
+  const chairIds = tourneys.flatMap((tourney: any) =>
+    tourney.committees.flatMap((committee: any) => committee.chairIds)
+  );
+
+  const users = chairIds.length
+    ? await Promise.all(
+        chairIds.map(async (id: string) => {
+          try {
+            const user = await clerkClient.users.getUser(id);
+            return user || null;
+          } catch (error) {
+            console.error(`Error fetching user with id ${id}:`, error);
+            return null;
+          }
+        })
+      )
+    : [];
 
   if (!user) {
     return {
@@ -25,19 +50,18 @@ const MyTournamentsPage = async () => {
   }
 
   const fetchAccurateTournamentData = async () => {
-    // Assuming user has a `id` that can be used to fetch tournaments
     const dTourneys = await db.tourney.findMany({
       where: {
         committees: {
           some: {
             delegateIds: {
-              has: user.id, // Assuming delegateIds is an array of user IDs
+              has: user.id,
             },
           },
         },
       },
       select: {
-        id: true, // Only fetch the IDs of the tournaments
+        id: true,
       },    
     });
 
@@ -46,33 +70,31 @@ const MyTournamentsPage = async () => {
         committees: {
           some: {
             chairIds: {
-              has: user.id, // Assuming delegateIds is an array of user IDs
+              has: user.id,
             },
           },
         },
       },
       select: {
-        id: true, // Only fetch the IDs of the tournaments
+        id: true,
       },
     
     });
 
     return {
-      dTourneys: dTourneys.map((tourney) => tourney.id), // Extract the tournament IDs
+      dTourneys: dTourneys.map((tourney) => tourney.id),
       cTourneys: cTourneys.map((tourney) => tourney.id),
     };
   };
 
-  // Step 2: Fetch the accurate data
   const { dTourneys, cTourneys } = await fetchAccurateTournamentData();
 
-  // Step 3: Update the user's publicMetadata to reflect the accurate data
+  //updates metadata based on what is also in the schema
   const updateUserMetadata = async (newDTourneys: string[], newCTourneys: string[]) => {
     try {
-      // Update the user's publicMetadata in Clerk
       await clerkClient.users.updateUserMetadata(user.id, {
         publicMetadata: {
-          ...user.publicMetadata, // Keep existing metadata, if any
+          ...user.publicMetadata,
           dTourneys: newDTourneys,
           cTourneys: newCTourneys,
         },
@@ -83,10 +105,8 @@ const MyTournamentsPage = async () => {
     }
   };
 
-  // Step 4: Automatically update the metadata when the page loads
   await updateUserMetadata(dTourneys, cTourneys);
 
-  // Step 5: Fetch tournaments using the updated tournament IDs
   const fetchTournaments = async (tourneyIds: string[]) => {
     const tournamentPromises = tourneyIds.map(async (tourneyId: string) => {
       const tourneyInfo = await getTourneyById(tourneyId);
@@ -96,11 +116,9 @@ const MyTournamentsPage = async () => {
     return results.filter(Boolean); 
   };
 
-  // Fetch tournaments and chair tournaments using updated metadata
   const tournaments = await fetchTournaments(dTourneys);
   const chairTournaments = await fetchTournaments(cTourneys);
 
-  // Revalidate the current path
   revalidatePath('/my-tournaments');
 
 
@@ -535,14 +553,14 @@ const MyTournamentsPage = async () => {
                   <div className="bg-slate-50 w-full rounded-lg">
                     <div className="w-full h-[465px] overflow-auto bg-white rounded-md shadow-md">
                       <ul className="bg-slate-300 px-4 py-1 font-bold text-md flex overflow-clip">
-                        <div className="w-[50%] sm:w-[60%] break-words pr-8">Name</div>
-                        <div className="w-[25%] break-words flex">
-                          <p className="w-full block sm:hidden">City, State</p>
-                          <p className="w-0 sm:w-5/6 hidden sm:block">City</p>
-                          <p className="w-0 sm:w-1/6 hidden sm:block">State</p>
-                        </div>
-                        <div className="ml-auto text-right w-0 sm:w-[15%] hidden sm:block">Start Date</div>
-                        <div className="ml-auto text-right w-[25%] sm:w-0 block sm:hidden">Date</div>
+                      <div className="w-[60%] sm:w-[35%] break-words pr-8">Name</div>
+                      <div className="w-[17%]">Chairs/Diases</div>
+                      <div className="w-[25%] sm:w-[18%] break-words flex">City, State</div>
+                      <div className="w-[25%] sm:w-[7%]">Date</div>
+                      <div className="flex flex-grow">
+                        <div className="w-[25%] break-words flex">Allocation</div>
+                        <div className="flex flex-grow break-words text-right justify-end">Upload Position Paper</div>
+                      </div>
                       </ul>
                       <ul>
                         {(() => {
@@ -552,20 +570,51 @@ const MyTournamentsPage = async () => {
 
                           if (validTournaments.length > 0) {
                             return validTournaments.map(tourneyInfo => (
-                              <li key={tourneyInfo.id} className="odd:bg-slate-100 even:bg-slate-200 odd:hover:bg-periwinkle-50 even:hover:bg-periwinkle-100 transition-all duration-200">
-                                <Link href={`/my-tournaments/${tourneyInfo.id}`}>
-                                  <div className="px-4 py-3 rounded-md font-semibold text-md flex overflow-clip">
-                                    <div className="w-[50%] sm:w-[60%] break-words pr-8">{tourneyInfo.name}</div>
-                                    <div className="w-[25%] break-words flex">
-                                      <p className="w-full block sm:hidden">{tourneyInfo.city}, {tourneyInfo.state}</p>
-                                      <p className="w-0 sm:w-5/6 hidden sm:block">{tourneyInfo.city}</p>
-                                      <p className="w-0 sm:w-1/6 hidden sm:block">{tourneyInfo.state}</p>
+                              <li key={tourneyInfo.id} className="odd:bg-slate-100 even:bg-slate-200  transition-all duration-200">
+                                {/*<Link href={`/my-tournaments/${tourneyInfo.id}`}>  odd:hover:bg-periwinkle-50 even:hover:bg-periwinkle-100*/}
+                                  <div className="px-4 py-5 rounded-md font-medium text-md flex">
+                                    <div className="w-[60%] sm:w-[35%] break-words pr-8 font-semibold">{tourneyInfo.name}</div>
+                                    <div className="w-[17%]">
+                                      {tourneyInfo?.committees?.map((committee) =>
+                                        committee?.chairIds?.map((chairId, index: number) => {
+                                          const chair = users.find((user: any) => user?.id === chairId);
+                                          return (
+                                            <span key={chairId}>
+                                              {chair ? `${chair.firstName} ${chair.lastName ? chair.lastName.charAt(0) + '.' : ''}` : 'Unknown'}
+                                              {index < committee.chairIds.length - 1 && ", "}
+                                            </span>
+                                          );
+                                        })
+                                      )}
                                     </div>
-                                    <div className="ml-auto text-right w-[15%]">
-                                      {new Date(tourneyInfo.startDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                                    <div className="sm:w-[18%] w-[25%] break-words flex">
+                                      <p className="w-full">{tourneyInfo.city}, {tourneyInfo.state}</p>
+                                    </div>
+                                    <div className="w-[6%]">
+                                      {new Date(tourneyInfo.startDate).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: '2-digit' })}
+                                    </div>
+                                    <div className="flex flex-grow z-20">
+                                      <div
+                                        className="w-[75%] border-[1px] h-auto border-slate-300 font-bold rounded-sm shadow-sm py-2 -my-2 mr-2.5 px-3">
+                                          Guatemala
+                                      </div>
+                                      <div className="flex flex-grow items-center">
+                                        <div className="h-auto flex-grow flex justify-center bg-[#8CB97A] hover:bg-[#6DA058] duration-200 text-center py-2 -my-2 rounded-sm shadow-sm">
+                                          <FileUp/>
+                                        </div>
+                                        <div className="relative group">
+                                          <Info className="w-5 h-5 ml-2 -mr-2"/>
+                                          <div className="absolute opacity-0 group-hover:opacity-100 transition-opacity duration-150 top-full mt-4 px-2 py-1 -ml-[170px] w-48 text-xs text-white bg-periwinkle-200 rounded-md shadow-lg z-30">
+                                            <p className="inline text-[#a7d296]">Green icon </p>
+                                            <p className="inline">means your position paper is confirmed. </p>
+                                            <p className="inline text-[#f8a2a2]">Red icon </p>
+                                            <p className="inline">means you still need to upload. </p>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
-                                </Link>
+                                {/*</Link>*/}
                               </li>
                             ));
                           } else {
