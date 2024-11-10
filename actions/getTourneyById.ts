@@ -8,7 +8,11 @@ export default async function getTourneyById(tourneyId: string) {
       id: tourneyId,
     },
     include: {
-      committees: true,
+      committees: {
+        include: {
+          delegateInfo: true,
+        },
+      },  
       delegateResources: true,
     },
   });

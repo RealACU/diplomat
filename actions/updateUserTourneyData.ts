@@ -1,45 +1,20 @@
-import { db } from "@/lib/db";
-import { currentUser } from "@clerk/nextjs/server"; 
+"use server";
 
-export const updateTourneyAndUser = async (tourneyId: string, updatedDelegateIDs: string[], updatedChairIDs: string[]) => {
-  const user = await currentUser();
-  if (!user) {
-    throw new Error('User not found');
-  }
+import { clerkClient } from "@clerk/nextjs/server";
 
-  // Update the tournament's committee delegateIds and chairIds
-  const updatedTournament = await db.tourney.update({
-    where: { id: tourneyId },
-    data: {
-      committees: {
-        updateMany: {
-          where: {},  // You can add conditions here if you want to update specific committees
-          data: {
-            delegateIds: updatedDelegateIDs,  // Update delegateIds
-            chairIds: updatedChairIDs,        // Update chairIds
-          },
+export async function updateUserTourneyData(userId: string, dTourneys: string[], cTourneys: string[]) {
+    try {
+        const client = await clerkClient();
+        await client.users.updateUserMetadata(userId, {
+            publicMetadata: {
+            dTourneys,
+            cTourneys,
         },
-      },
-    },
-  });
-
-  // Update the user's dTourneys and cTourneys arrays
-  const updatedUserMetadata = user.publicMetadata || {}; // Assuming user metadata contains these properties
-  const dTourneys = Array.isArray(updatedUserMetadata.dTourneys) ? updatedUserMetadata.dTourneys : [];
-  const cTourneys = Array.isArray(updatedUserMetadata.cTourneys) ? updatedUserMetadata.cTourneys : [];
-
-  // Here, we don't need to update the User model in Prisma since Clerk's user metadata handles it
-  const updatedUser = {
-    ...user,
-    publicMetadata: {
-      ...updatedUserMetadata,
-      dTourneys: dTourneys.includes(tourneyId) ? dTourneys : [...dTourneys, tourneyId], // Ensure tourneyId is added to dTourneys
-      cTourneys: cTourneys.includes(tourneyId) ? cTourneys : [...cTourneys, tourneyId], // Ensure tourneyId is added to cTourneys
-    },
-  };
-
-  return {
-    updatedTournament,
-    updatedUser, // We're returning the updated Clerk user object
-  };
-};
+    });
+        return { success: true };
+    } catch (error: unknown) {
+        const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
+        console.error(`Failed to update user ${userId}:`, errorMessage);
+        return { success: false, error: errorMessage };
+    }
+}

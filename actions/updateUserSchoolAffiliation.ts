@@ -2,9 +2,10 @@
 
 import { clerkClient } from "@clerk/nextjs/server";
 
-export async function updateUserMetadata(userId: string, schoolAffiliation: string) {
+export async function updateUserSchoolAffiliation(userId: string, schoolAffiliation: string) {
   try {
-    await clerkClient.users.updateUserMetadata(userId, {
+    const client = await clerkClient();
+    await client.users.updateUserMetadata(userId, {
       publicMetadata: {
         schoolAffiliation: String(schoolAffiliation),
       },

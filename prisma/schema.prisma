@@ -39,15 +39,25 @@ model Committee {
   tourneyId          String?
   Tourney            Tourney?         @relation(fields: [tourneyId], references: [id], onDelete: Cascade)
   delegateResults    DelegateResult[]
+  delegateInfo       DelegateInfo[]   @relation("CommitteeDelegates")
+}
+
+model DelegateInfo {
+  id                Int                  @id @default(autoincrement())
+  allocation        String          
+  committeeId       Int?
+  committee         Committee?          @relation("CommitteeDelegates", fields: [committeeId], references: [id], onDelete: Cascade)
+  delegateResults   DelegateResult[]
+  delegateId        String
 }
 
 model DelegateResource {
-  id        Int      @id @default(autoincrement())
-  name      String
-  link      String
-  protected Boolean?
-  tourneyId String?
-  Tourney   Tourney? @relation(fields: [tourneyId], references: [id], onDelete: Cascade)
+  id              Int              @id @default(autoincrement())
+  name            String
+  link            String
+  protected       Boolean?
+  tourneyId       String?
+  Tourney         Tourney?         @relation(fields: [tourneyId], references: [id], onDelete: Cascade)
 }
 
 model DelegateResult {
@@ -56,6 +66,8 @@ model DelegateResult {
   feedback    String
   committeeId Int?
   Committee   Committee? @relation(fields: [committeeId], references: [id], onDelete: Cascade)
+  delegateInfoId  Int?
+  DelegateInfo    DelegateInfo?    @relation(fields: [delegateInfoId], references: [id], onDelete: Cascade)
 }
 
 enum States {

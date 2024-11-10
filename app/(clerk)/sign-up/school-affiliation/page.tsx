@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import { updateUserMetadata } from "@/actions/updateUserMetadata";
+import { updateUserSchoolAffiliation } from "@/actions/updateUserSchoolAffiliation";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
@@ -20,7 +20,7 @@ function SchoolAffiliationPage() {
       return;
     }
 
-    const result = await updateUserMetadata(user.id, schoolAffiliation);
+    const result = await updateUserSchoolAffiliation(user.id, schoolAffiliation);
 
     if (result.success) {
       Swal.fire({
