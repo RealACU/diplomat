@@ -76,7 +76,7 @@ const UploadButton = ({
     if (paperLink !== "" && paperLink !== null && onUploadComplete) {
       onUploadComplete();
     }
-  }, [type, committeeId, tourneyId, user?.id, paperLink, onUploadComplete]); 
+  }, [type, committeeId, tourneyId, user, paperLink, onUploadComplete]); 
 
   const handleUploadSuccess = async (result: any) => {
     const url = result?.info?.secure_url;

@@ -173,7 +173,7 @@ const MyTournamentsPage = () => {
     if (chairIds.length || delegateIds.length) {
       fetchUsers();
     }  
-  }, [tourneys]);  
+  }, [tourneys, user]);  
 
   if (!user) {
     return <Loading />; 
