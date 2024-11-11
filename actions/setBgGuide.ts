@@ -7,15 +7,27 @@ export default async function setBgGuide(
   tourneyId: string,
   committeeId: number
 ) {
+  const committee = await db.committee.findUnique({
+    where: {
+      id: committeeId, 
+      tourneyId: tourneyId,
+    },
+  });
+
+  if (!committee) {
+    throw new Error("Committee not found");
+  }
+
   const tourney = await db.committee.update({
     where: {
       id: committeeId,
       tourneyId: tourneyId,
     },
     data: {
-      bgGuideLink: paperLink,
+      bgGuideLink: paperLink || "",
     },
   });
+
 
   return tourney;
 }

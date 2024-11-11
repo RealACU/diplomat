@@ -49,6 +49,7 @@ model DelegateInfo {
   committee         Committee?          @relation("CommitteeDelegates", fields: [committeeId], references: [id], onDelete: Cascade)
   delegateResults   DelegateResult[]
   delegateId        String
+  positionPaperLink String?
 }
 
 model DelegateResource {

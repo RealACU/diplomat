@@ -1,7 +1,7 @@
 "use client";
 
 import { CldUploadWidget } from "next-cloudinary";
-import { ScrollText, Plus, FileUp } from "lucide-react";
+import { ScrollText, Plus, FileUp, Trash2, Eye } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import setBgGuide from "@/actions/setBgGuide";
@@ -25,6 +25,7 @@ const UploadButton = ({
   committeeId,
   delegateId,
   text = "Click to upload",
+  textAfterUpload = "Upload",
   size = 6,
   ml = "auto",
   onUploadComplete,
@@ -34,6 +35,7 @@ const UploadButton = ({
   committeeId: number;
   delegateId: string;
   text?: string;
+  textAfterUpload?: string;
   size?: number;
   ml?: string;
   onUploadComplete?: () => void; 
@@ -74,7 +76,7 @@ const UploadButton = ({
 
   useEffect(() => {
     // Notify the parent if paperLink is already set on load
-    if (paperLink !== "" && onUploadComplete) {
+    if (paperLink !== "" && paperLink !== null && onUploadComplete) {
       onUploadComplete();
     }
   }, [paperLink, onUploadComplete]);
@@ -97,6 +99,30 @@ const UploadButton = ({
     }
   };
 
+  const handleDeleteLink = async () => {
+    setPaperLink("");
+    
+    try {
+      if (type === "position-paper") {
+        await addPositionPaper("", tourneyId, committeeId, delegateId);
+      } else if (type === "bg-guide") {
+        await setBgGuide("", tourneyId, committeeId);
+      }
+  
+      if (onUploadComplete) {
+        onUploadComplete(); 
+      }
+    } catch (error) {
+      console.error(`Error deleting ${type}:`, error);
+    }  
+  };
+
+  const handleOpenLink = () => {
+    if (paperLink) {
+      window.open(paperLink, "_blank");
+    }
+  };
+
   return (
     <CldUploadWidget
       uploadPreset={uploadPreset}
@@ -115,7 +141,7 @@ const UploadButton = ({
                 onClick={() => open()}
                 className={`h-auto flex-grow flex justify-center items-center border-[1px] duration-200 text-center py-2 -my-2 rounded-sm shadow-sm px-3 cursor-pointer transition-all ${
                   loading 
-                  ? "bg-slate-300 hover:bg-slate-350 border-slate-350" 
+                  ? "bg-slate-300 hover:bg-slate-350 border-slate-350 opacity-25" 
                   : "bg-[#c67171] hover:bg-[#ad5454] border-[#ad5454]"
                 }`}
               >
@@ -133,19 +159,33 @@ const UploadButton = ({
                 <div className="font-semibold text-lg">Upload Resources</div>
               </Button>
             )}
-            {paperLink !== "" && type !== "delegate-resources" && (
-              <Button
-                variant="ghost"
-                onClick={() => open()}
-                className={`h-auto flex-grow flex justify-center items-center border-[1px] duration-200 text-center py-2 -my-2 rounded-sm shadow-sm px-3 cursor-pointer transition-all ${
-                  loading 
-                  ? "bg-slate-300 hover:bg-slate-350 border-slate-350" 
-                  : "bg-[#8CB97A] hover:bg-[#6DA058] border-[#6DA058]"
-                }`}
-              >
-                <div className="font-medium text-base break-words">{text}</div>
-                <FileUp className={`w-${size} h-${size} ml-${ml}`} />
-              </Button>
+            {paperLink !== "" && paperLink !== null && type !== "delegate-resources" && (
+              <div className="h-auto flex-grow flex items-center">
+                <div 
+                  className="h-full p-[9px] rounded-sm mr-1 border-[1px] border-periwinkle-200 bg-periwinkle-50 hover:bg-periwinkle-200 aspect-square items-center justify-center duration-200 cursor-pointer"
+                  onClick={handleOpenLink}
+                >
+                  <Eye className={`w-${size} h-${size} ml-auto`}/>
+                </div>
+                <Button
+                  variant="ghost"
+                  onClick={() => open()}
+                  className={`w-full justify-center items-center border-[1px] duration-200 text-center py-2 -my-2 rounded-sm shadow-sm px-3 cursor-pointer transition-all ${
+                    loading 
+                    ? "bg-slate-300 hover:bg-slate-350 border-slate-350 opacity-25" 
+                    : "bg-[#8CB97A] hover:bg-[#6DA058] border-[#6DA058]"
+                  }`}
+                >
+                  <div className="font-medium text-base break-words">{textAfterUpload}</div>
+                  <FileUp className={`w-${size} h-${size} ml-${ml}`} />
+                </Button>
+                <div 
+                  className="h-full p-[9px] rounded-sm ml-1 border-[1px] border-[#ad5454] bg-[#c67171] hover:bg-[#ad5454] aspect-square items-center justify-center duration-200 cursor-pointer"
+                  onClick={handleDeleteLink} 
+                >
+                  <Trash2 className={`w-${size} h-${size} ml-auto`}/>
+                </div>
+              </div>
             )}
           </>
         );

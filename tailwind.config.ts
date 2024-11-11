@@ -49,6 +49,7 @@ const config = {
           200: "#0A3351",
         },
         'slate': {
+          150: '#E7ECF3',
           350: '#B0BCCD',
         },
         
@@ -108,17 +109,33 @@ const config = {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(-100%)" },
         },
+        gavelRotate: {
+          '0%': { transform: 'rotate(0deg)' },
+          '25%': { transform: 'rotate(25deg)' },
+          '100%': { transform: 'rotate(0deg)' },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "caret-blink": "caret-blink 1.25s ease-out infinite",
         'infinite-scroll': 'infinite-scroll 25s linear infinite',
+        'gavel-rotate': 'gavelRotate 1s ease-in-out infinite',
       },
     }, 
   },
   plugins: [
     require("tailwindcss-animate"),
+    plugin(function ({ addBase }) {
+      addBase({
+        "@supports": {
+          "interpolate-size": "allow-keywords",
+        },
+        html: {
+          interpolateSize: "allow-keywords",
+        },
+      });
+    }),
   ],
 } satisfies Config;
 

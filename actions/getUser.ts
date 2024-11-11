@@ -7,28 +7,19 @@ export async function getUser(userId: string) {
   try {
     const client = await clerkClient();
     const user = await client.users.getUser(userId);
-    
-    const delegateInfo = await db.delegateInfo.findFirst({
-      where: {
-        delegateId: userId, 
-      },
-    });
 
-    const allocation = delegateInfo?.allocation || 'Awaiting allocation';
+    const allDelegateInfo = await db.delegateInfo.findMany();
 
     const userData = {
       id: user.id,
       firstName: user.firstName,
       lastName: user.lastName,
-      email: Array.isArray(user.emailAddresses) && user.emailAddresses.length > 0 
-        ? user.emailAddresses[0].emailAddress 
+      email: Array.isArray(user.emailAddresses) && user.emailAddresses.length > 0
+        ? user.emailAddresses[0].emailAddress
         : 'Unknown',
-      delegateInfo: {
-        allocation, 
-        ...delegateInfo 
-      },
+      delegateInfo: allDelegateInfo.filter(info => info.delegateId === user.id) || [],
     };
-    
+
     return { success: true, user: userData };
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
