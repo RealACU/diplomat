@@ -46,40 +46,37 @@ const UploadButton = ({
 
   const { user } = useUser();
 
-  if (!user) {
-    console.error("Please Sign in");
-    return <div>Please sign in to upload files.</div>;
-  }
-
   useEffect(() => {
-    const loadLink = async () => {
-      try {
-        let link: string | undefined;
-        if (type === "bg-guide") {
-          link = await getBgGuideLink(committeeId, tourneyId);
-        } else if (type === "position-paper") {
-          link = await getPositionPaperLink(committeeId, tourneyId, user.id);
+    if (user) {
+      const loadLink = async () => {
+        try {
+          let link: string | undefined;
+
+          if (type === "bg-guide") {
+            link = await getBgGuideLink(committeeId, tourneyId);
+          } else if (type === "position-paper") {
+            link = await getPositionPaperLink(committeeId, tourneyId, user.id);
+          }
+
+          if (link) {
+            setPaperLink(link);
+          }
+          setLoading(false);
+        } catch (error) {
+          console.error(`Error fetching ${type} link:`, error);
+          setLoading(false);
         }
+      };
 
-        if (link) {
-          setPaperLink(link);
-        }
-        setLoading(false);
-      } catch (error) {
-        console.error(`Error fetching ${type} link:`, error);
-        setLoading(false);
-      }
-    };
+      loadLink();
+    } else {
+      setLoading(false); 
+    }
 
-    loadLink();
-  }, [type, committeeId, tourneyId]); 
-
-  useEffect(() => {
-    // Notify the parent if paperLink is already set on load
     if (paperLink !== "" && paperLink !== null && onUploadComplete) {
       onUploadComplete();
     }
-  }, [paperLink, onUploadComplete]);
+  }, [type, committeeId, tourneyId, user?.id, paperLink, onUploadComplete]); 
 
   const handleUploadSuccess = async (result: any) => {
     const url = result?.info?.secure_url;

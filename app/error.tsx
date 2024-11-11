@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 
 const error = () => {
   return (
@@ -8,21 +9,21 @@ const error = () => {
       <div className="flex flex-col items-center justify-center">
         <div className="flex justify-center items-center mt-6">
           <div className="gavel-container animate-gavel-rotate">
-            <img 
+            <Image 
               src="/gavel1.svg" 
               alt="Gavel" 
               className="w-24 h-24" 
             />
           </div>
         </div>
-        <img 
+        <Image 
           src="/gavel2.svg" 
           alt="Gavel" 
           className="-mt-[40px] ml-[66px] w-12 h-12"
         />
       </div>
       <p className="mx-3 text-2xl font-bold pt-2 justify-center flex flex-col items-center text-periwinkle-400">
-        We've run into an error!
+        We&apos;ve run into an error!
         <Link href="/" className="text-blue-500 underline block text-xl mt-2">
           Click here to go back.
         </Link>

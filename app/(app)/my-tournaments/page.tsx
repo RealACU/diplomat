@@ -724,8 +724,8 @@ const MyTournamentsPage = () => {
                               <>
                               <ul>
                                 {validTournaments.map(tourneyInfo => (
-                                  <div className="odd:bg-slate-150 even:bg-slate-100">
-                                    <li key={tourneyInfo.id} className="transition-all duration-200">
+                                  <div key={tourneyInfo.id} className="odd:bg-slate-150 even:bg-slate-100">
+                                    <li className="transition-all duration-200">
                                       {/*<Link href={`/my-tournaments/${tourneyInfo.id}`}>  odd:hover:bg-periwinkle-50 even:hover:bg-periwinkle-100*/}
                                         <div className="px-4 rounded-md font-medium text-md flex items-center">
                                           <div className="py-6 w-[60%] sm:w-[30%] break-words pr-8 font-semibold">{tourneyInfo.name}</div>
@@ -990,8 +990,8 @@ const MyTournamentsPage = () => {
                             <>
                             <ul>
                               {validTournaments.map(tourneyInfo => (
-                                <div className="odd:bg-slate-150 even:bg-slate-100">
-                                  <li key={tourneyInfo.id} className="transition-all duration-200">
+                                <div key={tourneyInfo.id} className="odd:bg-slate-150 even:bg-slate-100">
+                                  <li className="transition-all duration-200">
                                     {/*<Link href={`/my-tournaments/${tourneyInfo.id}`}>  odd:hover:bg-periwinkle-50 even:hover:bg-periwinkle-100*/}
                                     <div className="px-4 rounded-md font-medium text-md flex items-center">
                                       <div className="py-6 w-[60%] sm:w-[30%] break-words pr-8 font-semibold">
