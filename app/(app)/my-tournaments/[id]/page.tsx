@@ -10,12 +10,9 @@ import { Download, File } from "lucide-react";
 import getTourneyById from "@/actions/getTourneyById";
 import TournamentInformation from "@/components/TournamentInformation";
 
-const tourneyPage = async ({ params }: { params: { id: string } }) => {
-  if (!params) {
-    return null;
-  }
-
-  const tourney = await getTourneyById(params.id);
+const tourneyPage = async ({ params }: { params: Promise<{ id: string }>}) => {
+  const tourneyId = (await params).id;
+  const tourney = await getTourneyById(tourneyId);
 
   if (!tourney) {
     return <div>Tournament not found</div>;
@@ -135,7 +132,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                                       {isCreator ? (
                                         <UploadButton
                                           type="bg-guide"
-                                          tourneyId={params.id}
+                                          tourneyId={tourneyId}
                                           committeeId={committee.id}
                                           delegateId={user.id}
                                         />
@@ -145,7 +142,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                                         myCommittee.id === committee.id && (
                                           <UploadButton
                                             type="bg-guide"
-                                            tourneyId={params.id}
+                                            tourneyId={tourneyId}
                                             committeeId={committee.id}
                                             delegateId={user.id}
                                           />
@@ -181,7 +178,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                                   {isCreator ? (
                                     <UploadButton
                                       type="bg-guide"
-                                      tourneyId={params.id}
+                                      tourneyId={tourneyId}
                                       committeeId={committee.id}
                                       delegateId={user.id}
                                     />
@@ -191,7 +188,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                                     myCommittee.id === committee.id && (
                                       <UploadButton
                                         type="bg-guide"
-                                        tourneyId={params.id}
+                                        tourneyId={tourneyId}
                                         committeeId={committee.id}
                                         delegateId={user.id}
                                       />
@@ -273,7 +270,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                         <p>Upload background guide</p>
                         <UploadButton
                           type="bg-guide"
-                          tourneyId={params.id}
+                          tourneyId={tourneyId}
                           committeeId={myCommittee.id}
                           delegateId={user.id}
                         />
@@ -290,7 +287,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                         <p>Upload position paper</p>
                         <UploadButton
                           type="position-paper"
-                          tourneyId={params.id}
+                          tourneyId={tourneyId}
                           committeeId={myCommittee.id}
                           delegateId={user?.id}
                         />
@@ -307,7 +304,7 @@ const tourneyPage = async ({ params }: { params: { id: string } }) => {
                       {committees.map((committee) => (
                         <CommitteeSignUp
                           key={committee.id}
-                          tourneyId={params.id}
+                          tourneyId={tourneyId}
                           committeeId={committee.id}
                           delegateId={user?.id}
                           committeeName={committee.name}
