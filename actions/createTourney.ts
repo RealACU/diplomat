@@ -49,9 +49,11 @@ export default async function createTourney(
   };
 
   allChairIds.forEach(async (chairId) => {
-    const user = await (await clerkClient()).users.getUser(chairId);
+    const client = await clerkClient();
 
-    await clerkClient.users.updateUserMetadata(chairId, {
+    const user = await client.users.getUser(chairId);
+
+    await client.users.updateUserMetadata(chairId, {
       publicMetadata: {
         cTourneys: [...(user.publicMetadata.cTourneys as string[]), tourneyId],
       },
