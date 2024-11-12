@@ -49,7 +49,7 @@ export default async function createTourney(
   };
 
   allChairIds.forEach(async (chairId) => {
-    const user = await clerkClient.users.getUser(chairId);
+    const user = await (await clerkClient).users.getUser(chairId);
 
     await clerkClient.users.updateUserMetadata(chairId, {
       publicMetadata: {
