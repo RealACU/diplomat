@@ -12,14 +12,12 @@ import { useUser } from "@clerk/nextjs";
 import getAllTourneys from "@/actions/getAllTourneys";
 import getTourneyById from "@/actions/getTourneyById";
 import getUserTournaments from "@/actions/getUserTournaments";
-import { updateUserSchoolAffiliation } from "@/actions/updateUserSchoolAffiliation";
 import { updateUserTourneyData } from "@/actions/updateUserTourneyData";
 import { getUser } from "@/actions/getUser";
 import { Input } from "@/components/ui/input";
 import Loading from "@/app/loading";
 import UploadButton from "@/components/UploadButton";
 import { updateDelegateInfo } from "@/actions/updateDelegateInfo";
-import { GridLoader, PropagateLoader, PulseLoader, SyncLoader } from 'react-spinners';
 import LoadingSpinner from "@/components/LoadingSpinner";
 
 const MyTournamentsPage = () => {
@@ -173,7 +171,7 @@ const MyTournamentsPage = () => {
     if (chairIds.length || delegateIds.length) {
       fetchUsers();
     }  
-  }, [tourneys, user]);  
+  }, [tourneys]);  
 
   if (!user) {
     return <Loading />; 
@@ -204,15 +202,13 @@ const MyTournamentsPage = () => {
       return;
     }
 
-    // Access the positionPaperLink from delegateInfo
     const positionPaperLink = delegate.delegateInfo.positionPaperLink || null;
 
-    // Update the allocation state
     setDelegateInfoValues(prev => ({
       ...prev,
       [key]: { 
         allocation: newAllocation, 
-        positionPaperLink: positionPaperLink // Use the correctly defined variable
+        positionPaperLink: positionPaperLink 
       }
     }));
   
