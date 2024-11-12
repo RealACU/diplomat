@@ -10,11 +10,11 @@ import { Download, File } from "lucide-react";
 import getTourneyById from "@/actions/getTourneyById";
 import TournamentInformation from "@/components/TournamentInformation";
 
-type Params = {
-  params: { id: string };
-};
+const tourneyPage = async ({ params }: { params: { id: string } }) => {
+  if (!params) {
+    return null;
+  }
 
-const tourneyPage = async ({ params }: Params) => {
   const tourney = await getTourneyById(params.id);
 
   if (!tourney) {
