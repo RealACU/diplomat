@@ -11,6 +11,10 @@ import getTourneyById from "@/actions/getTourneyById";
 import TournamentInformation from "@/components/TournamentInformation";
 
 const tourneyPage = async ({ params }: { params: { id: string } }) => {
+  if (!params) {
+    return null;
+  }
+
   const tourney = await getTourneyById(params.id);
 
   if (!tourney) {
