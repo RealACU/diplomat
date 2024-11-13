@@ -39,7 +39,6 @@ const MyTournamentsPage = () => {
   const [delegates, setDelegates] = useState<any[]>([]);
   const [showDelegatesId, setShowDelegatesId] = useState(false);
   const [showLinksId, setShowLinksId] = useState(false);
-  const [isUploaded, setIsUploaded] = useState(false);
   const [delegateInfoValues, setDelegateInfoValues] = useState<{ [key: string]: { allocation: string | undefined; positionPaperLink: string | null; } }>( {});
   const [loading, setLoading] = useState(true);
 
@@ -113,9 +112,6 @@ const MyTournamentsPage = () => {
     const delegateIds = tourneys.flatMap((tourney) =>
       tourney.committees.flatMap((committee: any) => committee.delegateIds)
     );  
-
-    console.log('Chair IDs:', chairIds);
-    console.log('Delegate IDs:', delegateIds);
 
     const fetchUsers = async () => {
       const fetchData = async (ids: string[]) => {
@@ -229,11 +225,6 @@ const MyTournamentsPage = () => {
       console.error("Failed to save allocation:", result.error);
     }
   };
-
-  const handleUploadComplete = () => {
-    setIsUploaded(true);
-  };
-  
   
   const items = [
     
@@ -830,7 +821,7 @@ const MyTournamentsPage = () => {
                                             </div>
                                             <div className="flex w-full py-2 px-2 border-[1px] bg-slate-100 border-slate-300 rounded-md text-sm items-center">
                                               {tourneyInfo?.committees?.map((committee: any) => {
-                                                if (committee?.chairIds?.includes(user.id)) {
+                                                if (committee?.delegateIds?.includes(user.id)) {
                                                   return (
                                                     <div key={committee.id} className="w-[20%] overflow-hidden text-ellipsis line-clamp-2 pr-8">
                                                       {committee.name}
@@ -841,27 +832,27 @@ const MyTournamentsPage = () => {
                                               })}
                                               <div className="w-auto flex flex-col space-y-1">
                                                 {tourneyInfo?.committees?.map((committee: any) => {
-                                                  if (committee?.chairIds?.includes(user.id)) {
-                                                    return committee?.delegateIds?.map((delegateIds: any) => {
-                                                      const delegate = delegates.find((user: any) => user?.id === delegateIds);
+                                                  if (committee?.delegateIds?.includes(user.id)) {
+                                                    return committee?.chairIds?.map((chairIds: any) => {
+                                                      const chair = chairs.find((user: any) => user?.id === chairIds);
 
                                                       return (
-                                                        <li key={delegateIds} className="flex items-center">
+                                                        <li key={chairIds} className="flex items-center">
                                                           <div className="w-48 font-semibold flex items-center">
-                                                            {delegate
-                                                              ? `${delegate.firstName} ${delegate.lastName}`
+                                                            {chair
+                                                              ? `${chair.firstName} ${chair.lastName}`
                                                               : 'Unknown'}
                                                             <div className="relative group">
                                                               <Info className="w-4 h-4 stroke-periwinkle-400 ml-2"/>
                                                               <div className="absolute bg-opacity-0 opacity-0 group-hover:opacity-100 group-hover:bg-opacity-75 pointer-events-none transition-opacity duration-150 left-full px-2 py-1 w-auto text-xs text-white bg-periwinkle-200 rounded-md shadow-lg z-30 -mt-[28px] backdrop-blur-md ml-1">
                                                                 <p className="inline font-bold">ID: </p>
-                                                                <p className="inline font-medium">{delegateIds}</p>
+                                                                <p className="inline font-medium">{chairIds}</p>
                                                               </div>
                                                             </div>
                                                           </div>
                                                           <div className="w-48">
-                                                            {delegate
-                                                              ? `${delegate.email}`
+                                                            {chair
+                                                              ? `${chair.email}`
                                                               : 'Unknown'}
                                                           </div>
                                                         </li>
@@ -878,7 +869,7 @@ const MyTournamentsPage = () => {
                                                     if (!user?.id || !tourneyInfo?.committees) return null;
 
                                                     const userCommittee = tourneyInfo?.committees?.find((committee: any) =>
-                                                      committee.chairIds?.includes(user.id)
+                                                      committee.delegateIds?.includes(user.id)
                                                     );
 
                                                     if (userCommittee && userCommittee.bgGuideLink && userCommittee.bgGuideLink !== null) {
@@ -909,7 +900,7 @@ const MyTournamentsPage = () => {
                                                 <div className="flex-shrink-0">
                                                   {(() => {
                                                     const userCommittee = tourneyInfo?.committees?.find((committee: any) =>
-                                                      committee.chairIds?.includes(user.id)
+                                                      committee.delegateIds?.includes(user.id)
                                                     );
 
                                                     if (userCommittee) {
@@ -923,7 +914,6 @@ const MyTournamentsPage = () => {
                                                           textAfterUpload="New Paper"
                                                           size={5}
                                                           ml="2"
-                                                          onUploadComplete={handleUploadComplete}
                                                         />
                                                       );
                                                     }
@@ -981,13 +971,14 @@ const MyTournamentsPage = () => {
                           );
                         }
 
-                        if (validTournaments.length > 0) {
-                          return (
-                            <>
-                            <ul>
-                              {validTournaments.map(tourneyInfo => (
-                                <div key={tourneyInfo.id} className="odd:bg-slate-150 even:bg-slate-100">
-                                  <li className="transition-all duration-200">
+                        if (validTournaments.some(tourney => tourney.committees?.some((committee: any) => committee.chairIds?.includes(user.id)))) {
+                          if (validTournaments.length > 0) {
+                            return (
+                              <>
+                                <ul>
+                                  {validTournaments.map((tourneyInfo) => (
+                                    <div key={tourneyInfo.id} className="odd:bg-slate-150 even:bg-slate-100">
+                                      <li className="transition-all duration-200">                        
                                     {/*<Link href={`/my-tournaments/${tourneyInfo.id}`}>  odd:hover:bg-periwinkle-50 even:hover:bg-periwinkle-100*/}
                                     <div className="px-4 rounded-md font-medium text-md flex items-center">
                                       <div className="py-6 w-[60%] sm:w-[30%] break-words pr-8 font-semibold">
@@ -1179,15 +1170,16 @@ const MyTournamentsPage = () => {
                               </ul>
                             </>
                           );
-                        } else {
-                          return (
-                            <li className="py-4 px-6 sm:px-0 flex justify-center items-center text-center w-full">
-                              {"Talk to your advisor about chairing at your school's tournament!"}
-                              </li>
-                            );
-                          }
-                        })()}
-                      </ul>
+                        }
+                      } else {
+                        return (
+                          <li className="py-4 px-6 sm:px-0 flex justify-center items-center text-center w-full">
+                            {"Talk to your advisor about chairing at your school's tournament!"}
+                            </li>
+                          );
+                        }
+                      })()}
+                    </ul>
                   </div>
                 </div>
                 ),
