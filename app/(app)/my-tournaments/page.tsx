@@ -148,7 +148,7 @@ const MyTournamentsPage = () => {
       
             if (info.committeeId && tourneys.some((tourney: any) =>
               tourney.committees.some((committee: any) =>
-                committee.chairIds.includes(user.id) && committee.delegateIds.includes(delegate.id)
+                committee.delegateIds.includes(delegate.id)
               )
             )) {
               const key = `${delegate.id}-${info.committeeId}`;
@@ -706,26 +706,36 @@ const MyTournamentsPage = () => {
                             );
                           }
 
-                          if (validTournaments.length > 0) {
+                          const userTourneys = validTournaments.filter((tourney) => {
+                            return dTourneys.includes(tourney.id);
+                          }); 
+                          
+                          console.log(dTourneys);
+                      
+                          if (userTourneys.length > 0) {
                             return (
                               <>
-                              <ul>
-                                {validTournaments.map(tourneyInfo => (
-                                  <div key={tourneyInfo.id} className="odd:bg-slate-150 even:bg-slate-100">
-                                    <li className="transition-all duration-200">
-                                      {/*<Link href={`/my-tournaments/${tourneyInfo.id}`}>  odd:hover:bg-periwinkle-50 even:hover:bg-periwinkle-100*/}
+                                <ul>
+                                  {userTourneys.map((tourneyInfo) => (
+                                    <div key={tourneyInfo.id} className="odd:bg-slate-150 even:bg-slate-100">
+                                      <li className="transition-all duration-200">                        
+                                        {/*<Link href={`/my-tournaments/${tourneyInfo.id}`}>  odd:hover:bg-periwinkle-50 even:hover:bg-periwinkle-100*/}
                                         <div className="px-4 rounded-md font-medium text-md flex items-center">
-                                          <div className="py-6 w-[60%] sm:w-[30%] break-words pr-8 font-semibold">{tourneyInfo.name}</div>
+                                          <div className="py-6 w-[60%] sm:w-[30%] break-words pr-8 font-semibold">
+                                            {tourneyInfo.name}
+                                          </div>
                                           <div className="py-2 w-[17%] pr-4">
                                             {(() => {
-                                              const userCommittee = tourneyInfo?.committees?.find((committee: any) =>
-                                                committee.delegateIds?.includes(user.id)
-                                              );
-
-                                              return userCommittee ? (
+                                              const userComm = tourneyInfo?.committees?.find(
+                                                (committee: any) => committee.delegateIds?.includes(user.id)
+                                              );                
+      
+                                              return userComm ? (
                                                 <div>
-                                                  <span className={userCommittee.name.length > 30 ? "text-xs" : "text-sm"}>
-                                                    {userCommittee.name}
+                                                  <span
+                                                    className={userComm.name.length > 30 ? 'text-xs' : 'text-sm'}
+                                                  >
+                                                    {userComm.name}
                                                   </span>
                                                 </div>
                                               ) : (
@@ -959,7 +969,7 @@ const MyTournamentsPage = () => {
 
                       <ul>
                         {(() => {
-                        const validTournaments = tournaments
+                        const validTournaments = chairTournaments
                         .filter((tourneyInfo): tourneyInfo is NonNullable<typeof tourneyInfo> =>
                           tourneyInfo !== null && isAfter(new Date(tourneyInfo.endDate), new Date())
                         )
@@ -971,206 +981,208 @@ const MyTournamentsPage = () => {
                           );
                         }
 
-                        if (validTournaments.some(tourney => tourney.committees?.some((committee: any) => committee.chairIds?.includes(user.id)))) {
-                          if (validTournaments.length > 0) {
-                            return (
-                              <>
-                                <ul>
-                                  {validTournaments.map((tourneyInfo) => (
-                                    <div key={tourneyInfo.id} className="odd:bg-slate-150 even:bg-slate-100">
-                                      <li className="transition-all duration-200">                        
-                                    {/*<Link href={`/my-tournaments/${tourneyInfo.id}`}>  odd:hover:bg-periwinkle-50 even:hover:bg-periwinkle-100*/}
-                                    <div className="px-4 rounded-md font-medium text-md flex items-center">
-                                      <div className="py-6 w-[60%] sm:w-[30%] break-words pr-8 font-semibold">
-                                        {tourneyInfo.name}
-                                      </div>
-                                      <div className="py-2 w-[17%] pr-4">
-                                        {(() => {
-                                          const userCommittee = tourneyInfo?.committees?.find(
-                                            (committee: any) => committee.chairIds?.includes(user.id)
-                                          );
-
-                                          return userCommittee ? (
-                                            <div>
-                                              <span
-                                                className={userCommittee.name.length > 30 ? 'text-xs' : 'text-sm'}
-                                              >
-                                                {userCommittee.name}
-                                              </span>
-                                            </div>
-                                          ) : (
-                                            <div>Committee Name</div>
-                                          );
-                                        })()}
-                                      </div>
-                                      <div className="py-6 w-[11%] break-words flex text-right">
-                                        <p className="w-full">{tourneyInfo.city}, {tourneyInfo.state}</p>
-                                      </div>
-                                      <div className="w-[2%] justify-center flex">•</div>
-                                      <div className="py-6 w-[6%] text-right pr-4">
-                                        {new Date(tourneyInfo.startDate).toLocaleDateString('en-US', {
-                                          month: '2-digit',
-                                          day: '2-digit',
-                                          year: '2-digit',
-                                        })}
-                                      </div>
-                                      <div className="py-4 flex flex-grow z-20">
-                                        <div className="w-1/2 flex pr-3 gap-x-2.5">
-                                          <div
-                                            className="w-full border-[1px] h-auto border-slate-300 bg-slate-200 duration-200 hover:bg-slate-300 font-bold rounded-sm shadow-sm py-2 px-3 flex items-center cursor-pointer"
-                                            onClick={() => toggleDelegatesVisibility(tourneyInfo.id)}
-                                          >
-                                            View your delegates
-                                            <ChevronDown
-                                              className={`ml-auto w-5 h-5 transition-transform duration-300 transform ${
-                                                showDelegatesId === tourneyInfo.id ? 'rotate-180' : ''
-                                              }`}
-                                            />
-                                          </div>
-                                        </div>
-                                        <div className="w-1/2 flex items-center">
-                                          <div className="w-full flex items-center">
-                                            {(() => {
-                                              const userCommittee = tourneyInfo?.committees?.find(
-                                                (committee: any) => committee.chairIds?.includes(user.id)
-                                              );
-
-                                              if (userCommittee) {
-                                                return (
-                                                  <UploadButton
-                                                    type="bg-guide"
-                                                    tourneyId={tourneyInfo.id}
-                                                    committeeId={userCommittee.id}
-                                                    delegateId={user.id}
-                                                    text="Upload BG Guide"
-                                                    textAfterUpload="New BG"
-                                                    size={5}
-                                                  />
-                                                );
-                                              }
-                                              return null;
-                                            })()}
-                                          </div>
-                                          <div className="relative group">
-                                            <Info className="w-5 h-5 ml-2 -mr-2 stroke-slate-600" />
-                                            <div className="absolute opacity-0 bg-opacity-0 group-hover:opacity-100 group-hover:bg-opacity-75 pointer-events-none transition-opacity duration-150 right-full px-2 py-1 -mt-[36px] w-[300px] text-xs mr-1 text-white bg-periwinkle-300 rounded-md shadow-lg z-50 backdrop-blur-sm">
-                                              <p className="inline">A </p>
-                                              <p className="inline text-[#a1d48c]">green check mark </p>
-                                              <p className="inline">means your BG Guide is uploaded. A </p>
-                                              <p className="inline text-[#ffc3c3]">red X </p>
-                                              <p className="inline">means you still need to upload. </p>
-                                              <p>A refresh may be necessary to reflect changes.</p>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
+                        const userTourneys = validTournaments.filter((tourney) => {
+                          return cTourneys.includes(tourney.id);
+                        });                   
+                                            
+                        if (userTourneys.length > 0) {
+                          return (
+                            <>
+                              <ul>
+                                {userTourneys.map((tourneyInfo) => (
+                                  <div key={tourneyInfo.id} className="odd:bg-slate-150 even:bg-slate-100">
+                                    <li className="transition-all duration-200">                        
+                                  {/*<Link href={`/my-tournaments/${tourneyInfo.id}`}>  odd:hover:bg-periwinkle-50 even:hover:bg-periwinkle-100*/}
+                                  <div className="px-4 rounded-md font-medium text-md flex items-center">
+                                    <div className="py-6 w-[60%] sm:w-[30%] break-words pr-8 font-semibold">
+                                      {tourneyInfo.name}
                                     </div>
-                                  </li>
-                                  {/* ul under the main ul that allows you to add allocations/view delegates */}
-                                  <div
-                                    className={`transition-all duration-300 ease-in-out bg-white overflow-hidden ${
-                                      showDelegatesId === tourneyInfo.id ? 'h-auto' : 'h-0'
-                                    }`}
-                                  >
-                                    {showDelegatesId === tourneyInfo.id && (
-                                      <ul className="my-4 flex flex-col space-y-2 mx-44">
-                                        <div className="flex font-bold">
-                                          <div className="flex w-full">
-                                            <div className="ml-[34px] w-[255px]">Name</div>
-                                            <div className="w-[266px]">School Affiliation</div>
-                                            <div>Allocation</div>
-                                            <div className="flex-grow flex justify-end">
-                                              <div
-                                                className="w-24 flex cursor-pointer bg-slate-700 hover:bg-slate-800 rounded-md text-white font-semibold justify-center duration-200 text-sm items-center mr-3"
-                                                onClick={toggleDelegatesVisibility}
-                                              >
-                                                Save
-                                              </div>
-                                            </div>
+                                    <div className="py-2 w-[17%] pr-4">
+                                      {(() => {
+                                        const userComm = tourneyInfo?.committees?.find(
+                                          (committee: any) => committee.chairIds?.includes(user.id)
+                                        );                
+
+                                        return userComm ? (
+                                          <div>
+                                            <span
+                                              className={userComm.name.length > 30 ? 'text-xs' : 'text-sm'}
+                                            >
+                                              {userComm.name}
+                                            </span>
                                           </div>
-                                          <div className="w-[172px]"></div>
+                                        ) : (
+                                          <div>Committee Name</div>
+                                        );
+                                      })()}
+                                    </div>
+                                    <div className="py-6 w-[11%] break-words flex text-right">
+                                      <p className="w-full">{tourneyInfo.city}, {tourneyInfo.state}</p>
+                                    </div>
+                                    <div className="w-[2%] justify-center flex">•</div>
+                                    <div className="py-6 w-[6%] text-right pr-4">
+                                      {new Date(tourneyInfo.startDate).toLocaleDateString('en-US', {
+                                        month: '2-digit',
+                                        day: '2-digit',
+                                        year: '2-digit',
+                                      })}
+                                    </div>
+                                    <div className="py-4 flex flex-grow z-20">
+                                      <div className="w-1/2 flex pr-3 gap-x-2.5">
+                                        <div
+                                          className="w-full border-[1px] h-auto border-slate-300 bg-slate-200 duration-200 hover:bg-slate-300 font-bold rounded-sm shadow-sm py-2 px-3 flex items-center cursor-pointer"
+                                          onClick={() => toggleDelegatesVisibility(tourneyInfo.id)}
+                                        >
+                                          View your delegates
+                                          <ChevronDown
+                                            className={`ml-auto w-5 h-5 transition-transform duration-300 transform ${
+                                              showDelegatesId === tourneyInfo.id ? 'rotate-180' : ''
+                                            }`}
+                                          />
                                         </div>
-                                        {tourneyInfo?.committees?.map((committee: any) => {
-                                          if (committee?.chairIds?.includes(user.id)) {
-                                            return committee?.delegateIds?.map((delegateId: any, index: number) => {
-                                              const delegate = delegates.find((delegate: any) => delegate?.id === delegateId);
-                                              const key = `${delegateId}-${committee.id}`;
-                                              
+                                      </div>
+                                      <div className="w-1/2 flex items-center">
+                                        <div className="w-full flex items-center">
+                                          {(() => {
+                                            const userCommittee = tourneyInfo?.committees?.find(
+                                              (committee: any) => committee.chairIds?.includes(user.id)
+                                            );
+
+                                            if (userCommittee) {
                                               return (
-                                                <div className="flex w-full items-center" key={delegateId}>
-                                                  <div className="w-8 text-center font-medium">{index + 1}</div>
-                                                  <li className="w-full flex py-1 px-2 border-[1px] even:bg-slate-200 odd:bg-transparent border-slate-300 rounded-md text-sm items-center">
-                                                    <div className="w-[30%] font-semibold flex items-center">
-                                                      {delegate ? `${delegate.firstName} ${delegate.lastName}` : 'Unknown'}
-                                                      <div className="relative group">
-                                                        <Mail className="w-4 h-4 stroke-periwinkle-400 ml-2" />
-                                                        <div className="absolute bg-opacity-0 opacity-0 group-hover:opacity-100 group-hover:bg-opacity-75 pointer-events-none transition-opacity duration-150 left-full px-2 py-1 w-auto text-xs text-white bg-periwinkle-200 rounded-md shadow-lg z-30 -mt-[28px] backdrop-blur-md ml-1">
-                                                          <p className="inline font-bold">Email: </p>
-                                                          <p className="inline">{delegate ? `${delegate.email}` : 'Unknown'}</p>
-                                                        </div>
-                                                      </div>
-                                                      <div className="relative group">
-                                                        <Info className="w-4 h-4 stroke-periwinkle-400 ml-2" />
-                                                        <div className="absolute bg-opacity-0 opacity-0 group-hover:opacity-100 group-hover:bg-opacity-75 pointer-events-none transition-opacity duration-150 left-full px-2 py-1 w-auto text-xs text-white bg-periwinkle-200 rounded-md shadow-lg z-30 -mt-[28px] backdrop-blur-md ml-1">
-                                                          <p className="inline font-bold">ID: </p>
-                                                          <p className="inline">{delegateId}</p>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                    <div className="w-[30%]">
-                                                      {String(
-                                                        delegateId === user.id && user.publicMetadata.schoolAffiliation
-                                                          ? user.publicMetadata.schoolAffiliation
-                                                          : 'School affiliation not provided'
-                                                      )}
-                                                    </div>
-                                                    <div className="flex flex-grow justify-end">
-                                                      <Input
-                                                        type="text"
-                                                        placeholder="Enter allocation..."
-                                                        className="w-96 h-8 border-slate-300 drop-shadow-sm focus:outline-none transition-all duration-200 focus-visible:ring-gray-300"
-                                                        value={delegateInfoValues[key]?.allocation || delegate?.delegateInfo?.allocation || ''}
-                                                        onChange={(e) =>
-                                                          handleInputChange(e, delegateId, tourneyInfo.id, committee.id)
-                                                        }
-                                                      />
-                                                    </div>
-                                                    </li>
-                                                    {delegateInfoValues[key]?.positionPaperLink || delegate?.delegateInfo?.positionPaperLink ? (
-                                                      <Link
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="flex w-[172px] rounded-sm text-sm h-full p-2.5 border-[1px] border-periwinkle-100 bg-periwinkle-50 hover:bg-periwinkle-100 cursor-pointer ml-1 items-center font-semibold duration-200"
-                                                        href={delegateInfoValues[key]?.positionPaperLink || delegate?.delegateInfo?.positionPaperLink}
-                                                      >
-                                                        Position Paper
-                                                        <ExternalLink className="w-5 h-5 ml-2" />
-                                                      </Link>
-                                                    ) : (
-                                                      <div className="relative group flex w-[172px] rounded-sm text-sm h-full p-2 border-[2px] border-periwinkle-100 border-dashed text-periwinkle-100 bg-slate-100 ml-1 items-center font-semibold duration-200 cursor-not-allowed">
-                                                        Position Paper
-                                                        <ExternalLink className="w-5 h-5 ml-2 stroke-periwinkle-100" />
-                                                        <div className="w-36 absolute opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity left-full duration-150 bg-periwinkle-200 text-white text-xs rounded-md py-2 px-2 z-50 ml-2">
-                                                          Waiting for delegate to add position paper 
-                                                        </div>
-                                                      </div>
-                                                    )}
-                                                  </div>
-                                                );
-                                              });
-                                            } else {
-                                              return null;
+                                                <UploadButton
+                                                  type="bg-guide"
+                                                  tourneyId={tourneyInfo.id}
+                                                  committeeId={userCommittee.id}
+                                                  delegateId={user.id}
+                                                  text="Upload BG Guide"
+                                                  textAfterUpload="New BG"
+                                                  size={5}
+                                                />
+                                              );
                                             }
-                                          })}
-                                        </ul>
-                                      )}
+                                            return null;
+                                          })()}
+                                        </div>
+                                        <div className="relative group">
+                                          <Info className="w-5 h-5 ml-2 -mr-2 stroke-slate-600" />
+                                          <div className="absolute opacity-0 bg-opacity-0 group-hover:opacity-100 group-hover:bg-opacity-75 pointer-events-none transition-opacity duration-150 right-full px-2 py-1 -mt-[36px] w-[300px] text-xs mr-1 text-white bg-periwinkle-300 rounded-md shadow-lg z-50 backdrop-blur-sm">
+                                            <p className="inline">A </p>
+                                            <p className="inline text-[#a1d48c]">green check mark </p>
+                                            <p className="inline">means your BG Guide is uploaded. A </p>
+                                            <p className="inline text-[#ffc3c3]">red X </p>
+                                            <p className="inline">means you still need to upload. </p>
+                                            <p>A refresh may be necessary to reflect changes.</p>
+                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
-                                ))}
-                              </ul>
-                            </>
-                          );
-                        }
+                                </li>
+                                {/* ul under the main ul that allows you to add allocations/view delegates */}
+                                <div
+                                  className={`transition-all duration-300 ease-in-out bg-white overflow-hidden ${
+                                    showDelegatesId === tourneyInfo.id ? 'h-auto' : 'h-0'
+                                  }`}
+                                >
+                                  {showDelegatesId === tourneyInfo.id && (
+                                    <ul className="my-4 flex flex-col space-y-2 mx-44">
+                                      <div className="flex font-bold">
+                                        <div className="flex w-full">
+                                          <div className="ml-[34px] w-[255px]">Name</div>
+                                          <div className="w-[266px]">School Affiliation</div>
+                                          <div>Allocation</div>
+                                          <div className="flex-grow flex justify-end">
+                                            <div
+                                              className="w-24 flex cursor-pointer bg-slate-700 hover:bg-slate-800 rounded-md text-white font-semibold justify-center duration-200 text-sm items-center mr-3"
+                                              onClick={toggleDelegatesVisibility}
+                                            >
+                                              Save
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div className="w-[172px]"></div>
+                                      </div>
+                                      {tourneyInfo?.committees?.map((committee: any) => {
+                                        if (committee?.chairIds?.includes(user.id)) {
+                                          return committee?.delegateIds?.map((delegateId: any, index: number) => {
+                                            const delegate = delegates.find((delegate: any) => delegate?.id === delegateId);
+                                            const key = `${delegateId}-${committee.id}`;
+                                            
+                                            return (
+                                              <div className="flex w-full items-center" key={delegateId}>
+                                                <div className="w-8 text-center font-medium">{index + 1}</div>
+                                                <li className="w-full flex py-1 px-2 border-[1px] even:bg-slate-200 odd:bg-transparent border-slate-300 rounded-md text-sm items-center">
+                                                  <div className="w-[30%] font-semibold flex items-center">
+                                                    {delegate ? `${delegate.firstName} ${delegate.lastName}` : 'Unknown'}
+                                                    <div className="relative group">
+                                                      <Mail className="w-4 h-4 stroke-periwinkle-400 ml-2" />
+                                                      <div className="absolute bg-opacity-0 opacity-0 group-hover:opacity-100 group-hover:bg-opacity-75 pointer-events-none transition-opacity duration-150 left-full px-2 py-1 w-auto text-xs text-white bg-periwinkle-200 rounded-md shadow-lg z-30 -mt-[28px] backdrop-blur-md ml-1">
+                                                        <p className="inline font-bold">Email: </p>
+                                                        <p className="inline">{delegate ? `${delegate.email}` : 'Unknown'}</p>
+                                                      </div>
+                                                    </div>
+                                                    <div className="relative group">
+                                                      <Info className="w-4 h-4 stroke-periwinkle-400 ml-2" />
+                                                      <div className="absolute bg-opacity-0 opacity-0 group-hover:opacity-100 group-hover:bg-opacity-75 pointer-events-none transition-opacity duration-150 left-full px-2 py-1 w-auto text-xs text-white bg-periwinkle-200 rounded-md shadow-lg z-30 -mt-[28px] backdrop-blur-md ml-1">
+                                                        <p className="inline font-bold">ID: </p>
+                                                        <p className="inline">{delegateId}</p>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                  <div className="w-[30%]">
+                                                    {String(
+                                                      delegateId === user.id && user.publicMetadata.schoolAffiliation
+                                                        ? user.publicMetadata.schoolAffiliation
+                                                        : 'School affiliation not provided'
+                                                    )}
+                                                  </div>
+                                                  <div className="flex flex-grow justify-end">
+                                                    <Input
+                                                      type="text"
+                                                      placeholder="Enter allocation..."
+                                                      className="w-96 h-8 border-slate-300 drop-shadow-sm focus:outline-none transition-all duration-200 focus-visible:ring-gray-300"
+                                                      value={delegateInfoValues[key]?.allocation || delegate?.delegateInfo?.allocation || ''}
+                                                      onChange={(e) =>
+                                                        handleInputChange(e, delegateId, tourneyInfo.id, committee.id)
+                                                      }
+                                                    />
+                                                  </div>
+                                                  </li>
+                                                  {delegateInfoValues[key]?.positionPaperLink || delegate?.delegateInfo?.positionPaperLink ? (
+                                                    <Link
+                                                      target="_blank"
+                                                      rel="noopener noreferrer"
+                                                      className="flex w-[172px] rounded-sm text-sm h-full p-2.5 border-[1px] border-periwinkle-100 bg-periwinkle-50 hover:bg-periwinkle-100 cursor-pointer ml-1 items-center font-semibold duration-200"
+                                                      href={delegateInfoValues[key]?.positionPaperLink || delegate?.delegateInfo?.positionPaperLink}
+                                                    >
+                                                      Position Paper
+                                                      <ExternalLink className="w-5 h-5 ml-2" />
+                                                    </Link>
+                                                  ) : (
+                                                    <div className="relative group flex w-[172px] rounded-sm text-sm h-full p-2 border-[2px] border-periwinkle-100 border-dashed text-periwinkle-100 bg-slate-100 ml-1 items-center font-semibold duration-200 cursor-not-allowed">
+                                                      Position Paper
+                                                      <ExternalLink className="w-5 h-5 ml-2 stroke-periwinkle-100" />
+                                                      <div className="w-36 absolute opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity left-full duration-150 bg-periwinkle-200 text-white text-xs rounded-md py-2 px-2 z-50 ml-2">
+                                                        Waiting for delegate to add position paper 
+                                                      </div>
+                                                    </div>
+                                                  )}
+                                                </div>
+                                              );
+                                            });
+                                          } else {
+                                            return null;
+                                          }
+                                        })}
+                                      </ul>
+                                    )}
+                                  </div>
+                                </div>
+                              ))}
+                            </ul>
+                          </>
+                        );
                       } else {
                         return (
                           <li className="py-4 px-6 sm:px-0 flex justify-center items-center text-center w-full">
