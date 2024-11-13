@@ -1132,7 +1132,7 @@ const MyTournamentsPage = () => {
                                                   </div>
                                                   <div className="w-[30%]">
                                                     {String(
-                                                      delegateId === user.id && user.publicMetadata.schoolAffiliation
+                                                      delegateId === delegate.id && user.publicMetadata.schoolAffiliation
                                                         ? user.publicMetadata.schoolAffiliation
                                                         : 'School affiliation not provided'
                                                     )}
