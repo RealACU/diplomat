@@ -1218,14 +1218,17 @@ const MyTournamentsPage = () => {
           <div className="h-48 w-80 bg-slate-200"/>
         </div>
 
-        <div className="w-full flex flex-col z-20 pb-[200px] sm:pb-[80px] ml-10 sm:ml-20 text-navy-100 space-y-6 justify-center">
+        <div className="w-full flex flex-col z-20 pb-[200px] sm:pb-[54px] ml-10 sm:ml-20 text-navy-100 space-y-6 justify-center">
           <div className="flex flex-col sm:gap-y-2">
-            <h2 className="sm:text-4xl text-2xl ml-2 font-semibold break-words">
+            <h2 className="sm:text-4xl text-2xl ml-1 font-semibold break-words text-periwinkle-400">
               Welcome,
             </h2>
             <h1 className="sm:text-8xl text-5xl font-semibold break-words">
               {user ? `${user.firstName} ${user.lastName ? user.lastName.charAt(0) + '.' : ''}` : 'User'}
             </h1>
+            <h3 className="sm:text-lg text-md ml-1 font-semibold break-words text-periwinkle-400 opacity-50">
+              ID: {user?.id}
+            </h3>
           </div>
           <div className="flex-col flex gap-y-2 ml-2 font-semibold">
             <h2 className="flex text-2xl"></h2>

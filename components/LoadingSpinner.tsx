@@ -9,14 +9,17 @@ const LoadingSpinner = () => {
                     <Image 
                         src="/gavel1.svg" 
                         alt="Gavel" 
-                        className="w-12 h-12" 
+                        width={48}
+                        height={48}
                     />
                 </div>
             </div>
             <Image 
                 src="/gavel2.svg" 
                 alt="Gavel" 
-                className="-mt-[20px] ml-[32px] w-6 h-6"
+                className="-mt-[7px] ml-[32px]"
+                width={24}
+                height={24}
             />
         </div>
     );

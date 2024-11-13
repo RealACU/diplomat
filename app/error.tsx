@@ -12,14 +12,17 @@ const error = () => {
             <Image 
               src="/gavel1.svg" 
               alt="Gavel" 
-              className="w-24 h-24" 
+              width={96}
+              height={96} 
             />
           </div>
         </div>
         <Image 
           src="/gavel2.svg" 
           alt="Gavel" 
-          className="-mt-[40px] ml-[66px] w-12 h-12"
+          className="-mt-[14px] ml-[66px]"
+          width={48}
+          height={48}
         />
       </div>
       <p className="mx-3 text-2xl font-bold pt-2 justify-center flex flex-col items-center text-periwinkle-400">
