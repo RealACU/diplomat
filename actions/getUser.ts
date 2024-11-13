@@ -18,6 +18,7 @@ export async function getUser(userId: string) {
         ? user.emailAddresses[0].emailAddress
         : 'Unknown',
       delegateInfo: allDelegateInfo.filter(info => info.delegateId === user.id) || [],
+      publicMetadata: user.publicMetadata || {},
     };
 
     return { success: true, user: userData };

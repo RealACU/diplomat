@@ -22,11 +22,11 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 
 const MyTournamentsPage = () => {
   //use this when you want to call schoolaffiliation
-  //{String(user?.publicMetadata?.schoolAffiliation || 'School affiliation not provided')}
+  //{String(delegate?.publicMetadata?.schoolAffiliation || 'School affiliation not provided')}
   //or this, depending on the location of the node
   /*{String(
-    delegateId === user.id && user.publicMetadata.schoolAffiliation
-    ? user.publicMetadata.schoolAffiliation
+    delegateId === delegate?.id && delegate?.publicMetadata?.schoolAffiliation
+    ? delegate?.publicMetadata?.schoolAffiliation
     : 'School affiliation not provided'
     )}*/
   const { user } = useUser();
@@ -709,9 +709,7 @@ const MyTournamentsPage = () => {
                           const userTourneys = validTournaments.filter((tourney) => {
                             return dTourneys.includes(tourney.id);
                           }); 
-                          
-                          console.log(dTourneys);
-                      
+                                                
                           if (userTourneys.length > 0) {
                             return (
                               <>
