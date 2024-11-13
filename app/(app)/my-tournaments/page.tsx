@@ -41,11 +41,15 @@ const MyTournamentsPage = () => {
   const [showLinksId, setShowLinksId] = useState(false);
   const [delegateInfoValues, setDelegateInfoValues] = useState<{ [key: string]: { allocation: string | undefined; positionPaperLink: string | null; } }>( {});
   const [loading, setLoading] = useState(true);
+  const [dataFetched, setDataFetched] = useState(false);
+  const [userDataFetched, setUserDataFetched] = useState(false);
 
   useEffect(() => {
     if (!user) return;
 
     const fetchUserTournaments = async () => {
+      if (userDataFetched) return;
+
       setLoading(true);
       const { dTourneys, cTourneys } = await getUserTournaments(user.id);
       const tourneys = await getAllTourneys();
@@ -53,10 +57,12 @@ const MyTournamentsPage = () => {
       setDTourneys(dTourneys);
       setCTourneys(cTourneys);
       setLoading(false);
+
+      setUserDataFetched(true);
     };
 
     fetchUserTournaments();
-  }, [user]);
+  }, [user, userDataFetched]);
 
   // fetch tournaments and update user metadata
   useEffect(() => {
@@ -105,6 +111,8 @@ const MyTournamentsPage = () => {
   }, [dTourneys, cTourneys]);
 
   useEffect(() => {
+    if (dataFetched) return;
+
     const chairIds = tourneys.flatMap((tourney) =>
       tourney.committees.flatMap((committee: any) => committee.chairIds)
     );
@@ -161,13 +169,15 @@ const MyTournamentsPage = () => {
         return acc;
       }, {} as { [key: string]: { allocation: string | undefined; positionPaperLink: string | null } });
       
-      setDelegateInfoValues(initialDelegateInfoValues);      
+      setDelegateInfoValues(initialDelegateInfoValues);    
+      
+      setDataFetched(true);
     };  
   
     if (chairIds.length || delegateIds.length) {
       fetchUsers();
     }  
-  }, [tourneys, user]);  
+  }, [tourneys, dataFetched]);  
 
   if (!user) {
     return <Loading />; 
